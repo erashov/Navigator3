@@ -109,12 +109,9 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
-    <Folder Include="COMCOR_AYudin\" />
-    <Folder Include="COMCOR_AYudin\Tables\" />
     <Folder Include="dbo\Views\" />
     <Folder Include="COMCOR_NSPolyakova\" />
     <Folder Include="COMCOR_NSPolyakova\Views\" />
-    <Folder Include="COMCOR_AYudin\Views\" />
     <Folder Include="COMCOR_EIMansurov\" />
     <Folder Include="COMCOR_EIMansurov\Views\" />
     <Folder Include="Security\" />
@@ -301,14 +298,6 @@
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
     <Build Include="dbo\Tables\Элементы кнопочной формы.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="COMCOR_AYudin\Tables\VbindP.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="COMCOR_AYudin\Tables\bindVP.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
@@ -716,16 +705,8 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="COMCOR_AYudin\Views\ml_frozen_report_group.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
     <Build Include="dbo\Views\ml_frozen_report_group.sql">
       <AnsiNulls>On</AnsiNulls>
-    </Build>
-    <Build Include="COMCOR_AYudin\Views\ml_frozen_yesterday.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
     <Build Include="dbo\Views\ml_frozen_yesterday.sql">
       <AnsiNulls>On</AnsiNulls>
