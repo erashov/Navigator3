@@ -1,0 +1,53 @@
+﻿CREATE TABLE [dbo].[Arhiv] (
+    [NomerKanala]      NVARCHAR (50)    NULL,
+    [NoML_Vkl]         NVARCHAR (10)    NULL,
+    [Zakazchik]        NVARCHAR (255)   NULL,
+    [AdresA]           NVARCHAR (255)   NULL,
+    [AdresB]           NVARCHAR (255)   NULL,
+    [Skorost]          NVARCHAR (20)    NULL,
+    [D_puska]          NVARCHAR (50)    NULL,
+    [D_otkl]           DATETIME         NULL,
+    [NoML_Vykl]        NVARCHAR (25)    NULL,
+    [NameLink]         NVARCHAR (50)    NULL,
+    [privA]            NVARCHAR (255)   NULL,
+    [privB]            NVARCHAR (255)   NULL,
+    [Prim]             NVARCHAR (255)   NULL,
+    [NoKanS]           INT              CONSTRAINT [DF__Arhiv__NoKanS__145C0A3F] DEFAULT (0) NULL,
+    [NoKanE]           INT              CONSTRAINT [DF__Arhiv__NoKanE__15502E78] DEFAULT (0) NULL,
+    [NoKanF]           INT              CONSTRAINT [DF__Arhiv__NoKanF__164452B1] DEFAULT (0) NULL,
+    [NoKanT]           INT              CONSTRAINT [DF__Arhiv__NoKanT__173876EA] DEFAULT (0) NULL,
+    [NoKanY]           INT              NULL,
+    [Vid]              NVARCHAR (50)    NULL,
+    [Kont1]            NTEXT            NULL,
+    [Kont2]            NTEXT            NULL,
+    [Port]             NVARCHAR (50)    NULL,
+    [Status_Kanala]    NVARCHAR (50)    NULL,
+    [Status_zakaz]     NVARCHAR (50)    NULL,
+    [pr]               BIT              CONSTRAINT [DF__Arhiv__pr__182C9B23] DEFAULT (0) NULL,
+    [Astahov1]         NVARCHAR (250)   NULL,
+    [Astahov2]         NVARCHAR (250)   NULL,
+    [res1]             NVARCHAR (250)   NULL,
+    [res2]             NVARCHAR (250)   NULL,
+    [rowguid]          UNIQUEIDENTIFIER CONSTRAINT [DF__Arhiv__rowguid__515009E6] DEFAULT (newid()) ROWGUIDCOL NOT NULL,
+    [NumberML]         INT              NULL,
+    [timeSlotQuantity] INT              NULL,
+    [signB1]           BIT              NULL,
+    [signB2]           BIT              NULL,
+    [signB3]           BIT              NULL,
+    [signI1]           INT              NULL,
+    [signI2]           INT              NULL,
+    [signI3]           INT              NULL,
+    [signC1]           CHAR (10)        NULL,
+    [signC2]           CHAR (10)        NULL,
+    [signC3]           CHAR (10)        NULL,
+    [signD1]           DATETIME         NULL,
+    [signD2]           DATETIME         NULL,
+    [signD3]           DATETIME         NULL,
+    CONSTRAINT [PK_Arhiv] PRIMARY KEY CLUSTERED ([rowguid] ASC)
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [index_325576198]
+    ON [dbo].[Arhiv]([rowguid] ASC);
+

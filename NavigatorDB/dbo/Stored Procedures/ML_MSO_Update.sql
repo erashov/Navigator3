@@ -1,0 +1,52 @@
+﻿CREATE PROCEDURE dbo.ML_MSO_Update @NumML int,    
+                                   @Nom_Kan nvarchar(50),
+                                   @EqNum   nvarchar(50),
+                                   @Usluga  nvarchar(255),
+                                   @Pre_Usluga nvarchar(50),
+                                   @Zakazchik nvarchar(255),
+                                   @Manager   nvarchar(30),
+                                   @Telefon nvarchar(11),
+                                   @Osnovanie nvarchar(255),
+                                   @Kontakt_Ob nvarchar(255),
+                                   @SignalFormat nvarchar(50),
+                                   @Skorost nvarchar(15),
+                                   @NumberRetrans int,
+                                   @Klient nvarchar(15),
+                                   @Srochnost nvarchar(21) ,
+                                   @Otvetstv_ULSS nvarchar(100),
+                                   @Data_ULSS nvarchar(50),
+                                   @Kabel_prov    nvarchar(255),
+                                   @IP_Adres1 nvarchar(100),
+                                   @IP_Adres2 nvarchar(100),
+                                   @Maska1 nvarchar(100),
+                                   @Maska2  nvarchar(100),
+                                   @Data_Otkl nvarchar(100)
+
+AS
+
+set nocount on 
+
+Update dbo.ML_Main
+Set Nom_Kan = @Nom_Kan,
+    EqNum = @EqNum,
+    Usluga = @Usluga,
+    Pre_Usluga = @Pre_Usluga,
+    Zakazchik = @Zakazchik,
+    Manager = @Manager,
+    Telefon = @Telefon,
+    Osnovanie = @Osnovanie,
+    Kontakt_Ob = @Kontakt_Ob,
+    SignalFormat = @SignalFormat,
+    Skorost = @Skorost,
+    NumberRetrans = @NumberRetrans,
+    Klient = @Klient,
+    Srochnost = @Srochnost,
+    Otvetstv_ULSS = @Otvetstv_ULSS,
+    Data_ULSS = @Data_ULSS,
+    Kabel_prov = @Kabel_prov,
+    IP_Adres1 = @IP_Adres1,
+    IP_Adres2 = @IP_Adres2,
+    Maska1 = @Maska1,
+    Maska2 = @Maska2,
+    Data_Otkl = @Data_Otkl
+WHERE NumML = @NumML

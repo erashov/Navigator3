@@ -1,0 +1,3 @@
+﻿CREATE SCHEMA [COMCOR\NSPolyakova]
+    AUTHORIZATION [dbo];
+

@@ -1,0 +1,2 @@
+﻿CREATE USER [COMCOR\ASErashov] FOR LOGIN [COMCOR\ASErashov];
+

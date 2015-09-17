@@ -1,0 +1,2 @@
+﻿CREATE USER [ManItEx] FOR LOGIN [ManItEx];
+

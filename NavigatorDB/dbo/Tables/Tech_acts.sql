@@ -1,0 +1,26 @@
+﻿CREATE TABLE [dbo].[Tech_acts] (
+    [ID]               NVARCHAR (1024) NOT NULL,
+    [ServiceId]        NVARCHAR (1024) NULL,
+    [Nom_usl_contract] NVARCHAR (1024) NULL,
+    [Post]             NVARCHAR (1024) NULL,
+    [Surname]          NVARCHAR (1024) NULL,
+    [CityPost]         NVARCHAR (2048) NULL,
+    [CitySurname]      NVARCHAR (2048) NULL,
+    [NumGK]            NVARCHAR (1024) NULL,
+    [IspGK]            NVARCHAR (1024) NULL,
+    [ServiceUser]      NVARCHAR (2048) NULL,
+    [Object_a]         NVARCHAR (1024) NULL,
+    [Adres_a]          NVARCHAR (2048) NULL,
+    [Styk_a]           NVARCHAR (1024) NULL,
+    [Object_b]         NVARCHAR (1024) NULL,
+    [Adres_b]          NVARCHAR (2048) NULL,
+    [Styk_b]           NVARCHAR (1024) NULL,
+    [ServiceType]      NVARCHAR (1024) NULL,
+    [Rate]             NVARCHAR (1024) NULL,
+    [Class]            NVARCHAR (1024) NULL,
+    [IdTaskom]         NVARCHAR (1024) NULL,
+    [VOK]              NVARCHAR (1024) NULL,
+    [pk_id]            INT             NOT NULL,
+    CONSTRAINT [PK_Tech_acts] PRIMARY KEY CLUSTERED ([pk_id] ASC)
+);
+

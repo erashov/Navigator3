@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[phone_services] (
+    [ID]                               BIGINT         IDENTITY (1, 1) NOT NULL,
+    [lock_npaym]                       BIT            CONSTRAINT [DF_phone_services_lock_npaym] DEFAULT ((0)) NULL,
+    [stop_connect_intertown]           BIT            CONSTRAINT [DF_phone_services_stop_connect_intertown] DEFAULT ((0)) NULL,
+    [stop_connect_innerzone]           BIT            CONSTRAINT [DF_phone_services_stop_connect_innerzone] DEFAULT ((0)) NULL,
+    [ban_incoming_call]                BIT            CONSTRAINT [DF_phone_services_ban_incoming_call] DEFAULT ((0)) NULL,
+    [uncond_redirection_incoming_call] BIT            CONSTRAINT [DF_phone_services_uncond_redirection_incoming_call] DEFAULT ((0)) NULL,
+    [number_capacity]                  NVARCHAR (128) NULL,
+    [AON_outgoing_conn]                NVARCHAR (128) NULL,
+    [redirection]                      NVARCHAR (128) NULL,
+    [personal_numbering]               BIT            CONSTRAINT [DF_phone_services_personal_numbering] DEFAULT ((0)) NULL,
+    [long_distance_operator]           NVARCHAR (128) NULL,
+    [E1Link_number]                    INT            NULL,
+    [AON_client]                       NVARCHAR (128) NULL,
+    [AON_comcor]                       NVARCHAR (128) NULL,
+    [Caller_ID]                        BIT            CONSTRAINT [DF_phone_services_Caller_ID] DEFAULT ((0)) NULL,
+    [redirection_incoming_call]        BIT            CONSTRAINT [DF_phone_services_redirection_incoming_call] DEFAULT ((0)) NULL,
+    [transfer_conversion_call]         BIT            CONSTRAINT [DF_phone_services_transfer_conversion_call] DEFAULT ((0)) NULL,
+    [notif_new_call]                   BIT            CONSTRAINT [DF_phone_services_notif_new_call] DEFAULT ((0)) NULL,
+    [call_holding]                     BIT            CONSTRAINT [DF_phone_services_call_holding] DEFAULT ((0)) NULL,
+    [call_waiting]                     BIT            CONSTRAINT [DF_phone_services_call_waiting] DEFAULT ((0)) NULL,
+    [timer_call]                       BIT            CONSTRAINT [DF_phone_services_timer_call] DEFAULT ((0)) NULL,
+    [sided3_connection]                BIT            CONSTRAINT [DF_phone_services_sided3_connection] DEFAULT ((0)) NULL,
+    [sided3_DC]                        BIT            CONSTRAINT [DF_phone_services_sided3_DC] DEFAULT ((0)) NULL,
+    CONSTRAINT [PK_phone_services] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+

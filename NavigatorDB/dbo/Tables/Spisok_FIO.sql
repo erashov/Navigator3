@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[Spisok_FIO] (
+    [FIO]     NVARCHAR (50)    NULL,
+    [rowguid] UNIQUEIDENTIFIER CONSTRAINT [DF__Spisok_FI__rowgu__090A5324] DEFAULT (newid()) ROWGUIDCOL NOT NULL
+);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [index_677577452]
+    ON [dbo].[Spisok_FIO]([rowguid] ASC);
+

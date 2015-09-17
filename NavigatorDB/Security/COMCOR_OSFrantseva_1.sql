@@ -1,0 +1,3 @@
+﻿CREATE SCHEMA [COMCOR\OSFrantseva]
+    AUTHORIZATION [COMCOR\OSFrantseva];
+

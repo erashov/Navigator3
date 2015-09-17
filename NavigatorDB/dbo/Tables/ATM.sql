@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[ATM] (
+    [a]       NVARCHAR (50)    NULL,
+    [rowguid] UNIQUEIDENTIFIER CONSTRAINT [DF__ATM__rowguid__75C27486] DEFAULT (newid()) ROWGUIDCOL NOT NULL
+);
+
