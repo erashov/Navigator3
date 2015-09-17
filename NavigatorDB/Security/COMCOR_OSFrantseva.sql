@@ -1,3 +1,0 @@
-﻿CREATE USER [COMCOR\OSFrantseva]
-    WITH DEFAULT_SCHEMA = [COMCOR\OSFrantseva];
-

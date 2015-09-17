@@ -110,15 +110,9 @@
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
     <Folder Include="dbo\Views\" />
-    <Folder Include="COMCOR_NSPolyakova\" />
-    <Folder Include="COMCOR_NSPolyakova\Views\" />
-    <Folder Include="COMCOR_EIMansurov\" />
-    <Folder Include="COMCOR_EIMansurov\Views\" />
     <Folder Include="Security\" />
     <Folder Include="dbo\Functions\" />
     <Folder Include="dbo\Stored Procedures\" />
-    <Folder Include="COMCOR_OSFrantseva\" />
-    <Folder Include="COMCOR_OSFrantseva\Stored Procedures\" />
     <Folder Include="dbo\User Defined Types\" />
   </ItemGroup>
   <ItemGroup>
@@ -685,10 +679,6 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="COMCOR_NSPolyakova\Views\ml_frozen_report.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
     <Build Include="dbo\Views\freezing.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
@@ -753,10 +743,6 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="COMCOR_EIMansurov\Views\View1.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
     <Build Include="dbo\Views\freeze_new.sql">
       <AnsiNulls>On</AnsiNulls>
     </Build>
@@ -784,13 +770,9 @@
     </Build>
     <Build Include="Security\ManItEx.sql" />
     <Build Include="Security\UltimusServiceUser.sql" />
-    <Build Include="Security\COMCOR_GG-NavigatorUsers.sql" />
-    <Build Include="Security\COMCOR_GG-NavigatorUsers_1.sql" />
-    <Build Include="Security\COMCOR_OSFrantseva.sql" />
     <Build Include="Security\Navigator.sql" />
     <Build Include="Security\COMCOR_ASErashov.sql" />
     <Build Include="Security\COMCOR_ASErashov_1.sql" />
-    <Build Include="Security\COMCOR_EIMansurov.sql" />
     <Build Include="Security\NavigatorRead.sql" />
     <Build Include="Security\NavigatorReader.sql" />
     <Build Include="Security\RoleMemberships.sql" />
@@ -1453,10 +1435,6 @@
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
     <Build Include="dbo\Stored Procedures\report_ML_73.sql">
-      <AnsiNulls>On</AnsiNulls>
-      <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="COMCOR_OSFrantseva\Stored Procedures\CloseTaskById.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
@@ -2349,10 +2327,6 @@
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
     <Build Include="dbo\User Defined Types\RouteSheetNumbers.sql" />
-    <Build Include="Security\COMCOR_AYudin.sql" />
-    <Build Include="Security\COMCOR_EIMansurov_1.sql" />
-    <Build Include="Security\COMCOR_NSPolyakova.sql" />
-    <Build Include="Security\COMCOR_OSFrantseva_1.sql" />
     <Build Include="Security\Permissions.sql" />
   </ItemGroup>
 </Project>

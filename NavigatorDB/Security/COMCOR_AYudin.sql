@@ -1,3 +1,0 @@
-﻿CREATE SCHEMA [COMCOR\AYudin]
-    AUTHORIZATION [dbo];
-

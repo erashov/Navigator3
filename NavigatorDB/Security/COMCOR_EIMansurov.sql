@@ -1,3 +1,0 @@
-﻿CREATE USER [COMCOR\EIMansurov] FOR LOGIN [COMCOR\EIMansurov]
-    WITH DEFAULT_SCHEMA = [COMCOR\EIMansurov];
-
