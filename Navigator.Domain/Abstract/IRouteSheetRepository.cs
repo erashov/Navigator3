@@ -5,6 +5,6 @@ namespace Navigator.Domain.Abstract
 {
     public interface IRouteSheetRepository
     {
-        IEnumerable<RouteSheet> RouteSheets { get; }
+        IEnumerable<List2Nav> List2Navs { get; }
     }
 }

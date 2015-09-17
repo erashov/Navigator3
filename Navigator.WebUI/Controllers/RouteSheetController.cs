@@ -12,7 +12,7 @@ namespace Navigator.WebUI.Controllers
         // GET: RouteSheet
         public ViewResult List()
         {
-            return View(repository.RouteSheets);
+            return View(repository.List2Navs);
         }
     }
 }

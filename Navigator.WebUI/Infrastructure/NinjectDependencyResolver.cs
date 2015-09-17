@@ -6,6 +6,7 @@ using System.Linq;
 using Moq;
 using Navigator.Domain.Entities;
 using Navigator.Domain.Abstract;
+using Navigator.Domain.Concrete;
 
 namespace SportsStore.WebUI.Infrastructure
 {
@@ -27,10 +28,11 @@ namespace SportsStore.WebUI.Infrastructure
         }
         private void AddBindings()
         {
-            Mock<IRouteSheetRepository> mock = new Mock<IRouteSheetRepository>();
-            mock.Setup(m => m.RouteSheets).Returns(new List<RouteSheet> { new RouteSheet { NumML = 400856, utverzh = DateTime.Now, Otvetstv = "Волкова Н.А.", Zakazhcik = "ООО \"КабЛук\"", AdresA = "Вавилова ул., д.53, корп.1,1-й подъезд,, этаж 2, ком.213 (коридор)", AdresB = "" },
-                new RouteSheet { NumML = 400857, utverzh = DateTime.Now, Otvetstv = "Волова Н.В.", Zakazhcik = "ООО \"Лук\"", AdresA = "Вавилова ул., д.54, корп.1,1-й подъезд,, этаж 2, ком.213 (коридор)", AdresB = "" } });
-            kernel.Bind<IRouteSheetRepository>().ToConstant(mock.Object);
+            kernel.Bind<IRouteSheetRepository>().To<EFListMLGridRepository>();
+            //Mock<IRouteSheetRepository> mock = new Mock<IRouteSheetRepository>();
+            //mock.Setup(m => m.RouteSheets).Returns(new List<ListMLGrid> { new ListMLGrid { NumML = 400856, utverzh = DateTime.Now, Otvetstv = "Волкова Н.А.", Zakazhcik = "ООО \"КабЛук\"", AdresA = "Вавилова ул., д.53, корп.1,1-й подъезд,, этаж 2, ком.213 (коридор)", AdresB = "" },
+            //    new ListMLGrid { NumML = 400857, utverzh = DateTime.Now, Otvetstv = "Волова Н.В.", Zakazhcik = "ООО \"Лук\"", AdresA = "Вавилова ул., д.54, корп.1,1-й подъезд,, этаж 2, ком.213 (коридор)", AdresB = "" } });
+            //kernel.Bind<IRouteSheetRepository>().ToConstant(mock.Object);
             // put bindings here
         }
     }
