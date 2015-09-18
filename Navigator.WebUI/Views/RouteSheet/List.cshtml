@@ -1,22 +1,41 @@
 ﻿@using Navigator.Domain.Entities
 @model IEnumerable<ListMLGrid>
 
-
-@(Html.Kendo().Grid(Model) // Bind the grid to the Model property of the view
+@(Html.Kendo().Grid(Model)
       .Name("Grid")
       .Columns(columns =>
       {
-          columns.Bound(p => p.NumML);   //Create a column bound to the "ProductID" property
-          columns.Bound(p => p.AdresA); //Create a column bound to the "ProductName" property
-          columns.Bound(p => p.AdresB);   //Create a column bound to the "UnitPrice" property
-          columns.Bound(p => p.utverzh);//Create a column bound to the "UnitsInStock" property
-      })
+          columns.Bound(p => p.NumML).Title("№ МЛ").Width(100);
+          columns.Bound(p => p.USERs).Title("Пользователь").Width(146);
+          columns.Bound(p => p.Otvetstv).Title("Ответственный").Width(208);
+          columns.Bound(p => p.Zakazhcik).Title("Заказчик").Width(208);
+          columns.Bound(p => p.ESVTPIQQCNfe).Title("E,S,V,T,P,I,Q,QC,N,Ф").Width(200);
+          columns.Bound(p => p.E).Width(80);
+          columns.Bound(p => p.S).Width(80);
+          columns.Bound(p => p.V).Width(80);
+          columns.Bound(p => p.T).Width(80);
+          columns.Bound(p => p.P).Width(80);
+          columns.Bound(p => p.I).Width(80);
+          columns.Bound(p => p.Q).Width(80);
+          columns.Bound(p => p.QC).Width(80);
+          columns.Bound(p => p.N).Width(80);
+          columns.Bound(p => p.fe).Width(80);
+          columns.Bound(p => p.gplr).Width(80);
+          columns.Bound(p => p.gpz).Width(80);
+          columns.Bound(p => p.AdresA).Width(308);
+          columns.Bound(p => p.AdresB).Width(308);
+          columns.Bound(p => p.utverzh).Width(100);
+      }).ColumnMenu().Editable(editable => editable.Mode(GridEditMode.InCell))
      .Pageable().Sortable()
-
-    .Filterable()
+        .Scrollable()
+        .HtmlAttributes(new { style = "height:730px;" }).Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple)).Navigatable()
+    .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
     .DataSource(dataSource => dataSource
         .Ajax()
-        .PageSize(20)
+          .Read(read => read.Action("ColumnMenu_Read", "Grid"))
+        .PageSize(20).Sort(sort=>sort.Add("NumML").Descending())
+             .Model(model => model.Id(p => p.NumML))
         .ServerOperation(false)
-     ) //Enable paging
+     ).Resizable(resize => resize.Columns(true))
+    .Reorderable(reorder => reorder.Columns(true)) //Enable paging
 )
