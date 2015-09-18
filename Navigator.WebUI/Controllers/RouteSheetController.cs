@@ -4,15 +4,15 @@ namespace Navigator.WebUI.Controllers
 {
     public class RouteSheetController : Controller
     {
-        private IRouteSheetRepository repository;
-        public RouteSheetController(IRouteSheetRepository routesheetRepository)
+        private IListMLGridRepository repository;
+        public RouteSheetController(IListMLGridRepository routesheetRepository)
         {
             this.repository = routesheetRepository;
         }
         // GET: RouteSheet
         public ViewResult List()
         {
-            return View(repository.List2Navs);
+            return View(repository.ListMLGrids);
         }
     }
 }

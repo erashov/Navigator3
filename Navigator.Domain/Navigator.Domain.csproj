@@ -79,10 +79,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\IRouteSheetRepository.cs" />
+    <Compile Include="Abstract\IListMLGridRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFListMLGridRepository.cs" />
-    <Compile Include="Entities\List2Nav.cs" />
+    <Compile Include="Entities\ListMLGrid.cs" />
     <Compile Include="Entities\RouteSheet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

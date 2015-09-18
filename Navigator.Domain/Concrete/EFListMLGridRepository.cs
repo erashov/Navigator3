@@ -1,21 +1,21 @@
 ﻿using Navigator.Domain.Abstract;
 using Navigator.Domain.Entities;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Navigator.Domain.Concrete
 {
-    public class EFListMLGridRepository:IRouteSheetRepository
+   public class EFListMLGridRepository : IListMLGridRepository
     {
         private EFDbContext context = new EFDbContext();
-
-
-        public IEnumerable<List2Nav> List2Navs
+        public IEnumerable<ListMLGrid> ListMLGrids
         {
             get
             {
-                return context.List2Navs;
+                return context.ListMLGrids;
             }
         }
     }

@@ -1,9 +1,6 @@
 ﻿@using Navigator.Domain.Entities
-@model IEnumerable<List2Nav>
+@model IEnumerable<ListMLGrid>
 
-@{
-    ViewBag.Title = "Route Sheets";
-}
 
 @(Html.Kendo().Grid(Model) // Bind the grid to the Model property of the view
       .Name("Grid")
@@ -15,7 +12,7 @@
           columns.Bound(p => p.utverzh);//Create a column bound to the "UnitsInStock" property
       })
      .Pageable().Sortable()
-    .Scrollable(scr => scr.Height(430))
+
     .Filterable()
     .DataSource(dataSource => dataSource
         .Ajax()
