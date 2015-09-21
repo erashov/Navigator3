@@ -1,41 +1,150 @@
 ﻿@using Navigator.Domain.Entities
 @model IEnumerable<ListMLGrid>
 
+@(Html.Kendo().ToolBar()
+    .Name("ToolBar")
+    .Items(items =>
+    {
+        items.Add().Type(CommandType.Button).Text("Очистить фильтры").Id("ClearFilters");
+        items.Add().Type(CommandType.Button).Text("Конфигуратор").Id("Configurator");
+        items.Add().Type(CommandType.Button).Text("Toggle Button").Togglable(true);
+        items.Add().Type(CommandType.SplitButton).Text("Insert").MenuButtons(menuButtons =>
+        {
+            menuButtons.Add().Text("Insert above").Icon("insert-n");
+            menuButtons.Add().Text("Insert between").Icon("insert-m");
+            menuButtons.Add().Text("Insert below").Icon("insert-s");
+        });
+        items.Add().Type(CommandType.Separator);
+        items.Add().Template("<label>Format:</label>");
+        items.Add().Template("<input id='dropdown' style='width: 150px;' />").Overflow(ShowInOverflowPopup.Never);
+        items.Add().Type(CommandType.Separator);
+        items.Add().Type(CommandType.ButtonGroup).Buttons(buttons =>
+        {
+            buttons.Add().Text("Left").Togglable(true).Group("text-align").SpriteCssClass("k-tool-icon k-justifyLeft");
+            buttons.Add().Text("Center").Togglable(true).Group("text-align").SpriteCssClass("k-tool-icon k-justifyCenter");
+            buttons.Add().Text("Right").Togglable(true).Group("text-align").SpriteCssClass("k-tool-icon k-justifyRight");
+        });
+        items.Add().Type(CommandType.ButtonGroup).Buttons(buttons =>
+        {
+            buttons.Add().Text("Bold").Togglable(true).SpriteCssClass("k-tool-icon k-bold").ShowText(ShowIn.Overflow);
+            buttons.Add().Text("Italic").Togglable(true).SpriteCssClass("k-tool-icon k-italic").ShowText(ShowIn.Overflow);
+            buttons.Add().Text("Underline").Togglable(true).SpriteCssClass("k-tool-icon k-underline").ShowText(ShowIn.Overflow);
+        });
+        items.Add().Type(CommandType.Button).Text("Action").Overflow(ShowInOverflowPopup.Always);
+        items.Add().Type(CommandType.Button).Text("Another Action").Overflow(ShowInOverflowPopup.Always);
+        items.Add().Type(CommandType.Button).Text("Something else here").Overflow(ShowInOverflowPopup.Always);
+    })
+    .Events(e => e.Click("onClick").Toggle("onToggle").Open("onOpen").Close("onClose").OverflowOpen("onOverflowOpen").OverflowClose("onOverflowClose"))
+)
+@(Html.Kendo().Window()
+        .Name("window")
+        .Width(630)
+        .Height(315)
+        .Draggable()
+        .Resizable()
+        .Title("Rams's Ten Principles of Good Design")
+        .Actions(actions => actions.Pin().Refresh().Maximize().Close())
+        .LoadContentFrom("ajaxcontent1", "window")
+)
+
 @(Html.Kendo().Grid(Model)
       .Name("Grid")
       .Columns(columns =>
       {
-          columns.Bound(p => p.NumML).Title("№ МЛ").Width(100);
+          columns.Bound(p => p.NumML).Title("№ МЛ").Width(160);
           columns.Bound(p => p.USERs).Title("Пользователь").Width(146);
           columns.Bound(p => p.Otvetstv).Title("Ответственный").Width(208);
           columns.Bound(p => p.Zakazhcik).Title("Заказчик").Width(208);
           columns.Bound(p => p.ESVTPIQQCNfe).Title("E,S,V,T,P,I,Q,QC,N,Ф").Width(200);
-          columns.Bound(p => p.E).Width(80);
-          columns.Bound(p => p.S).Width(80);
-          columns.Bound(p => p.V).Width(80);
-          columns.Bound(p => p.T).Width(80);
-          columns.Bound(p => p.P).Width(80);
-          columns.Bound(p => p.I).Width(80);
-          columns.Bound(p => p.Q).Width(80);
-          columns.Bound(p => p.QC).Width(80);
-          columns.Bound(p => p.N).Width(80);
-          columns.Bound(p => p.fe).Width(80);
-          columns.Bound(p => p.gplr).Width(80);
-          columns.Bound(p => p.gpz).Width(80);
+          columns.Bound(p => p.E).Width(100);
+          columns.Bound(p => p.S).Width(100);
+          columns.Bound(p => p.V).Width(100);
+          columns.Bound(p => p.T).Width(100);
+          columns.Bound(p => p.P).Width(100);
+          columns.Bound(p => p.I).Width(100);
+          columns.Bound(p => p.Q).Width(100);
+          columns.Bound(p => p.QC).Width(100);
+          columns.Bound(p => p.N).Width(100);
+          columns.Bound(p => p.fe).Width(100);
+          columns.Bound(p => p.gplr).Width(100);
+          columns.Bound(p => p.gpz).Width(100);
           columns.Bound(p => p.AdresA).Width(308);
           columns.Bound(p => p.AdresB).Width(308);
-          columns.Bound(p => p.utverzh).Width(100);
+          columns.Bound(p => p.utverzh).Width(300);
       }).ColumnMenu().Editable(editable => editable.Mode(GridEditMode.InCell))
      .Pageable().Sortable()
         .Scrollable()
-        .HtmlAttributes(new { style = "height:730px;" }).Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple)).Navigatable()
+        .HtmlAttributes(new { style = "height:740px;" }).Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple)).Navigatable()
     .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
     .DataSource(dataSource => dataSource
         .Ajax()
           .Read(read => read.Action("ColumnMenu_Read", "Grid"))
-        .PageSize(20).Sort(sort=>sort.Add("NumML").Descending())
-             .Model(model => model.Id(p => p.NumML))
+        .PageSize(20).Sort(sort => sort.Add("NumML").Descending())
+             .Model(model => { model.Id(p => p.NumML);
+                 model.Field(p => p.NumML).Editable(false); })
         .ServerOperation(false)
      ).Resizable(resize => resize.Columns(true))
     .Reorderable(reorder => reorder.Columns(true)) //Enable paging
 )
+
+<script>
+    function buttonClickHandler(e) {
+        alert(e.id + " 'click' event is fired.");
+    }
+
+    function buttonToggleHandler(e) {
+        kendoConsole.log(e.target.text() + " 'toggle' event is fired.");
+    }
+
+    function splitButtonClickHandler(e) {
+        kendoConsole.log("SplitButton event: " + e.id + " is clicked.");
+    }
+
+    function onClick(e) {
+        if (e.id == 'ClearFilters') {
+            var gridDataSource = $("#Grid").data("kendoGrid").dataSource;
+            for (var i = 0; i < gridDataSource.options.fields.length - 1; i++) {
+                gridDataSource.filter({ field: gridDataSource.options.fields[i].field, value: "" });
+            }
+            gridDataSource.filter([]);
+        }
+       // alert(e.id + " 'click' event is fired.");
+        //kendoConsole.log("ToolBar 'click' event is fired for element with id: " + e.id);
+    }
+
+    function onToggle(e) {
+        if (e.group == "radio") {
+            kendoConsole.log("Toolbar 'toggle' event: " + e.id + " button is selected from group: " + e.group);
+        } else {
+            kendoConsole.log("ToolBar 'toggle' event: " + e.id + " button is changed");
+        }
+    }
+
+    function onOverflowOpen(e) {
+        kendoConsole.log("Overflow container open");
+    }
+
+    function onOverflowClose(e) {
+        kendoConsole.log("Overflow container close");
+    }
+
+    function onOpen(e) {
+        kendoConsole.log("SplitButton popup open");
+    }
+
+    function onClose(e) {
+        //kendoConsole.log("SplitButton popup close");
+    }
+</script>
+
+<script>
+    $(document).ready(function() {
+        var window = $("#window");
+
+        $("#Configurator").click(function (e) {
+            window.data("kendoWindow").open();
+        });
+
+       
+    });
+</script>

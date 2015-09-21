@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 0px;
     padding-bottom: 20px;
 }
 
@@ -15,4 +15,6 @@ select,
 textarea {
     max-width: 280px;
 }
-
+button, input, optgroup, select, textarea{
+    color:black!important;
+}
