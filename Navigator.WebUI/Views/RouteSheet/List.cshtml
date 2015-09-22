@@ -14,9 +14,7 @@
             menuButtons.Add().Text("Insert between").Icon("insert-m");
             menuButtons.Add().Text("Insert below").Icon("insert-s");
         });
-        items.Add().Type(CommandType.Separator);
-        items.Add().Template("<label>Format:</label>");
-        items.Add().Template("<input id='dropdown' style='width: 150px;' />").Overflow(ShowInOverflowPopup.Never);
+        items.Add().Type(CommandType.Separator);     
         items.Add().Type(CommandType.Separator);
         items.Add().Type(CommandType.ButtonGroup).Buttons(buttons =>
         {
@@ -40,34 +38,66 @@
         .Name("window")
         .Width(630)
         .Height(315)
+        .Content(@<text>
+            <p>
+                Alvar Aalto is one of the greatest names in modern architecture and design.
+                Glassblowers at the iittala factory still meticulously handcraft the legendary
+                vases that are variations on one theme, fluid organic shapes that let the end user
+                ecide the use. Interpretations of the shape in new colors and materials add to the
+                growing Alvar Aalto Collection that remains true to his original design.
+            </p>
+
+            <p>
+                Born Hugo Alvar Henrik Aalto (February 3, 1898 - May 11, 1976) in Kuortane, Finland,
+                was noted for his humanistic approach to modernism. He studied architecture at the
+                Helsinki University of Technology from 1916 to 1921. In 1924 he married architect
+                Aino Marsio.
+            </p>
+
+            <p>
+                Alvar Aalto was one of the first and most influential architects of the Scandinavian
+                modern movement, and a member of the Congres Internationaux d'Architecture Moderne.
+                Major architectural works include the Finlandia Hall in Helsinki, Finland,
+                and the campus of Helsinki University of Technology.
+            </p>
+
+            <p>
+                Source:
+                <a href="http://www.aalto.com/about-alvar-aalto.html" title="About Alvar Aalto">www.aalto.com</a>
+            </p>
+        </text>)
         .Draggable()
         .Resizable()
-        .Title("Rams's Ten Principles of Good Design")
+        .Title("Конфигуратор")
         .Actions(actions => actions.Pin().Refresh().Maximize().Close())
-        .LoadContentFrom("ajaxcontent1", "window")
+        .LoadContentFrom("ajaxcontent1", "window").Visible(false)
 )
+
+@*<div id="window">
+    Content of the Window
+</div>*@
 
 @(Html.Kendo().Grid(Model)
       .Name("Grid")
       .Columns(columns =>
       {
-          columns.Bound(p => p.NumML).Title("№ МЛ").Width(160);
+          columns.Bound(p => p.NumML).Title("№ МЛ").Width(180);
           columns.Bound(p => p.USERs).Title("Пользователь").Width(146);
           columns.Bound(p => p.Otvetstv).Title("Ответственный").Width(208);
           columns.Bound(p => p.Zakazhcik).Title("Заказчик").Width(208);
           columns.Bound(p => p.ESVTPIQQCNfe).Title("E,S,V,T,P,I,Q,QC,N,Ф").Width(200);
-          columns.Bound(p => p.E).Width(100);
-          columns.Bound(p => p.S).Width(100);
-          columns.Bound(p => p.V).Width(100);
-          columns.Bound(p => p.T).Width(100);
-          columns.Bound(p => p.P).Width(100);
-          columns.Bound(p => p.I).Width(100);
-          columns.Bound(p => p.Q).Width(100);
-          columns.Bound(p => p.QC).Width(100);
-          columns.Bound(p => p.N).Width(100);
-          columns.Bound(p => p.fe).Width(100);
-          columns.Bound(p => p.gplr).Width(100);
-          columns.Bound(p => p.gpz).Width(100);
+          columns.Bound(p => p.E).Width(130);
+          columns.Bound(p => p.S).Width(130);
+          columns.Bound(p => p.V).Width(130);
+          columns.Bound(p => p.T).Width(130);
+          columns.Bound(p => p.P).Width(130);
+          columns.Bound(p => p.I).Width(130);
+          columns.Bound(p => p.Q).Width(130);
+          columns.Bound(p => p.QC).Width(130);
+          columns.Bound(p => p.N).Width(130);
+          columns.Bound(p => p.fe).Width(130);
+          columns.Bound(p => p.gplr).Width(130);
+          columns.Bound(p => p.gpz).Width(130);
           columns.Bound(p => p.AdresA).Width(308);
           columns.Bound(p => p.AdresB).Width(308);
           columns.Bound(p => p.utverzh).Width(300);
@@ -81,7 +111,18 @@
           .Read(read => read.Action("ColumnMenu_Read", "Grid"))
         .PageSize(20).Sort(sort => sort.Add("NumML").Descending())
              .Model(model => { model.Id(p => p.NumML);
-                 model.Field(p => p.NumML).Editable(false); })
+                 model.Field(p => p.NumML).Editable(false);
+                 model.Field(p => p.E).Editable(false);
+                 model.Field(p => p.S).Editable(false);
+                 model.Field(p => p.V).Editable(false);
+                 model.Field(p => p.T).Editable(false);
+                 model.Field(p => p.P).Editable(false);
+                 model.Field(p => p.I).Editable(false);
+                 model.Field(p => p.Q).Editable(false);
+                 model.Field(p => p.QC).Editable(false);
+                 model.Field(p => p.N).Editable(false);
+                 model.Field(p => p.fe).Editable(false);
+             })
         .ServerOperation(false)
      ).Resizable(resize => resize.Columns(true))
     .Reorderable(reorder => reorder.Columns(true)) //Enable paging
@@ -142,7 +183,8 @@
         var window = $("#window");
 
         $("#Configurator").click(function (e) {
-            window.data("kendoWindow").open();
+            window.data("kendoWindow").center().open();
+          //  $("#window").kendoWindow();
         });
 
        
