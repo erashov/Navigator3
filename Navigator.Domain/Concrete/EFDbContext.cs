@@ -6,5 +6,6 @@ namespace Navigator.Domain.Concrete
     public class EFDbContext: DbContext
     {
         public DbSet<ListMLGrid> ListMLGrids { get; set; }
+        public DbSet<Osnova> Osnovas { get; set; }
     }
 }

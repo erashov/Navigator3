@@ -18,3 +18,8 @@ textarea {
 button, input, optgroup, select, textarea{
     color:black!important;
 }
+.valueDel {
+    border-top-style: solid; 
+    border-width: 1px;
+    border-color: #d0d7e5;
+}

@@ -80,9 +80,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IListMLGridRepository.cs" />
+    <Compile Include="Abstract\IOsnovaRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFListMLGridRepository.cs" />
+    <Compile Include="Concrete\EFOsnovaRepository.cs" />
     <Compile Include="Entities\ListMLGrid.cs" />
+    <Compile Include="Entities\Osnova.cs" />
     <Compile Include="Entities\RouteSheet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

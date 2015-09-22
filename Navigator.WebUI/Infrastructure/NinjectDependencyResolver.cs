@@ -29,6 +29,7 @@ namespace SportsStore.WebUI.Infrastructure
         private void AddBindings()
         {
             kernel.Bind<IListMLGridRepository>().To<EFListMLGridRepository>();
+            kernel.Bind<IOsnovaRepository>().To<EFOsnovaRepository>();
 
             //Mock<IRouteSheetRepository> mock = new Mock<IRouteSheetRepository>();
             //mock.Setup(m => m.List2Navs).Returns(
