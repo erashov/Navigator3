@@ -23,16 +23,28 @@
         .Resizable()
         .Title("Конфигуратор")
         .Actions(actions => actions.Pin().Refresh().Maximize().Close())
-        .LoadContentFrom("ajaxcontent1", "window").Visible(false))
+        .Visible(false))
+
 @(Html.Kendo().Grid<ListMLGrid>()
       .Name("Grid")
       .Columns(columns =>
       {
-          columns.Bound(p => p.NumML).Title("№ МЛ").Width(180);
-          columns.Bound(p => p.USERs).Filterable(ftb => ftb.Multi(true)).Title("Пользователь").Width(146);
-          columns.Bound(p => p.Otvetstv).Title("Ответственный").Width(208);
-          columns.Bound(p => p.Zakazhcik).Title("Заказчик").Width(208);
+        columns.Template(@<text></text>).ClientTemplate("<input type='checkbox'  class='chkbx' />").HeaderTemplate("<input type='checkbox' id='masterCheckBox' onclick='checkAll(this)'/>").Width(30);
+        columns.Bound(p => p.NumML).Template(@<text> @item.NumML  @item.utverzh </text>).ClientTemplate("<a href=''>#=NumML# </a><div class=\"valueDel\"></div> #=kendo.toString(utverzh,'dd.MM.yyyy')#").Title("№ МЛ").Width(180);
+        columns.Bound(p => p.USERs).Filterable(ftb => ftb.Multi(true)).Title("Пользователь").Width(146);
+        columns.Bound(p => p.AdresA).Template(@<text>  @item.AdresA @item.AdresB </text>).ClientTemplate("#=AdresA ? AdresA:'' # <div class=\"valueDel\"></div> #=AdresB ? AdresB:''#").Title("Адрес").Width(308);
+
+        columns.Bound(p => p.Otvetstv).Title("Ответственный").Width(208);
+        columns.Bound(p => p.Zakazhcik).Title("Заказчик").Width(208);
+        columns.Bound(p => p.AdressA).Template(@<text>@item.AdressA @item.AdressB</text>).ClientTemplate("#=AdressA ? AdressA:'' # <div class=\"valueDel\"></div> #=AdressB ? AdressB:''#").Title("Адрес СО").Width(120);
+        columns.Bound(p => p.Usluga).Template(@<text>@item.Usluga @item.Skorost</text>).ClientTemplate("<table><tr><td>#=Usluga ? Usluga:'' #  &nbsp;</td></tr><tr><td>#=Skorost ? Skorost:'' #  &nbsp; </td></tr><tr><td></td></tr></table>").Title("Услуга").Width(130);
+        columns.Bound(p => p.Styk_A).Template(@<text>@item.Styk_A @item.Styk_B</text>).ClientTemplate("#=Styk_A ? Styk_A:'' # <div class=\"valueDel\"></div> #=Styk_B ? Styk_B:''#").Title("Стык").Width(120);
+        columns.Bound(p => p.PrivA).Template(@<text>@item.PrivA @item.PrivB</text>).ClientTemplate("#=PrivA ? PrivA:'' # <div class=\"valueDel\"></div> #=PrivB ? PrivB:''#").Title("Узел привязки").Width(150);
+        columns.Bound(p => p.UDA).Template(@<text>@item.UDA @item.UDB</text>).ClientTemplate("#=UDA ? UDA:'' # <div class=\"valueDel\"></div> #=UDB ? UDB:''#").Title("Узел доступа").Width(150);
+        columns.Bound(p => p.SpecOb).Title("Канал привязки").Width(150);
+        columns.Bound(p => p.ChNumA).Template(@<text>@item.ChNumA @item.UDB</text>).ClientTemplate("#=ChNumA ? ChNumA:'' # <div class=\"valueDel\"></div> #=ChNumB ? ChNumB:''#").Title("F стыка").Width(150);
           columns.Bound(p => p.ESVTPIQQCNfe).Title("E,S,V,T,P,I,Q,QC,N,Ф").Width(200);
+          columns.Bound(p => p.L).Width(130);
           columns.Bound(p => p.E).Width(130);
           columns.Bound(p => p.S).Width(130);
           columns.Bound(p => p.V).Width(130);
@@ -42,21 +54,32 @@
           columns.Bound(p => p.Q).Width(130);
           columns.Bound(p => p.QC).Width(130);
           columns.Bound(p => p.N).Width(130);
-          columns.Bound(p => p.fe).Width(130);
-          columns.Bound(p => p.gplr).Width(130);
-          columns.Bound(p => p.gpz).Width(130);
-          columns.Bound(p => p.AdresA).Template(@<text>
-        <strong>@item.AdresA</strong>
-<div class="valueDel"></div>
-<strong>@item.AdresB</strong>
-        </text>).Width(308);
-          columns.Bound(p => p.AdresB).Width(308);
-          columns.Bound(p => p.utverzh).Title("Утверждено").Format("{0:dd-MM-yyyy}").Width(300);
+          columns.Bound(p => p.fe).Title("Ф").Width(130);
+          columns.Bound(p => p.gplr_start).Template(@<text>@item.gplr_start @item.gplr_end @item.gplr2_start @item.gplr2_end @item.gplrIsCanceled @item.gplr2IsCanceled</text>).ClientTemplate("<table><tr><td >#=gplr_start ? kendo.toString(gplr_start,'dd.MM.yyyy'):'' #</td><td>#=gplr2_start ? kendo.toString(gplr2_start,'dd.MM.yyyy'):'' #</td></tr><tr><td>#=gplr_end ? kendo.toString(gplr_end,'dd.MM.yyyy'):'' #+#=gplrIsCanceled ? gplrIsCanceled:'' #</td><td>#=gplr2_end ? kendo.toString(gplr2_end,'dd.MM.yyyy'):'' # +	#=gplr2IsCanceled ? gplr2IsCanceled:'' #</td></tr></table>").Title("ГПЛР").Width(180);
+          columns.Bound(p => p.dmv_start).Template(@<text>@item.dmv_start @item.dmv_end @item.dmv2_start @item.dmv2_end @item.dmvIsCanceled @item.dmv2IsCanceled</text>).ClientTemplate("<table><tr><td >#=dmv_start ? kendo.toString(dmv_start,'dd.MM.yyyy'):'' #</td><td>#=dmv2_start ? kendo.toString(dmv2_start,'dd.MM.yyyy'):'' #</td></tr><tr><td>#=dmv_end ? kendo.toString(dmv_end,'dd.MM.yyyy'):'' #+#=dmvIsCanceled ? dmvIsCanceled:'' #</td><td>#=dmv2_end ? kendo.toString(dmv2_end,'dd.MM.yyyy'):'' # +	#=dmv2IsCanceled ? dmv2IsCanceled:'' #</td></tr></table>").Title("ДМВ").Width(180);
+            columns.Bound(p => p.osp_start).Template(@<text>@item.osp_start @item.osp_end @item.dmv2_start @item.ospIsCanceled </text>).ClientTemplate("#=osp_start ? kendo.toString(osp_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=osp_end ? kendo.toString(osp_end,'dd.MM.yyyy'):'' #+#=ospIsCanceled ? ospIsCanceled:'' #").Title("ОСП").Width(180);
+columns.Bound(p => p.uiias_h_start).Template(@<text>@item.uiias_h_start @item.uiias_h_end @item.uiias_h_start @item.uiias_hIsCanceled </text>).ClientTemplate("#=uiias_h_start ? kendo.toString(uiias_h_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=uiias_h_end ? kendo.toString(uiias_h_end,'dd.MM.yyyy'):'' #+#=uiias_hIsCanceled ? uiias_hIsCanceled:'' #").Title("ОЦОДиТ").Width(180);
+columns.Bound(p => p.oshugpu_start).Template(@<text>@item.oshugpu_start @item.oshugpu_end @item.oshugpu_start @item.oshugpuIsCanceled </text>).ClientTemplate("#=oshugpu_start ? kendo.toString(oshugpu_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=oshugpu_end ? kendo.toString(oshugpu_end,'dd.MM.yyyy'):'' #+#=oshugpuIsCanceled ? oshugpuIsCanceled:'' #").Title("ОШУГПУ").Width(180);
+columns.Bound(p => p.oshugpz_start).Template(@<text>@item.oshugpz_start @item.oshugpz_end @item.oshugpz_start @item.oshugpzIsCanceled </text>).ClientTemplate("#=oshugpz_start ? kendo.toString(oshugpz_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=oshugpz_end ? kendo.toString(oshugpz_end,'dd.MM.yyyy'):'' #+#=oshugpzIsCanceled ? oshugpzIsCanceled:'' #").Title("ГФЗ").Width(180);
+columns.Bound(p => p.to_start).Template(@<text>@item.to_start @item.to_end @item.to2_start @item.to2_end @item.toIsCanceled @item.to2IsCanceled</text>).ClientTemplate("<table><tr><td >#=to_start ? kendo.toString(to_start,'dd.MM.yyyy'):'' #</td><td>#=to2_start ? kendo.toString(to2_start,'dd.MM.yyyy'):'' #</td></tr><tr><td>#=to_end ? kendo.toString(to_end,'dd.MM.yyyy'):'' #+#=toIsCanceled ? toIsCanceled:'' #</td><td>#=to2_end ? kendo.toString(to2_end,'dd.MM.yyyy'):'' # +	#=to2IsCanceled ? to2IsCanceled:'' #</td></tr></table>").Title("ТО").Width(180);
+columns.Bound(p => p.otse_start).Template(@<text>@item.otse_start @item.otse_end @item.otse2_start @item.otse2_end @item.otseIsCanceled @item.otse2IsCanceled</text>).ClientTemplate("<table><tr><td >#=otse_start ? kendo.toString(otse_start,'dd.MM.yyyy'):'' #</td><td>#=otse2_start ? kendo.toString(otse2_start,'dd.MM.yyyy'):'' #</td></tr><tr><td>#=otse_end ? kendo.toString(otse_end,'dd.MM.yyyy'):'' #+#=otseIsCanceled ? otseIsCanceled:'' #</td><td>#=otse2_end ? kendo.toString(otse2_end,'dd.MM.yyyy'):'' # +	#=otse2IsCanceled ? otse2IsCanceled:'' #</td></tr></table>").Title("ОТС(Е)").Width(180);
+columns.Bound(p => p.otss_start).Template(@<text>@item.otss_start @item.otss_end @item.otss2_start @item.otss2_end @item.otssIsCanceled @item.otss2IsCanceled</text>).ClientTemplate("<table><tr><td >#=otss_start ? kendo.toString(otss_start,'dd.MM.yyyy'):'' #</td><td>#=otss2_start ? kendo.toString(otss2_start,'dd.MM.yyyy'):'' #</td></tr><tr><td>#=otss_end ? kendo.toString(otss_end,'dd.MM.yyyy'):'' #+#=otssIsCanceled ? otssIsCanceled:'' #</td><td>#=otss2_end ? kendo.toString(otss2_end,'dd.MM.yyyy'):'' # +	#=otss2IsCanceled ? otss2IsCanceled:'' #</td></tr></table>").Title("ОТС(S)").Width(180);
+columns.Bound(p => p.otu_start).Template(@<text>@item.otu_start @item.otu_end @item.otu_start @item.otuIsCanceled </text>).ClientTemplate("#=otu_start ? kendo.toString(otu_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=otu_end ? kendo.toString(otu_end,'dd.MM.yyyy'):'' #+#=otuIsCanceled ? otuIsCanceled:'' #").Title("ОТУ").Width(180);
+columns.Bound(p => p.otvu_start).Template(@<text>@item.otvu_start @item.otvu_end @item.otvu_start @item.otvuIsCanceled </text>).ClientTemplate("#=otvu_start ? kendo.toString(otvu_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=otvu_end ? kendo.toString(otvu_end,'dd.MM.yyyy'):'' #+#=otvuIsCanceled ? otvuIsCanceled:'' #").Title("ОТвУ").Width(180);
+columns.Bound(p => p.TaskReturns).Title("Возврат МЛ").Width(150);
+columns.Bound(p => p.TaskCancels).Title("Возврат заданий").Width(150);
+columns.Bound(p => p.StartDate).Template(@<text>@item.StartDate @item.StopDate</text>).ClientTemplate("#=StartDate ? kendo.toString(StartDate,'dd.MM.yyyy'):'' # <div class=\"valueDel\"></div> #=StopDate ? kendo.toString(StopDate,'dd.MM.yyyy'):''#").Title("Заморозка").Width(150);
+          columns.Bound(p=>p.Probl).Title("Проблема").Width(130);
+         columns.Bound(p => p.Prim).Title("Примечание").Width(130);
+          columns.Bound(p => p.Operator).Title("Наименование СО").Width(180);
+          columns.Bound(p => p.test_date_a).Template(@<text>@item.test_date_a @item.test_date_b @item.test_res_a @item.test_res_b</text>).ClientTemplate("<table><tr><td>#=test_date_a ? kendo.toString(test_date_a,'dd.MM.yyyy'):''#</td><td>#=test_res_a ? test_res_a:''#&nbsp;</td></tr><tr><td>#=test_date_b ? kendo.toString(test_date_b,'dd.MM.yyyy'):''#&nbsp;</td><td>#=test_res_b ? test_res_a:''#&nbsp;</td></tr></table>").Title("Тест СО").Width(150);
+          columns.Bound(p => p.SpecProject).Title("Спецпроект").Width(130);
+
       }).ColumnMenu().Editable(editable => editable.Mode(GridEditMode.InCell))
-      .Pageable(pageable => pageable.Refresh(true).PageSizes(true).ButtonCount(5))
+      .Pageable(pageable => pageable.Refresh(true).PageSizes(true).ButtonCount(3))
       .Sortable()
       .Scrollable()
-      .HtmlAttributes(new { style = "height:740px;" })
+      .HtmlAttributes(new { style = "height:743px;" })
       .Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
       .Navigatable()
       .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
@@ -65,6 +88,7 @@
       .Model(model =>
       {
           model.Id(p => p.NumML);
+          model.Field(p => p.AdresA).Editable(false);
           model.Field(p => p.NumML).Editable(false);
           model.Field(p => p.E).Editable(false);
           model.Field(p => p.S).Editable(false);

@@ -23,3 +23,7 @@ button, input, optgroup, select, textarea{
     border-width: 1px;
     border-color: #d0d7e5;
 }
+.k-state-selected{
+ /*background-color:red!important;
+    border-color:red!important;*/ 
+}
