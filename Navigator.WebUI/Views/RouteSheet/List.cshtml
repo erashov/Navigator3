@@ -81,8 +81,7 @@
       .Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
       .Navigatable()
       .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
-      .DataSource(dataSource => dataSource.Ajax().Read(read => read.Action("RouteSheet_Read", "RouteSheet"))
-      .Sort(sort => sort.Add("NumML").Descending())
+      .DataSource(dataSource => dataSource.Ajax().Read(read => read.Action("RouteSheet_Read", "RouteSheet")).Sort(sort => sort.Add("NumML").Descending())
       .Model(model =>
       {
           model.Id(p => p.NumML);

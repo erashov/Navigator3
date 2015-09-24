@@ -23,21 +23,13 @@ namespace Navigator.WebUI.Controllers
 
         public ActionResult RouteSheet_Read([DataSourceRequest]DataSourceRequest request)
         {
-            DataSourceResult result = new DataSourceResult();
             //ModifyFilters(request.Filters, request);   
-            var fil = request.Filters.FirstOrDefault(m => (m as FilterDescriptor).Member == "Adres");
-            if (fil != null && (fil as FilterDescriptor).Value.ToString().Contains("*"))
-            {
-                (fil as FilterDescriptor).Value = string.Empty;// (fil as FilterDescriptor).Value.ToString().Split('*')[0];
-                DataSourceRequest request1 = new DataSourceRequest();
-                result = repository.ListMLGrids.ToDataSourceResult(request1);
-                //var filt = new FilterDescriptor { Member = "Adres", Value = (fil as FilterDescriptor).Value.ToString().Split('*')[1], Operator = FilterOperator.Contains };
-                //request.Filters.Add(filt);
-            }
-            else
-            {
-               result = repository.ListMLGrids.ToDataSourceResult(request);
-            }
+            //var fil = request.GroupsFilters.FirstOrDefault(m => (m as FilterDescriptor).Member == "AdresA");
+            //if (fil!=null) {
+            //    var filt = new FilterDescriptor { Member = "AdresB", Value = (fil as FilterDescriptor).Value, Operator= (fil as FilterDescriptor).Operator };
+            //    request.Filters.Add(filt);
+            //}
+              DataSourceResult result = repository.ListMLGrids.ToDataSourceResult(request);
 
             return Json(result);
         }
