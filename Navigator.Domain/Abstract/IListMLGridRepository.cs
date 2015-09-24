@@ -5,6 +5,6 @@ namespace Navigator.Domain.Abstract
 {
     public interface IListMLGridRepository
     {
-        IEnumerable<ListMLGrid> ListMLGrids { get; }
+        IEnumerable<ListMLGrid> ListMLGrids { get; } 
     }
 }
