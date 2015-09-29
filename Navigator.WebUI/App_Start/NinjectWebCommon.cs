@@ -10,6 +10,8 @@ namespace Navigator.WebUI.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
+    using Ninject.Web.Mvc;
+    using System.Web.Http;
 
     public static class NinjectWebCommon 
     {
@@ -46,6 +48,7 @@ namespace Navigator.WebUI.App_Start
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
                 RegisterServices(kernel);
+           
                 return kernel;
             }
             catch

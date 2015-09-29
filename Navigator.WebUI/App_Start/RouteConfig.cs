@@ -16,7 +16,7 @@ namespace Navigator.WebUI
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "RouteSheet", action = "List", id = UrlParameter.Optional }
+                defaults: new { controller = "MainGrid", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
