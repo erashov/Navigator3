@@ -10,10 +10,10 @@
         $(document).ready(function () {
             $("#grid").kendoGrid({
                 dataSource: {
-                    type: "odata",
+                  
                     transport: {
                         read: {
-                            url: "//localhost/Navigator 3/odata/ListMLGrids", dataType: "json"
+                            url: document.URL+ "/api/Grid", type: "get", dataType: "json"
                         }
                     },
                         pageSize: 20
