@@ -5,43 +5,45 @@
 
 <div id="example">
     <div id="grid"></div>
+
     <script>
         $(document).ready(function () {
             $("#grid").kendoGrid({
                 dataSource: {
                     type: "odata",
-                    transport: {read: {
-                        url: "/api/RouteList", dataType: "json"
+                    transport: {
+                        read: {
+                            url: "//localhost/Navigator 3/odata/ListMLGrids", dataType: "json"
+                        }
                     },
-                    pageSize: 20
-                },
-                height: 740,
-                groupable: true,
-                sortable: true,
-                pageable: {
-                    refresh: true,
-                    pageSizes: true,
-                    buttonCount: 5
-                },
-                columns: [{
-                    template: "<div class='customer-photo'" +
-                                    "style='background-image: url(../content/web/Customers/#:data.CustomerID#.jpg);'></div>" +
-                                "<div class='customer-name'>#: ContactName #</div>",
-                    field: "NumML",
-                    title: "NumML",
-                    width: 240
-                }, {
-                    field: "USERs",
-                    title: "Пользователь"
-                }, {
-                    field: "Otvetstv",
-                    title: "Ответственный"
-                }, {
-                    field: "Zakazhcik",
-                    title:"Заказчик",
-                    width: 150
-                }]
-            });
+                        pageSize: 20
+                    },
+                    height: 740,
+                    groupable: true,
+                    sortable: true,
+                    pageable: {
+                        refresh: true,
+                        pageSizes: true,
+                        buttonCount: 5
+                    },
+                    columns: [{
+                        //template: "<div class='customer-photo'</div>" +
+                        //            "<div class='customer-name'>#: ContactName #</div>",
+                        field: "NumML",
+                        title: "NumML",
+                        width: 240
+                    }, {
+                        field: "USERs",
+                        title: "Пользователь"
+                    }, {
+                        field: "Otvetstv",
+                        title: "Ответственный"
+                    }, {
+                        field: "Zakazhcik",
+                        title:"Заказчик",
+                        width: 150
+                    }]
+                });
         });
     </script>
 </div>
