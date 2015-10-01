@@ -5,33 +5,33 @@
 
 <div id="example">
     <div id="grid"></div>
-
     <script>
         $(document).ready(function () {
             $("#grid").kendoGrid({
-                dataSource: {
-                  
+                dataSource: {                  
                     transport: {
                         read: {
                             url: document.URL+ "/api/Grid", type: "get", dataType: "json"
-                        }
+                        }                      
                     },
                         pageSize: 20
                     },
-                    height: 740,
+                    height: 760,
                     groupable: true,
                     sortable: true,
+                    pageable:true,
+                    resizable: true,
+                    reorderable: true,
                     pageable: {
                         refresh: true,
                         pageSizes: true,
                         buttonCount: 5
                     },
-                    columns: [{
-                        //template: "<div class='customer-photo'</div>" +
-                        //            "<div class='customer-name'>#: ContactName #</div>",
+                    columns: [{ template: "<input name='checkedRecords' type='checkbox' />", width: 30, headerTemplate: "<input name='checkedRecords' type='checkbox' />" }, {
+                        template: "<a href=''>#=NumML# </a><div class=\"valueDel\"></div> #=kendo.toString(utverzh,'dd.MM.yyyy')#",                 
                         field: "NumML",
                         title: "NumML",
-                        width: 240
+                       
                     }, {
                         field: "USERs",
                         title: "Пользователь"
@@ -41,8 +41,24 @@
                     }, {
                         field: "Zakazhcik",
                         title:"Заказчик",
-                        width: 150
-                    }]
+                 
+                    }, {
+                        template: "#=AdresA ? AdresA:'' # <div class=\"valueDel\"></div> #=AdresB ? AdresB:''#",
+                        field: "AdresA",
+                        title:"Адрес"
+                    }, {
+                        field: "AdressA",
+                        title: "Адрес СО",
+                        template: "#=AdressA ? AdressA:'' # <div class=\"valueDel\"></div> #=AdressB ? AdressB:''#"
+                    }, {
+                        title: "Услуга",
+                        field: "Usluga",
+                        template: "<table><tr><td>#=Usluga ? Usluga:'' #  &nbsp;</td></tr><tr><td>#=Skorost ? Skorost:'' #  &nbsp; </td></tr><tr><td></td></tr></table>"
+                    }, {
+                        field: "Styk_A",
+                        title: "Стык",
+                        template: "#=Styk_A ? Styk_A:'' # <div class=\"valueDel\"></div> #=Styk_B ? Styk_B:''#"
+                    }, { field: "PrivA", title: "Узел привязки", template: "#=PrivA ? PrivA:'' # <div class=\"valueDel\"></div> #=PrivB ? PrivB:''#" }]
                 });
         });
     </script>

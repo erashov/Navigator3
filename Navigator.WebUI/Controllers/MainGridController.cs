@@ -9,5 +9,9 @@ namespace Navigator.WebUI.Controllers
         {
             return View();
         }
+        public ActionResult Odata()
+        {
+            return View();
+        }
     }
 }
