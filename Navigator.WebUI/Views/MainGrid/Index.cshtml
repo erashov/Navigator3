@@ -8,59 +8,126 @@
     <script>
         $(document).ready(function () {
             $("#grid").kendoGrid({
-                dataSource: {                  
+                dataSource: {
                     transport: {
-                        read: {
-                            url: document.URL+ "/api/Grid", type: "get", dataType: "json"
-                        }                      
-                    },
-                        pageSize: 20
-                    },
-                    height: 760,
-                    groupable: true,
-                    sortable: true,
-                    pageable:true,
-                    resizable: true,
-                    reorderable: true,
-                    pageable: {
-                        refresh: true,
-                        pageSizes: true,
-                        buttonCount: 5
-                    },
-                    columns: [{ template: "<input name='checkedRecords' type='checkbox' />", width: 30, headerTemplate: "<input name='checkedRecords' type='checkbox' />" }, {
-                        template: "<a href=''>#=NumML# </a><div class=\"valueDel\"></div> #=kendo.toString(utverzh,'dd.MM.yyyy')#",                 
-                        field: "NumML",
-                        title: "NumML",
-                       
-                    }, {
-                        field: "USERs",
-                        title: "Пользователь"
-                    }, {
-                        field: "Otvetstv",
-                        title: "Ответственный"
-                    }, {
-                        field: "Zakazhcik",
-                        title:"Заказчик",
-                 
-                    }, {
-                        template: "#=AdresA ? AdresA:'' # <div class=\"valueDel\"></div> #=AdresB ? AdresB:''#",
-                        field: "AdresA",
-                        title:"Адрес"
-                    }, {
-                        field: "AdressA",
-                        title: "Адрес СО",
-                        template: "#=AdressA ? AdressA:'' # <div class=\"valueDel\"></div> #=AdressB ? AdressB:''#"
-                    }, {
-                        title: "Услуга",
-                        field: "Usluga",
-                        template: "<table><tr><td>#=Usluga ? Usluga:'' #  &nbsp;</td></tr><tr><td>#=Skorost ? Skorost:'' #  &nbsp; </td></tr><tr><td></td></tr></table>"
-                    }, {
-                        field: "Styk_A",
-                        title: "Стык",
-                        template: "#=Styk_A ? Styk_A:'' # <div class=\"valueDel\"></div> #=Styk_B ? Styk_B:''#"
-                    }, { field: "PrivA", title: "Узел привязки", template: "#=PrivA ? PrivA:'' # <div class=\"valueDel\"></div> #=PrivB ? PrivB:''#" }]
-                });
+                        read: { url: document.URL + "/api/Grid", type: "get", dataType: "json" }
+                    }, pageSize: 20,
+                    serverPaging: true,
+                    schema:  {
+                model: {
+                        fields: {
+                            utverzh: { type: "date" },
+                            gplr_start: { type: "date" },
+                            gplr2_start: { type: "date" },
+                            gplr_end: { type: "date" },
+                            gplr2_end: { type: "date" },
+                            dmv_start: { type: "date" },
+                            dmv2_start: { type: "date" },
+                            dmv_end: { type: "date" },
+                            dmv2_end: { type: "date" },
+                            osp_start: { type: "date" },
+                            osp_end: { type: "date" },
+                            oshugpz_start: { type: "date" },
+                            oshugpz_end: { type: "date" },
+                            uiias_h_start: { type: "date" },
+                            uiias_h_end: { type: "date" },
+                            test_date_a: { type: "date" },
+                            test_date_b: { type: "date" },
+                            Sdan: { type: "date" },
+                            Sdan_TS: { type: "date" }
+                        }
+                }
+            }  
+                },
+                height: 760,
+                editable: true,
+                filterable: true,
+                columnMenu: true,
+                sortable: true,
+                pageable: true,
+                selectable: "multiple",
+                resizable: true,
+                reorderable: true,
+                pageable: {
+                    refresh: true,
+                    pageSizes: [10, 20, 50],
+                    buttonCount: 5
+                },
+                columns: [{ template: "<input name='checkedRecords' type='checkbox' />", width: 30, headerTemplate: "<input name='checkedRecords' type='checkbox' />" }, {
+                    template: "<a href=''>#=NumML# </a><div class=\"valueDel\"></div> #= utverzh ? kendo.toString(utverzh, 'dd.MM.yyyy') : '' #",
+                    field: "NumML",
+                    title: "NumML"
+                    ,width: 100
+                }, {
+                    field: "USERs",
+                    title: "Пользователь",
+                    width: 130
+                }, {
+                    field: "Otvetstv",
+                    title: "Ответственный",
+                    width: 130
+                }, {
+                    field: "Zakazhcik",
+                    title: "Заказчик",
+                    width: 190
+                }, {
+                    template: "#=AdresA ? AdresA:'' # <div class=\"valueDel\"></div> #=AdresB ? AdresB:''#",
+                    field: "AdresA",
+                    title: "Адрес",
+                    width: 400
+                }, {
+                    field: "AdressA",
+                    title: "Адрес СО",
+                    template: "#=AdressA ? AdressA:'' # <div class=\"valueDel\"></div> #=AdressB ? AdressB:''#"
+                    ,width: 400
+                }, {
+                    title: "Услуга",
+                    field: "Usluga",
+                    template: "<table><tr><td>#=Usluga ? Usluga:'' #  &nbsp;</td></tr><tr><td>#=Skorost ? Skorost:'' #  &nbsp; </td></tr><tr><td></td></tr></table>"
+                    , width: 100
+                }, {
+                    field: "Styk_A",
+                    title: "Стык",
+                    template: "#=Styk_A ? Styk_A:'' # <div class=\"valueDel\"></div> #=Styk_B ? Styk_B:''#", width: 100
+                }, {
+                    field: "PrivA", title: "Узел привязки",
+                    template: "#=PrivA ? PrivA:'' # <div class=\"valueDel\"></div> #=PrivB ? PrivB:''#", width: 100
+                }, {
+                    field: "UDA", title: "Узел доступа",
+                    template: "#=UDA ? UDA:'' # <div class=\"valueDel\"></div> #=UDB ? UDB:''#", width: 100
+                }, {
+                    field: "SpecOb", title: "Канал привязки"
+                }, {
+                    field: "ChNumA", title: "F стыка",
+                    template: "#=ChNumA ? ChNumA:'' # <div class=\"valueDel\"></div> #=ChNumB ? ChNumB:''#", width: 100
+                }, {
+                    field: "ESVTPIQQCNfe",
+                    title: "E,S,V,T,P,I,Q,QC,N,Ф", width: 100
+                },
+                { field: "L", width: 100 }, { field: "E", width: 100 }, { field: "S", width: 100 }, { field: "V", width: 100 }, { field: "T", width: 100 },
+                { field: "P", width: 100 }, { field: "I", width: 100 }, { field: "Q", width: 100 }, { field: "QC", width: 100 }, { field: "N", width: 100 },
+                { field: "Fe", width: 100, title: "Ф" },
+                { field: "gplr_start", title: "ГПЛР", template: "<table><tr><td >#=gplr_start ? kendo.toString(gplr_start,'dd.MM.yyyy'):'' #</td><td>#=gplr2_start ? kendo.toString(gplr2_start,'dd.MM.yyyy'):'' #</td></tr><tr><td>#=gplr_end ? kendo.toString(gplr_end,'dd.MM.yyyy'):'' # #=gplrIsCanceled ? gplrIsCanceled:'' #</td><td>#=gplr2_end ? kendo.toString(gplr2_end,'dd.MM.yyyy'):'' # #=gplr2IsCanceled ? gplr2IsCanceled:''#</td></tr></table>", width: 160 },
+{ field: "dmv_start", title: "ДМВ", template: "<table><tr><td >#=dmv_start ? kendo.toString(dmv_start,'dd.MM.yyyy'):'' #</td><td>#=dmv2_start ? kendo.toString(dmv2_start,'dd.MM.yyyy'):'' #</td></tr><tr><td>#=dmv_end ? kendo.toString(dmv_end,'dd.MM.yyyy'):'' # #=dmvIsCanceled ? dmvIsCanceled:'' #</td><td>#=dmv2_end ? kendo.toString(dmv2_end,'dd.MM.yyyy'):'' #  #=dmv2IsCanceled ? dmv2IsCanceled:''#</td></tr></table>", width: 160 },
+                { field: "osp_start", title: "ОСП", template: "#=osp_start ? kendo.toString(osp_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=osp_end ? kendo.toString(osp_end,'dd.MM.yyyy'):'' # #=ospIsCanceled ? ospIsCanceled:'' #",width: 160 },
+                { field: "uiias_h_start", title: "ОЦОДиТ", template: "#=uiias_h_start ? kendo.toString(uiias_h_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=uiias_h_end ? kendo.toString(uiias_h_end,'dd.MM.yyyy'):'' # #=uiias_hIsCanceled ? uiias_hIsCanceled:'' #", width: 160 },
+                { field: "oshugpu_start", title: "ОШУГПУ", template: "#=oshugpu_start ? kendo.toString(oshugpu_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=oshugpu_end ? kendo.toString(oshugpu_end,'dd.MM.yyyy'):'' # #=oshugpuIsCanceled ? oshugpuIsCanceled:'' #",width:160 },
+                { field: "oshugpz_start", title: "ГФЗ", template: "#=oshugpz_start ? kendo.toString(oshugpz_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=oshugpz_end ? kendo.toString(oshugpz_end,'dd.MM.yyyy'):'' # #=oshugpzIsCanceled ? oshugpzIsCanceled:'' #", width: 160 },
+                { field: "to_start", title: "ТО", template: "<table><tr><td >#=to_start ? kendo.toString(to_start,'dd.MM.yyyy'):''#</td><td>#=to2_start ? kendo.toString(to2_start,'dd.MM.yyyy'):''#</td></tr><tr><td>#=to_end ? kendo.toString(to_end,'dd.MM.yyyy'):''# #=toIsCanceled ? toIsCanceled:''#</td><td>#=to2_end ? kendo.toString(to2_end,'dd.MM.yyyy'):''# #=to2IsCanceled ? to2IsCanceled:''#</td></tr></table>", width: 160 },
+               // { field: "otse_start", title: "ОТС(Е)", template: "<table><tr><td >#=otse_start ? kendo.otseString(otse_start,'dd.MM.yyyy'):''#</td><td>#=otse2_start ? kendo.otseString(otse2_start,'dd.MM.yyyy'):''#</td></tr><tr><td>#=otse_end ? kendo.otseString(otse_end,'dd.MM.yyyy'):''# #=otseIsCanceled ? otseIsCanceled:''#</td><td>#=otse2_end ? kendo.otseString(otse2_end,'dd.MM.yyyy'):''# #=otse2IsCanceled ? otse2IsCanceled:''#</td></tr></table>", width: 160 },
+                //{ field: "otss_start", title: "ОТС(S)", template: "<table><tr><td >#=otss_start ? kendo.otssString(otss_start,'dd.MM.yyyy'):''#</td><td>#=otss2_start ? kendo.otssString(otss2_start,'dd.MM.yyyy'):''#</td></tr><tr><td>#=otss_end ? kendo.otssString(otss_end,'dd.MM.yyyy'):''# #=otssIsCanceled ? otssIsCanceled:''#</td><td>#=otss2_end ? kendo.otssString(otss2_end,'dd.MM.yyyy'):''# #=otss2IsCanceled ? otss2IsCanceled:''#</td></tr></table>" ,width:160}
+                ]
+            });
         });
+
+        String.prototype.format = function () {
+            var formatted = this;
+            for (var i = 0; i < arguments.length; i++) {
+                var regexp = new RegExp('\\{' + i + '\\}', 'gi');
+                formatted = formatted.replace(regexp, arguments[i]);
+            }
+            return formatted;
+        };
     </script>
 </div>
 
