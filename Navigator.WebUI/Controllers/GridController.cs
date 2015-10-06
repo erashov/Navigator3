@@ -17,11 +17,12 @@ namespace Navigator.WebUI.Controllers
         {
             this._repository = routesheetRepository;
         }
-        HttpRequest _request = HttpContext.Current.Request;
+        //   HttpRequest _request = HttpContext.Current.Request;
+
         public IQueryable<ListMLGrid> GetListMLGrids()
         {
-            int take = _request["take"]==null?10:int.Parse(_request["take"]);
-            int skip = _request["skip"] == null ? 0 : int.Parse(_request["skip"]);
+           // int take = _request["take"]==null?10:int.Parse(_request["take"]);
+            //int skip = _request["skip"] == null ? 0 : int.Parse(_request["skip"]);
             return _repository.ListMLGrids;//.Skip(skip).Take(take);//.qu.OrderByDescending(c=>c.NumML).AsQueryable();
         }
     }

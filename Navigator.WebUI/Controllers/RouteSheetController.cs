@@ -5,6 +5,7 @@ using Kendo.Mvc.Extensions;
 using System.Collections.Generic;
 using Kendo.Mvc;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Navigator.WebUI.Controllers
 {
@@ -33,6 +34,15 @@ namespace Navigator.WebUI.Controllers
 
             return Json(result);
         }
+        public async Task<DataSourceResult> Read([DataSourceRequest] DataSourceRequest request)
+        {
+            // Here you might actually get the items from your cache or database. 
+     
+
+            // Here is when the kendo magic happens. 
+            return repository.ListMLGrids.ToDataSourceResult(request);
+        }
+
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Editing_Update([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IListMLGridRepository routesheetRepository)
         {

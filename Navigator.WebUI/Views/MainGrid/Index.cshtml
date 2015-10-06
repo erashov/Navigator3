@@ -10,10 +10,15 @@
             $("#grid").kendoGrid({
                 dataSource: {
                     transport: {
-                        read: { url: document.URL + "/api/Grid", type: "get", dataType: "json" }
+                        read:{
+                            url: "ListMLs/GetListMls",
+                            dataType: "json",
+                            type: "POST"
+                        } 
                     }, pageSize: 20,
                     serverPaging: true,
-                    schema:  {
+                    schema: {
+                        data: "data",total: "total",
                 model: {
                         fields: {
                             utverzh: { type: "date" },
@@ -37,7 +42,7 @@
                             Sdan_TS: { type: "date" }
                         }
                 }
-            }  
+            }
                 },
                 height: 760,
                 editable: true,
