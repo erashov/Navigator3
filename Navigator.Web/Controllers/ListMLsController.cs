@@ -18,8 +18,6 @@ namespace Navigator.Web.Controllers
         {
             return View();
         }
-
-
         public ActionResult GetListMls(int page, int pageSize, int take)
         {
             var sorterCollection = KendoGridSorterCollection.BuildCollection(Request);
@@ -32,9 +30,10 @@ namespace Navigator.Web.Controllers
             { sortedMls = _repository.ListMLGrids.MultipleSort(sorterCollection.Sorters) ; }
                 
             var count = sortedMls.Count();
-            var data = (from v in sortedMls.Skip((page - 1) * pageSize)
-                             .Take(pageSize)
-                        select v).ToList(); //sortedMls.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            var data = sortedMls.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            //(from v in sortedMls.Skip((page - 1) * pageSize)
+            //                 .Take(pageSize)
+            //            select v).ToList(); 
 
             var jsonData = new { total = count, data };
             return Json(jsonData, JsonRequestBehavior.AllowGet);

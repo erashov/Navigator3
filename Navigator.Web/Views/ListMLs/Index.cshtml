@@ -17,13 +17,12 @@
                         }
                     }, pageSize: 20,
                     serverPaging: true,
+                    serverSorting: true,
                     schema: {
                         data: "data", total: "total",
                 model: {
                     fields: {
-                        NumML: {
-                            type: "integer"
-                        },
+                            NumML: { type: "integer" },
                             utverzh: { type: "date" },
                             gplr_start: { type: "date" },
                             gplr2_start: { type: "date" },
@@ -123,7 +122,7 @@
                 { field: "oshugpu_start", title: "ОШУГПУ", template: "#=oshugpu_start ? kendo.toString(oshugpu_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=oshugpu_end ? kendo.toString(oshugpu_end,'dd.MM.yyyy'):'' # #=oshugpuIsCanceled ? oshugpuIsCanceled:'' #",width:160 },
                 { field: "oshugpz_start", title: "ГФЗ", template: "#=oshugpz_start ? kendo.toString(oshugpz_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=oshugpz_end ? kendo.toString(oshugpz_end,'dd.MM.yyyy'):'' # #=oshugpzIsCanceled ? oshugpzIsCanceled:'' #", width: 160 },
                 { field: "to_start", title: "ТО", template: "<table><tr><td >#=to_start ? kendo.toString(to_start,'dd.MM.yyyy'):''#</td><td>#=to2_start ? kendo.toString(to2_start,'dd.MM.yyyy'):''#</td></tr><tr><td>#=to_end ? kendo.toString(to_end,'dd.MM.yyyy'):''# #=toIsCanceled ? toIsCanceled:''#</td><td>#=to2_end ? kendo.toString(to2_end,'dd.MM.yyyy'):''# #=to2IsCanceled ? to2IsCanceled:''#</td></tr></table>", width: 160 },
-               // { field: "otse_start", title: "ОТС(Е)", template: "<table><tr><td >#=otse_start ? kendo.otseString(otse_start,'dd.MM.yyyy'):''#</td><td>#=otse2_start ? kendo.otseString(otse2_start,'dd.MM.yyyy'):''#</td></tr><tr><td>#=otse_end ? kendo.otseString(otse_end,'dd.MM.yyyy'):''# #=otseIsCanceled ? otseIsCanceled:''#</td><td>#=otse2_end ? kendo.otseString(otse2_end,'dd.MM.yyyy'):''# #=otse2IsCanceled ? otse2IsCanceled:''#</td></tr></table>", width: 160 },
+              //  { field: "otse_start", title: "ОТС(Е)", template: "<table><tr><td >#=otse_start ? kendo.otseString(otse_start,'dd.MM.yyyy'):''#</td><td>#=otse2_start ? kendo.otseString(otse2_start,'dd.MM.yyyy'):''#</td></tr><tr><td>#=otse_end ? kendo.otseString(otse_end,'dd.MM.yyyy'):''# #=otseIsCanceled ? otseIsCanceled:''#</td><td>#=otse2_end ? kendo.otseString(otse2_end,'dd.MM.yyyy'):''# #=otse2IsCanceled ? otse2IsCanceled:''#</td></tr></table>", width: 160 },
                 //{ field: "otss_start", title: "ОТС(S)", template: "<table><tr><td >#=otss_start ? kendo.otssString(otss_start,'dd.MM.yyyy'):''#</td><td>#=otss2_start ? kendo.otssString(otss2_start,'dd.MM.yyyy'):''#</td></tr><tr><td>#=otss_end ? kendo.otssString(otss_end,'dd.MM.yyyy'):''# #=otssIsCanceled ? otssIsCanceled:''#</td><td>#=otss2_end ? kendo.otssString(otss2_end,'dd.MM.yyyy'):''# #=otss2IsCanceled ? otss2IsCanceled:''#</td></tr></table>" ,width:160}
                 ]
             });
