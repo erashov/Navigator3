@@ -27,8 +27,9 @@ namespace Navigator.Web.Controllers
                 sortedMls = _repository.ListMLGrids.OrderByDescending(v => v.NumML);
             }
             else
-            { sortedMls = _repository.ListMLGrids.MultipleSort(sorterCollection.Sorters) ; }
-                
+            {
+                sortedMls = _repository.ListMLGrids.MultipleSort(sorterCollection.Sorters);
+            }
             var count = sortedMls.Count();
             var data = sortedMls.Skip((page - 1) * pageSize).Take(pageSize).ToList();
             //(from v in sortedMls.Skip((page - 1) * pageSize)
