@@ -8,7 +8,7 @@ namespace Navigator.Domain.Concrete
     public class EFListMLGridRepository : IListMLGridRepository
     {
         private EFDbContext context = new EFDbContext();
-        public IQueryable<ListMLGrid> ListMLGrids
+        public IEnumerable<ListMLGrid> ListMLGrids
         {
             get
             {

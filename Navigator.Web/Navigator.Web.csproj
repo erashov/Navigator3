@@ -131,7 +131,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\favicon.ico" />
     <Content Include="Content\kendo\2015.3.930\Black\editor.png" />
     <Content Include="Content\kendo\2015.3.930\Black\imagebrowser.png" />
     <Content Include="Content\kendo\2015.3.930\Black\indeterminate.gif" />
@@ -469,6 +473,7 @@
     <Content Include="Content\kendo\2015.3.930\Uniform\sprite_kpi.png" />
     <Content Include="Content\kendo\2015.3.930\Uniform\sprite_kpi_2x.png" />
     <Content Include="Content\query-builder.default.min.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -478,6 +483,8 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\kendo\2015.3.930\angular.min.js" />
@@ -633,11 +640,9 @@
     <Content Include="Scripts\kendo\2015.3.930\kendo.webcomponents.min.js" />
     <Content Include="Scripts\kendo\2015.3.930\kendo.window.min.js" />
     <Content Include="Scripts\kendo\2015.3.930\pako_deflate.min.js" />
-    <Content Include="Scripts\kendo\QueryBuilder\jQuery.extendext.min.js" />
-    <Content Include="Scripts\kendo\QueryBuilder\query-builder.js" />
-    <Content Include="Scripts\kendo\QueryBuilder\query-builder.min.js" />
-    <Content Include="Scripts\kendo\QueryBuilder\query-builder.standalone.js" />
-    <Content Include="Scripts\kendo\QueryBuilder\query-builder.standalone.min.js" />
+    <Content Include="Scripts\QueryBuilder\jQuery.extendext.min.js" />
+    <Content Include="Scripts\QueryBuilder\query-builder.ru.js" />
+    <Content Include="Scripts\QueryBuilder\query-builder.standalone.min.js" />
     <Content Include="Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>

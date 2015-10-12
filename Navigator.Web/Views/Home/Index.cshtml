@@ -8,7 +8,6 @@
     <ul>
         <li class="k-state-active">Список МЛ</li>
         <li>Engine</li>
-
     </ul>
 </div>
 
@@ -16,22 +15,9 @@
     $(document).ready(function () {
         var ts = $("#tabstrip").kendoTabStrip({
             animation: { open: { effects: "fadeIn" } },
-            contentUrls: ["ListMLs/Index",
-                        'http://stackoverflow.com/questions/15643401/kendo-tabstrip-rendering-action-into-tab-in-mvc-4',
-
-            ]
-        }).data('kendoTabStrip');
+            contentUrls: ["ListMLs/Index",'QueryBuilder/index']}).data('kendoTabStrip');
     });
 </script>
-<style type="text/css">
-    .k-tabstrip-items {
-        font-size: 15px;
-        line-height: 0.8em;
-    }
-    .k-tabstrip-items .k-link, .k-panelbar .k-tabstrip-items .k-link{
-        padding:0.4em 0.92em
-    }
-</style>
 
 
 

@@ -1,34 +1,21 @@
 ﻿<!DOCTYPE html>
 <html>
-    <head>
-
-        <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
-    	<link href="@Url.Content("~/Content/kendo/2015.3.930/kendo.common.min.css")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Content/kendo/2015.3.930/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Content/kendo/2015.3.930/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Content/kendo/2015.3.930/kendo.default.min.css")" rel="stylesheet" type="text/css" />
-	<link href="@Url.Content("~/Content/kendo/2015.3.930/kendo.dataviz.default.min.css")" rel="stylesheet" type="text/css" />
-	<script src="@Url.Content("~/Scripts/kendo/2015.3.930/jquery.min.js")"></script>
-	<script src="@Url.Content("~/Scripts/kendo/2015.3.930/jszip.min.js")"></script>
-	<script src="@Url.Content("~/Scripts/kendo/2015.3.930/kendo.all.min.js")"></script>
-	<script src="@Url.Content("~/Scripts/kendo/2015.3.930/kendo.aspnetmvc.min.js")"></script>
-	<script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
-        <link href="@Url.Content("~/Content/query-builder.default.min.css")" rel="stylesheet" />
-        <script src="~/Scripts/knockout-3.3.0.js"></script>
-        <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-        <script src="~/Scripts/condition.js"></script>
-        <script src="~/Scripts/group.js"></script>
-        <script src="~/Scripts/viewModel.js"></script>
-
+<head>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.3.930/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.3.930/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.3.930/kendo.default.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.3.930/kendo.dataviz.default.min.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/kendo/2015.3.930/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.3.930/jszip.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.3.930/kendo.all.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.3.930/kendo.aspnetmvc.min.js")"></script>
+    <link href="@Url.Content("~/Content/query-builder.default.min.css")" rel="stylesheet" />
+    <link rel="icon" href="@Url.Content("~/content/favicon.ico")" />
 </head>
-    <body>
-        <div id="body">
- 
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
-            </section>
-        </div>
-
-        
-    </body>
+<body style="margin:0px;">
+    <div>
+        @RenderBody()
+    </div>
+</body>
 </html>

@@ -8,7 +8,7 @@ namespace Navigator.Web.KendoGridUtilities
 {
     public static class LinqSortingUtility
     {
-        public static IQueryable<T> MultipleSort<T>(this IQueryable<T> data,
+        public static IEnumerable<T> MultipleSort<T>(this IEnumerable<T> data,
             List<KendoGridSorter> sortExpressions)
         {
             if ((sortExpressions == null) || (sortExpressions.Count <= 0))
@@ -16,7 +16,7 @@ namespace Navigator.Web.KendoGridUtilities
                 return data;
             }
 
-            IQueryable<T> query = from item in data select item;
+            IEnumerable<T> query = from item in data select item;
             IOrderedEnumerable<T> orderedQuery = null;
 
             for (int i = 0; i < sortExpressions.Count; i++)

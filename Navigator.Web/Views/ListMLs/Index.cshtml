@@ -9,39 +9,6 @@
     </div>
     <div id="grid"></div>
     <div id="window">
-        Content of the Window
-        <div class="container">
-            <div data-bind="with: group">
-                <div data-bind="template: templateName"></div>
-            </div>
-        </div>
-        <script id="condition-template" type="text/html">
-            <div class="condition">
-                <select data-bind="options: fields, value: selectedField"></select>
-                <select data-bind="options: comparisons, value: selectedComparison"></select>
-                <input type="text" data-bind="value: value"></input>
-                <button class="btn btn-danger btn-xs" data-bind="click: $parent.removeChild"><span class="glyphicon glyphicon-minus-sign"></span></button>
-            </div>
-        </script>
-        <script id="group-template" type="text/html">
-            <div class="alert alert-warning alert-group">
-                <select data-bind="options: logicalOperators, value: selectedLogicalOperator"></select>
-                <button class="btn btn-xs btn-success" data-bind="click: addCondition"><span class="glyphicon glyphicon-plus-sign"></span> Добавить поле</button>
-                <button class="btn btn-xs btn-success" data-bind="click: addGroup"><span class="glyphicon glyphicon-plus-sign"></span> Добавитиь гпуппу</button>
-                <button class="btn btn-xs btn-danger" data-bind="click: $parent.removeChild"><span class="glyphicon glyphicon-minus-sign"></span> Удалить гпуппу</button>
-                <div class="group-conditions">
-                    <div data-bind="foreach: children">
-                        <div data-bind="template: templateName"></div>
-                    </div>
-                </div>
-            </div>
-        </script>
-
-        <script>
-            window.addEventListener('load', function () {
-                ko.applyBindings(new QueryBuilder.ViewModel());
-            }, true);
-        </script>
     </div>
     <script>
         $(document).ready(function () {
@@ -108,7 +75,7 @@
                         }
                     }
                 },
-                height: 690,
+                height: 705,
                 editable: true,
                 filterable: { mode: "row" },
                 columnMenu: true,
@@ -131,7 +98,7 @@
                     buttonCount: 5
                 },
                 columns: [
-                    { width: 30, headerTemplate: "<input name='checkedRecords' type='checkbox' />", template: "<input name='checkedRecords' type='checkbox' />" },
+                    { width: 30, headerTemplate: "<input  type='checkbox' id='chkSelectAll' onclick='checkAll(this)' />", template: "<input  type='checkbox' class='chkbx'/>" },
                     { field: "NumML", title: "№ МЛ", template: "<a href=''>#=NumML# </a><div class=\"valueDel\"></div> #= utverzh ? kendo.toString(utverzh, 'dd.MM.yyyy') : '' #", width: 150 },
                     { field: "USERs", title: "Пользователь", width: 160, filterable: { cell: { operator: "contains" } } },
                     { field: "Otvetstv", title: "Ответственный", width: 160 },
@@ -175,44 +142,16 @@
             win.center();
             win.open();
         }
+        function checkAll(ele) {
+            var state = $(ele).is(':checked');
+            var grid = $('#grid').data('kendoGrid');
+            $.each(grid.dataSource.view(), function () {
+                //if (this['IsSelected'] != state)
+                this.dirty = true;
+                //this['IsSelected'] = state;
+            });
+            grid.refresh();
+        }
     </script>
 </div>
 
-
-<style type="text/css">
-    .valueDel {
-        border-top-style: solid;
-        border-width: 1px;
-        border-color: #d0d7e5;
-    }
-
-    .k-grid {
-        font-size: 15px;
-    }
-
-        .k-grid td {
-            line-height: 1.6em;
-            padding: .2em .2em;
-        }
-
-    .k-toolbar .k-button, .k-toolbar .k-split-button, .k-toolbar .k-button-group, .k-toolbar .k-widget, .k-toolbar .k-textbox, .k-toolbar label, .k-toolbar .k-separator {
-        font-size: 15px;
-    }
-
-    .k-tabstrip > .k-content, .k-panelbar .k-tabstrip > .k-content {
-        padding: 1px !important;
-    }
-
-    .k-block, .k-widget {
-        /*line-height:1em*/
-    }
-
-    .k-grid-header th.k-header, .k-filter-row th {
-        padding: 0.1em .4em .1em .5em !important;
-    }
-
-    .k-toolbar {
-        padding-top: 0px;
-        padding-bottom: 0px;
-    }
-</style>

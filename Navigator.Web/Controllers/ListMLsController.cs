@@ -32,10 +32,6 @@ namespace Navigator.Web.Controllers
             }
             var count = sortedMls.Count();
             var data = sortedMls.Skip((page - 1) * pageSize).Take(pageSize).ToList();
-            //(from v in sortedMls.Skip((page - 1) * pageSize)
-            //                 .Take(pageSize)
-            //            select v).ToList(); 
-
             var jsonData = new { total = count, data };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
