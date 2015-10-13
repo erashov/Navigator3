@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewBag.Title = "Список Osnova";
+}
+
+<div id="example">
+    <div class="demo-section k-content wide">
+        <div id="toolbar"></div>
+    </div>
+    <div id="gridOsnova"></div>
+    <div id="window">
+    </div>
+    <script>
+        $(document).ready(function () {
+            var win = $("#window").kendoWindow({
+                height: "360px",
+                title: "Конфигуратор",
+
+                visible: false,
+                width: "560px"
+            }).data("kendoWindow");
+
+            $("#toolbar").kendoToolBar({
+                items: [
+                    { type: "button", text: "Конфигуратор" },
+                    { type: "button", text: "Toggle Button", togglable: true }
+                ],
+                click: onClick
+            });
+
+
+            $("#gridOsnova").kendoGrid({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "Osnova/GetList",
+                            dataType: "json",
+                            type: "POST"
+                        }
+                    }, pageSize: 20,
+                    serverPaging: true,
+                    serverSorting: true,
+                    serverFiltering: true,
+                    schema: {
+                        data: "data", total: "total",
+                        model: {
+                            fields: {
+                                Utverzh_M: { type: "date" }
+                               
+                            }
+                        }
+                    }
+                 
+                },
+                height: 705,
+                editable: true,
+                filterable: { mode: "row" },
+                columnMenu: true,
+                sortable: { mode: "multiple", allowUnsort: true },
+                pageable: {
+                    messages: {
+                        display: "{0} - {1} из {2} элементов",
+                        empty: "No items to display",
+                        of: "из {0}",
+                        itemsPerPage: "элементов на странице",
+                        refresh: "Обновить"
+                    }
+                },
+                selectable: "multiple",
+                resizable: true,
+                reorderable: true,
+                pageable: {
+                    refresh: true,
+                    pageSizes: [10, 20, 50],
+                    buttonCount: 5
+                },
+                columns: [
+                    { width: 30, headerTemplate: "<input  type='checkbox' id='chkSelectAll' onclick='checkAll(this)' />", template: "<input  type='checkbox' class='chkbx'/>" },
+                    { field: "NumML", title: "№ МЛ", width: 150 },
+                  
+                    { field: "Manager", title: "Ответственный", width: 160 },
+                    { field: "Zakazhcik", title: "Заказчик", width: 190 },
+                    { field: "AdresA", title: "Адрес", width: 400 },
+                   
+                    { title: "Услуга", field: "Usluga", width: 100 }
+                   
+                ]
+            });
+        });
+        function onClick(e) {
+            var win = $("#window").data("kendoWindow");
+            win.center();
+            win.open();
+        }
+        function checkAll(ele) {
+            var state = $(ele).is(':checked');
+            var grid = $('#gridOsnova').data('kendoGrid');
+            $.each(grid.dataSource.view(), function () {
+                //if (this['IsSelected'] != state)
+                this.dirty = true;
+                //this['IsSelected'] = state;
+            });
+            grid.refresh();
+        }
+    </script>
+</div>
+

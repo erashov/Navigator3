@@ -1,45 +1,50 @@
-﻿    .valueDel {
-        border-top-style: solid;
-        border-width: 1px;
-        border-color: #d0d7e5;
+﻿.valueDel {
+    border-top-style: solid;
+    border-width: 1px;
+    border-color: #d0d7e5;
+}
+
+.k-grid {
+    font-size: 15px;
+}
+
+.k-grid td {
+    line-height: 1.6em;
+    padding: .2em .2em;
+}
+
+.k-toolbar .k-button, .k-toolbar .k-split-button, .k-toolbar .k-button-group, .k-toolbar .k-widget, .k-toolbar .k-textbox, .k-toolbar label, .k-toolbar .k-separator {
+    font-size: 14px;
+}
+
+.k-tabstrip > .k-content, .k-panelbar .k-tabstrip > .k-content {
+    padding: 1px;
+}
+
+.k-block, .k-widget {
+    /*line-height:1em*/
+}
+
+.k-grid-header th.k-header, .k-filter-row th {
+    padding: .1em .4em .1em .5em !important;
+}
+
+.k-toolbar {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+
+.k-tabstrip-items {
+    font-size: 15px;
+    line-height: .8em;
+    padding: 0.05em .3em 0px;
+}
+
+    .k-tabstrip-items .k-link, .k-panelbar .k-tabstrip-items .k-link {
+        padding: .4em .92em;
     }
 
-    .k-grid {
-        font-size: 15px;
-    }
-
-        .k-grid td {
-            line-height: 1.6em;
-            padding: .2em .2em;
-        }
-
-    .k-toolbar .k-button, .k-toolbar .k-split-button, .k-toolbar .k-button-group, .k-toolbar .k-widget, .k-toolbar .k-textbox, .k-toolbar label, .k-toolbar .k-separator {
-        font-size: 14px;
-    }
-
-    .k-tabstrip > .k-content, .k-panelbar .k-tabstrip > .k-content {
-        padding: 1px !important;
-    }
-
-    .k-block, .k-widget {
-        /*line-height:1em*/
-    }
-
-    .k-grid-header th.k-header, .k-filter-row th {
-        padding: 0.1em .4em .1em .5em !important;
-    }
-
-    .k-toolbar {
-        padding-top: 0px;
-        padding-bottom: 0px;
-    }
-
-
-        .k-tabstrip-items {
-        font-size: 15px;
-        line-height: 0.8em;
-        padding:0.05em 0.3em 0px;
-    }
-    .k-tabstrip-items .k-link, .k-panelbar .k-tabstrip-items .k-link{
-        padding:0.4em 0.92em
-    }
+.k-loading {
+    visibility: hidden;
+}

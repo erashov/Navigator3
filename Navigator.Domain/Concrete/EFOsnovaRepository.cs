@@ -1,14 +1,13 @@
 ﻿using Navigator.Domain.Abstract;
 using Navigator.Domain.Entities;
-using System.Collections.Generic;
-using System;
+using System.Linq;
 
 namespace Navigator.Domain.Concrete
 {
     public class EFOsnovaRepository : IOsnovaRepository
     {
         private EFDbContext context = new EFDbContext();
-        public IEnumerable<Osnova> Osnovas
+        public IQueryable<Osnova> Osnovas
         {
             get
             {

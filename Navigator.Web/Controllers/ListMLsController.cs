@@ -21,17 +21,22 @@ namespace Navigator.Web.Controllers
         public ActionResult GetListMls(int page, int pageSize, int take)
         {
             var sorterCollection = KendoGridSorterCollection.BuildCollection(Request);
-            var sortedMls = _repository.ListMLGrids;
+            var filterCollection = KendoGridFilterCollection.BuildCollection(Request);
+            var filteredMls = _repository.ListMLGrids.MultipleFilter(filterCollection.Filters);
+            var sortedMls = filteredMls;
             if (sorterCollection.Sorters.Count() == 0)
             {
-                sortedMls = _repository.ListMLGrids.OrderByDescending(v => v.NumML);
+                sortedMls = filteredMls.OrderByDescending(v => v.NumML);
             }
             else
             {
-                sortedMls = _repository.ListMLGrids.MultipleSort(sorterCollection.Sorters);
+                sortedMls = filteredMls.MultipleSort(sorterCollection.Sorters);
             }
             var count = sortedMls.Count();
-            var data = sortedMls.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+          //  var data = sortedMls.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            var data = (from v in sortedMls.Skip((page - 1) * pageSize)
+                            .Take(pageSize)
+                        select v).ToList();
             var jsonData = new { total = count, data };
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }

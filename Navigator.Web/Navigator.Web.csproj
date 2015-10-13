@@ -76,6 +76,10 @@
       <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Linq.Dynamic, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.4\lib\net40\System.Linq.Dynamic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -652,16 +656,20 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListMLsController.cs" />
+    <Compile Include="Controllers\OsnovaController.cs" />
     <Compile Include="Controllers\QueryBuilderController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="KendoGridUtilities\KendoGridFilterCollection.cs" />
     <Compile Include="KendoGridUtilities\KendoGridSorterCollection.cs" />
+    <Compile Include="KendoGridUtilities\LinqFilteringUtility.cs" />
     <Compile Include="KendoGridUtilities\LinqSortingUtility.cs" />
     <Compile Include="Models\GridFilter.cs" />
     <Compile Include="Models\GridFilters.cs" />
     <Compile Include="Models\GridSort.cs" />
+    <Compile Include="Models\KendoGridFilter.cs" />
     <Compile Include="Models\KendoGridSorter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -793,6 +801,7 @@
     <Content Include="Views\ListMLs\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\QueryBuilder\Index.cshtml" />
+    <Content Include="Views\Osnova\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

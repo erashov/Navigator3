@@ -8,6 +8,7 @@
     <ul>
         <li class="k-state-active">Список МЛ</li>
         <li>Engine</li>
+        <li>Osnova</li>
     </ul>
 </div>
 
@@ -15,7 +16,8 @@
     $(document).ready(function () {
         var ts = $("#tabstrip").kendoTabStrip({
             animation: { open: { effects: "fadeIn" } },
-            contentUrls: ["ListMLs/Index",'QueryBuilder/index']}).data('kendoTabStrip');
+            contentUrls: ["ListMLs/Index", 'QueryBuilder/index', "Osnova/Index"]
+        }).data('kendoTabStrip');
     });
 </script>
 
