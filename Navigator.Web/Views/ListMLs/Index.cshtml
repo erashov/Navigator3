@@ -1,19 +1,25 @@
 ﻿<link href="~/Content/Site.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/QueryBuilder/query-builder.standalone.min.js"></script>
+<script src="~/Scripts/QueryBuilder/jQuery.extendext.min.js"></script>
+<link href="~/Content/query-builder.default.min.css" rel="stylesheet" />
+<script src="~/Scripts/QueryBuilder/query-builder.ru.js"></script>
 <div id="example">
     <div class="demo-section k-content wide">
         <div id="toolbar"></div>
     </div>
     <div id="grid"></div>
-    <div id="window"> </div>
+    <div id="window">
+        <div id="configurator" style="display: none;">
+            <div id="builder"></div>
+            <div class="demo-section k-content">
+                <button id="textSave">Сохранить</button>
+            </div>
+        </div>
+    </div>
     <script>
         $(document).ready(function () {
-            var win = $("#window").kendoWindow({
-                height: "360px",
-                title: "Конфигуратор",
-                visible: false,
-                width: "560px"
-            }).data("kendoWindow");
-
             $("#toolbar").kendoToolBar({
                 items: [
                     { type: "button", text: "Конфигуратор" },
@@ -21,8 +27,6 @@
                 ],
                 click: onClick
             });
-
-
             $("#grid").kendoGrid({
                 dataSource: {
                     transport: {
@@ -132,8 +136,16 @@
             });
         });
         function onClick(e) {
+            $("#configurator").show();
+            $("#window").kendoWindow({
+
+                title: "Конфигуратор",
+                actions: ["Refresh", "Minimize", "Maximize", "Close"],
+                width: 580,
+                //        modal: true
+            }).data("kendoWindow").center().open();
             var win = $("#window").data("kendoWindow");
-            win.center();
+            // win.center();
             win.open();
         }
         function checkAll(ele) {
@@ -146,6 +158,59 @@
             });
             grid.refresh();
         }
+    </script>
+
+    <script>
+        $('#builder').queryBuilder({
+            filters: [{
+                id: 'name',
+                label: 'Name',
+                type: 'string'
+            }, {
+                id: 'category',
+                label: 'Category',
+                type: 'integer',
+                input: 'select',
+                values: {
+                    1: 'Books',
+                    2: 'Movies',
+                    3: 'Music',
+                    4: 'Tools',
+                    5: 'Goodies',
+                    6: 'Clothes'
+                },
+                operators: ['equal', 'not_equal', 'in', 'not_in', 'is_null', 'is_not_null']
+            }, {
+                id: 'in_stock',
+                label: 'In stock',
+                type: 'integer',
+                input: 'radio',
+                values: {
+                    1: 'Yes',
+                    0: 'No',
+                    2: 'Maybe'
+                },
+                operators: ['equal']
+            }, {
+                id: 'price',
+                label: 'Price',
+                type: 'double',
+                validation: {
+                    min: 0,
+                    step: 0.01
+                }
+            }, {
+                id: 'id',
+                label: 'Identifier',
+                type: 'string',
+                placeholder: '____-____-____',
+                operators: ['equal', 'not_equal'],
+                validation: {
+                    format: /^.{4}-.{4}-.{4}$/
+                }
+            }],
+
+        });
     </script>
 </div>
 

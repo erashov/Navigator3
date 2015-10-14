@@ -491,8 +491,6 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
-    <Content Include="Scripts\kendo\2015.3.930\angular.min.js" />
-    <Content Include="Scripts\kendo\2015.3.930\jquery.min.js" />
     <Content Include="Scripts\kendo\2015.3.930\jszip.min.js" />
     <Content Include="Content\kendo\2015.3.930\fonts\DejaVu\DejaVuSans-Bold.ttf" />
     <Content Include="Content\kendo\2015.3.930\fonts\DejaVu\DejaVuSans-BoldOblique.ttf" />
@@ -649,7 +647,6 @@
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Scripts\kendo\2015.3.930\jquery.min.map" />
     <Content Include="Scripts\kendo\2015.3.930\kendo.all.min.js.map" />
     <Content Include="Scripts\kendo\2015.3.930\kendo.angular.min.js.map" />
     <Content Include="Scripts\kendo\2015.3.930\kendo.angular2.min.js.map" />
