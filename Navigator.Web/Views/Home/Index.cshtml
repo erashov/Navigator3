@@ -2,13 +2,22 @@
 @{
     ViewBag.Title = "Навигатор";
 }
-
-
+<link href="~/Content/Site.css" rel="stylesheet" />
 <div id="tabstrip">
     <ul>
         <li class="k-state-active">Список МЛ</li>
         <li>Engine</li>
         <li>Osnova</li>
+        <li>Список F</li>
+        <li>Список Y</li>
+        <li>Список R</li>
+        <li>Список E</li>
+        <li>Список S</li>
+        <li>Список T</li>
+        <li>Список O</li>
+        <li>Список K</li>
+        <li>Список L</li>
+        <li>Список каналов</li>
     </ul>
 </div>
 
@@ -16,7 +25,7 @@
     $(document).ready(function () {
         var ts = $("#tabstrip").kendoTabStrip({
             animation: { open: { effects: "fadeIn" } },
-            contentUrls: ["ListMLs/Index", 'QueryBuilder/index', "Osnova/Index"]
+            contentUrls: ["ListMLs/Index", 'QueryBuilder/index', "Osnova/Index","","","","","","","","","",""]
         }).data('kendoTabStrip');
     });
 </script>

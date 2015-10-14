@@ -1,28 +1,16 @@
-﻿
-@{
-    ViewBag.Title = "Список Osnova";
-}
-
+﻿<link href="~/Content/Site.css" rel="stylesheet" />
 <div id="example">
     <div class="demo-section k-content wide">
-        <div id="toolbar"></div>
+        <div id="toolbarOsn"></div>
     </div>
     <div id="gridOsnova"></div>
     <div id="window">
     </div>
     <script>
         $(document).ready(function () {
-            var win = $("#window").kendoWindow({
-                height: "360px",
-                title: "Конфигуратор",
 
-                visible: false,
-                width: "560px"
-            }).data("kendoWindow");
-
-            $("#toolbar").kendoToolBar({
-                items: [
-                    { type: "button", text: "Конфигуратор" },
+            $("#toolbarOsn").kendoToolBar({
+                items: [     
                     { type: "button", text: "Toggle Button", togglable: true }
                 ],
                 click: onClick
@@ -53,7 +41,7 @@
                  
                 },
                 height: 705,
-                editable: true,
+                editable: "inline",
                 filterable: { mode: "row" },
                 columnMenu: true,
                 sortable: { mode: "multiple", allowUnsort: true },
@@ -76,6 +64,7 @@
                 },
                 columns: [
                     { width: 30, headerTemplate: "<input  type='checkbox' id='chkSelectAll' onclick='checkAll(this)' />", template: "<input  type='checkbox' class='chkbx'/>" },
+                    { command: ["edit"], title: "&nbsp;", width: 90 },
                     { field: "NumML", title: "№ МЛ", width: 150 },
                   
                     { field: "Manager", title: "Ответственный", width: 160 },
@@ -88,9 +77,7 @@
             });
         });
         function onClick(e) {
-            var win = $("#window").data("kendoWindow");
-            win.center();
-            win.open();
+  
         }
         function checkAll(ele) {
             var state = $(ele).is(':checked');

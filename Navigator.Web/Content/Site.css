@@ -32,9 +32,10 @@
 .k-toolbar {
     padding-top: 0px;
     padding-bottom: 0px;
+    line-height:2em!important;
 }
-
-
+.k-toolbar-resizable{min-height:2.19em!important;}
+#toolbar{height:10px;}
 .k-tabstrip-items {
     font-size: 15px;
     line-height: .8em;
@@ -47,4 +48,8 @@
 
 .k-loading {
     visibility: hidden;
+}
+.k-block > .k-header, .k-window-titlebar
+{
+    font-size:1em;
 }
