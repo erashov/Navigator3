@@ -492,6 +492,7 @@
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\gridMls.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\kendo\2015.3.930\jszip.min.js" />
@@ -623,6 +624,7 @@
     <Content Include="Scripts\kendo\2015.3.930\kendo.webcomponents.min.js" />
     <Content Include="Scripts\kendo\2015.3.930\kendo.window.min.js" />
     <Content Include="Scripts\kendo\2015.3.930\pako_deflate.min.js" />
+    <Content Include="Scripts\QueryBuilder\configurator.js" />
     <Content Include="Scripts\QueryBuilder\jQuery.extendext.min.js" />
     <Content Include="Scripts\QueryBuilder\query-builder.ru.js" />
     <Content Include="Scripts\QueryBuilder\query-builder.standalone.min.js" />
@@ -636,7 +638,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListMLsController.cs" />
     <Compile Include="Controllers\OsnovaController.cs" />
-    <Compile Include="Controllers\QueryBuilderController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -752,7 +753,6 @@
     <Content Include="Scripts\kendo\2015.3.930\kendo.window.min.js.map" />
     <Content Include="Views\ListMLs\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\QueryBuilder\Index.cshtml" />
     <Content Include="Views\Osnova\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
