@@ -763,6 +763,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\Grids\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Navigator.Domain\Navigator.Domain.csproj">
