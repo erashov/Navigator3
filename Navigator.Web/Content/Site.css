@@ -36,11 +36,11 @@
 }
 .k-toolbar-resizable{min-height:2.19em!important;}
 
-#toolbarMls{height:10px;}
+#toolbarMls{height:11px;}
 .k-tabstrip-items {
     font-size: 15px;
-    line-height: .8em;
-    padding: 0.05em .3em 0px;
+    line-height: .9em;
+    padding: 0.09em .3em 1px;
 }
 
     .k-tabstrip-items .k-link, .k-panelbar .k-tabstrip-items .k-link {
