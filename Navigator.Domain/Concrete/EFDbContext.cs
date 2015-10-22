@@ -7,5 +7,6 @@ namespace Navigator.Domain.Concrete
     {
         public DbSet<ListMLGrid> ListMLGrids { get; set; }
         public DbSet<Osnova> Osnovas { get; set; }
+        public DbSet<RouteSheet> RouteSheets { get; set; }
     }
 }

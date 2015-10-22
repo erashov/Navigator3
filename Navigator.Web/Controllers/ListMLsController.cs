@@ -12,8 +12,8 @@ namespace Navigator.Web.Controllers
 {
     public class ListMLsController : Controller
     {
-        private IListMLGridRepository _repository;
-        public ListMLsController(IListMLGridRepository routesheetRepository)
+        private IRouteSheetsRepository _repository;
+        public ListMLsController(IRouteSheetsRepository routesheetRepository)
         {
             this._repository = routesheetRepository;
         }
@@ -24,49 +24,54 @@ namespace Navigator.Web.Controllers
         }
         public ActionResult GetListMls(int page, int pageSize, int take, List<GridSort> sort = null, GridFilters filter = null)
         {
-            var mls = _repository.ListMLGrids.AsQueryable();
-            var totalCount = _repository.ListMLGrids.Count();
-
-            if (filter != null && (filter.Filters != null && filter.Filters.Count > 0))
+            try
             {
-                string whereClause = null;
-                var parameters = new List<object>();
-                var filters = filter.Filters;
+                var mls = _repository.RouteSheets.AsQueryable();
+                var totalCount = _repository.RouteSheets.Count();
 
-                for (var i = 0; i < filters.Count; i++)
+                if (filter != null && (filter.Filters != null && filter.Filters.Count > 0))
                 {
-                    if (i == 0)
-                        whereClause += string.Format(" {0}",
-                            BuildWhereClause<ListMLGrid>(i, filter.Logic, filters[i],
-                            parameters));
-                    else
-                        whereClause += string.Format(" {0} {1}",
-                            ToLinqOperator(filter.Logic),
-                            BuildWhereClause<ListMLGrid>(i, filter.Logic, filters[i],
-                            parameters));
+                    string whereClause = null;
+                    var parameters = new List<object>();
+                    var filters = filter.Filters;
+
+                    for (var i = 0; i < filters.Count; i++)
+                    {
+                        if (i == 0)
+                            whereClause += string.Format(" {0}",
+                                BuildWhereClause<ListMLGrid>(i, filter.Logic, filters[i],
+                                parameters));
+                        else
+                            whereClause += string.Format(" {0} {1}",
+                                ToLinqOperator(filter.Logic),
+                                BuildWhereClause<ListMLGrid>(i, filter.Logic, filters[i],
+                                parameters));
+                    }
+
+                    mls = mls.Where(whereClause, parameters.ToArray());
+                    totalCount = mls.Where(whereClause, parameters.ToArray()).Count();
                 }
 
-                mls = mls.Where(whereClause, parameters.ToArray());
-                totalCount = mls.Where(whereClause, parameters.ToArray()).Count();
-            }
-
-            if (sort != null && sort.Count > 0)
-            {
-                foreach (var s in sort)
+                if (sort != null && sort.Count > 0)
                 {
-                    mls = mls.OrderBy(s.Field + " " + s.Dir);
+                    foreach (var s in sort)
+                    {
+                        mls = mls.OrderBy(s.Field + " " + s.Dir);
+                    }
                 }
+                else
+                {
+                    mls = mls.OrderBy("NumML desc");
+                }
+                var data = mls.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                var jsonData = new { total = totalCount, data = data };
+                return Json(jsonData, JsonRequestBehavior.AllowGet);
             }
-            else
+            catch (Exception e)
             {
-                mls = mls.OrderBy("NumML desc");
+                //string s = e.InnerException.Message;
+                return Json(null, JsonRequestBehavior.AllowGet);
             }
-            var data = mls.Skip((page - 1) * pageSize).Take(pageSize).ToList();
-            var jsonData = new { total = totalCount, data = data };
-            return Json(jsonData, JsonRequestBehavior.AllowGet);
-
-
-
         }
         public static string BuildWhereClause<T>(int index, string logic,
         GridFilter filter, List<object> parameters)
@@ -90,7 +95,7 @@ namespace Navigator.Web.Controllers
                             ToLinqOperator(filter.Operator),
                             index);
                     }
-                    if (typeof(int).IsAssignableFrom(property.PropertyType))
+                    if (typeof(int).IsAssignableFrom(property.PropertyType) || filter.Field== "dmv_ReportExist" || filter.Field== "gplr_ReportExist")
                     {
                         parameters.Add(int.Parse(filter.Value));
                         return string.Format("{0}{1}@{2}",

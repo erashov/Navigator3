@@ -82,9 +82,11 @@
   <ItemGroup>
     <Compile Include="Abstract\IListMLGridRepository.cs" />
     <Compile Include="Abstract\IOsnovaRepository.cs" />
+    <Compile Include="Abstract\IRouteSheetsRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFListMLGridRepository.cs" />
     <Compile Include="Concrete\EFOsnovaRepository.cs" />
+    <Compile Include="Concrete\EFRouteSheetsRepository.cs" />
     <Compile Include="Entities\ListMLGrid.cs" />
     <Compile Include="Entities\Osnova.cs" />
     <Compile Include="Entities\RouteSheet.cs" />
@@ -96,6 +98,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="temp\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

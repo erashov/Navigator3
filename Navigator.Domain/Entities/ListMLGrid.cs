@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Navigator.Domain.Entities
 {
-    [Table("RouteSheets")]
-    public class RouteSheet
+    [Table("ListMLGrid")]
+    public class ListMLGrid
     {
         [Key]
         [Column(Order = 0)]
@@ -20,10 +20,8 @@ namespace Navigator.Domain.Entities
         [StringLength(255)]
         public string Zakazhcik { get; set; }
 
-        [StringLength(510)]
-        public string Adres { get; set; }
-
         [StringLength(255)]
+        public string Adres { get; set; }
         public string AdresA { get; set; }
 
         [StringLength(255)]
@@ -140,6 +138,36 @@ namespace Navigator.Domain.Entities
         public DateTime? Data_Sost_A { get; set; }
 
         public DateTime? Data_Sost_B { get; set; }
+
+        public DateTime? Data_Vypt_A { get; set; }
+
+        public DateTime? Data_Vypt_B { get; set; }
+
+        public DateTime? DCSV { get; set; }
+
+        public DateTime? D_UVK { get; set; }
+
+        public DateTime? D_UIIAS_Sost { get; set; }
+
+        public DateTime? D_UIIAS { get; set; }
+
+        public DateTime? D_USHTU_TF_Sost { get; set; }
+
+        public DateTime? D_USHTU_TF { get; set; }
+
+        public DateTime? D_USHTU_Sost { get; set; }
+
+        public DateTime? D_USHTU { get; set; }
+
+        public DateTime? c { get; set; }
+
+        public DateTime? b { get; set; }
+
+        public DateTime? D_USP { get; set; }
+
+        public DateTime? D_USP1 { get; set; }
+
+        public DateTime? signD3 { get; set; }
 
         [Key]
         [Column(Order = 2)]
@@ -263,8 +291,7 @@ namespace Navigator.Domain.Entities
 
         public int? oshugpz_ReportExist { get; set; }
 
-
-        public int gplr_ReportExist { get; set; }
+        public int? gplr_ReportExist { get; set; }
 
         public int? otsod_ReportExist { get; set; }
 
@@ -280,7 +307,7 @@ namespace Navigator.Domain.Entities
 
         public int? to_ReportExist { get; set; }
 
-        public int dmv_ReportExist { get; set; }
+        public int? dmv_ReportExist { get; set; }
 
         public int? ushugpu_ReportExist { get; set; }
 

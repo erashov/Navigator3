@@ -27,7 +27,7 @@ namespace Navigator.Web.Infrastructure
         {
             kernel.Bind<IListMLGridRepository>().To<EFListMLGridRepository>();
             kernel.Bind<IOsnovaRepository>().To<EFOsnovaRepository>();
-
+            kernel.Bind<IRouteSheetsRepository>().To<EFRouteSheetsRepository>();
 
         }
     }
