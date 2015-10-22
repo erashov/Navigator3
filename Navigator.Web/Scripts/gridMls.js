@@ -37,6 +37,31 @@ var filterDep = {
         }
     }
 };
+var filterGfz = {
+    mode: "row",
+    cell: {
+        showOperators: false,
+        template: function (args) {
+            args.element.kendoDropDownList({
+                autoBind: false,
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: new kendo.data.DataSource({
+                    data: items
+                }),
+                index: 0,
+                optionLabel: {
+                    text: "Без фильтра",
+                    value: ""
+                },
+                valuePrimitive: true
+
+            });
+
+        }
+    }
+   
+};
 
 var columns = [
         { width: 30, headerTemplate: "<input  type='checkbox' id='chkSelectAll' onclick='checkAll(this)' />", template: "<input  type='checkbox' class='chkbx'/>" },
@@ -66,9 +91,9 @@ var columns = [
         { field: "uiias_h_start", title: "ОЦОДиТ", filterable: filterDep, template: "#=uiias_h_start ? kendo.toString(uiias_h_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=uiias_h_end ? kendo.toString(uiias_h_end,'dd.MM.yyyy'):'' # #=uiias_hIsCanceled ? uiias_hIsCanceled:'' #", width: 160 },
         { field: "oshugpu_start", title: "ОШУГПУ", filterable: filterDep, template: "#=oshugpu_start ? kendo.toString(oshugpu_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=oshugpu_end ? kendo.toString(oshugpu_end,'dd.MM.yyyy'):'' # #=oshugpuIsCanceled ? oshugpuIsCanceled:'' #", width: 160 },
         {
-            field: "oshugpz_start", title: "ГФЗ", filterable: {
-                ui: "datetimepicker" // use Kendo UI DateTimePicker
-            }, template: "#=oshugpz_start ? kendo.toString(oshugpz_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=oshugpz_end ? kendo.toString(oshugpz_end,'dd.MM.yyyy'):'' # #=oshugpzIsCanceled ? oshugpzIsCanceled:'' #", width: 160
+            field: "oshugpz_start", title: "ГФЗ", filterable: filterGfz
+            , template: "#=oshugpz_start ? kendo.toString(oshugpz_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=oshugpz_end ? kendo.toString(oshugpz_end,'dd.MM.yyyy'):'' # #=oshugpzIsCanceled ? oshugpzIsCanceled:'' #", width: 160
+            
         },
         { field: "to_start", title: "ТО", filterable: filterDep, template: "<table><tr><td >#=to_start ? kendo.toString(to_start,'dd.MM.yyyy'):''#</td><td>#=to2_start ? kendo.toString(to2_start,'dd.MM.yyyy'):''#</td></tr><tr><td>#=to_end ? kendo.toString(to_end,'dd.MM.yyyy'):''# #=toIsCanceled ? toIsCanceled:''#</td><td>#=to2_end ? kendo.toString(to2_end,'dd.MM.yyyy'):''# #=to2IsCanceled ? to2IsCanceled:''#</td></tr></table>", width: 160 },
         { field: "otse_start", title: "ОТС(Е)", filterable: filterDep, template: "<table><tr><td >#=otse_start ? kendo.toString(otse_start,'dd.MM.yyyy'):''#</td><td>#=otse2_start ? kendo.toString(otse2_start,'dd.MM.yyyy'):''#</td></tr><tr><td>#=otse_end ? kendo.toString(otse_end,'dd.MM.yyyy'):''# #=otseIsCanceled ? otseIsCanceled:''#</td><td>#=otse2_end ? kendo.toString(otse2_end,'dd.MM.yyyy'):''# #=otse2IsCanceled ? otse2IsCanceled:''#</td></tr></table>", width: 190 },
@@ -155,6 +180,25 @@ $("#gridMls").kendoGrid({
         buttonCount: 5
     },
     columns: columns
+});
+var columns1 = $("#gridMls").data("kendoGrid").columns;
+for (var i = 0; i < columns.length; i++) {
+    var column = columns[i];
+    var columnName = column.field;
+    var columnHeader = jQuery('div#gridMls span.k-filtercell[data-field="oshugpz_start"]');
+    if (columnName == 'oshugpz_start') {
+        if (undefined != columnHeader[0]) {
+            var fieldValue = jQuery('<div>From: <input id="from"/> To: <input id="to"/>');
+            fieldValue.val(columnName);
+            fieldValue.click(function (evt) {
+                evt.stopPropagation();
+                jQuery(evt.target).focus().select();
+            });
+            columnHeader.append(fieldValue);
+        }
+    }
+}
+$("#from, #to").kendoDatePicker({
 });
 
 function onClick(e) {
