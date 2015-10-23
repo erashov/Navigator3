@@ -4,8 +4,8 @@
         { type: "button", text: "Снять", id: "btnTakeOff" },
         { type: "button", title: "Обновить", id: "btnRefresh", icon: "refresh" },
         { type: "button", text: "Конфигуратор", id: "btnconf", click: buttonClickOpenConf },
-        { type: "button", text: "Очистить фильтпы", id: "btnclear", click: buttonClickClearFilters },
-        { type: "button", text: "Toggle Button", togglable: true }
+        { type: "button", text: "Очистить фильтпы", id: "btnclear", click: buttonClickClearFilters }
+        //,{ type: "button", text: "Toggle Button", togglable: true }
     ],
     click: onClick
 });
@@ -31,9 +31,7 @@ var filterDep = {
                     value: ""
                 },
                 valuePrimitive: true
-
             });
-
         }
     }
 };
@@ -41,26 +39,11 @@ var filterGfz = {
     mode: "row",
     cell: {
         showOperators: false,
-        template: function (args) {
-            args.element.kendoDropDownList({
-                autoBind: false,
-                dataTextField: "text",
-                dataValueField: "value",
-                dataSource: new kendo.data.DataSource({
-                    data: items
-                }),
-                index: 0,
-                optionLabel: {
-                    text: "Без фильтра",
-                    value: ""
-                },
-                valuePrimitive: true
+        //template:
 
-            });
 
-        }
     }
-   
+
 };
 
 var columns = [
@@ -93,7 +76,7 @@ var columns = [
         {
             field: "oshugpz_start", title: "ГФЗ", filterable: filterGfz
             , template: "#=oshugpz_start ? kendo.toString(oshugpz_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=oshugpz_end ? kendo.toString(oshugpz_end,'dd.MM.yyyy'):'' # #=oshugpzIsCanceled ? oshugpzIsCanceled:'' #", width: 160
-            
+
         },
         { field: "to_start", title: "ТО", filterable: filterDep, template: "<table><tr><td >#=to_start ? kendo.toString(to_start,'dd.MM.yyyy'):''#</td><td>#=to2_start ? kendo.toString(to2_start,'dd.MM.yyyy'):''#</td></tr><tr><td>#=to_end ? kendo.toString(to_end,'dd.MM.yyyy'):''# #=toIsCanceled ? toIsCanceled:''#</td><td>#=to2_end ? kendo.toString(to2_end,'dd.MM.yyyy'):''# #=to2IsCanceled ? to2IsCanceled:''#</td></tr></table>", width: 160 },
         { field: "otse_start", title: "ОТС(Е)", filterable: filterDep, template: "<table><tr><td >#=otse_start ? kendo.toString(otse_start,'dd.MM.yyyy'):''#</td><td>#=otse2_start ? kendo.toString(otse2_start,'dd.MM.yyyy'):''#</td></tr><tr><td>#=otse_end ? kendo.toString(otse_end,'dd.MM.yyyy'):''# #=otseIsCanceled ? otseIsCanceled:''#</td><td>#=otse2_end ? kendo.toString(otse2_end,'dd.MM.yyyy'):''# #=otse2IsCanceled ? otse2IsCanceled:''#</td></tr></table>", width: 190 },
@@ -162,43 +145,38 @@ $("#gridMls").kendoGrid({
     filterable: { mode: "row", extra: false },
     columnMenu: true,
     sortable: { mode: "multiple", allowUnsort: true },
-    pageable: {
-        messages: {
-            display: "{0} - {1} из {2} элементов",
-            empty: "No items to display",
-            of: "из {0}",
-            itemsPerPage: "элементов на странице",
-            refresh: "Обновить"
-        }
-    },
+    pageable: true,
     selectable: "multiple",
     resizable: true,
     reorderable: true,
     pageable: {
         refresh: true,
-        pageSizes: [10, 20, 50,100],
+        pageSizes: [10, 20, 50, 100],
         buttonCount: 5
     },
     columns: columns
 });
-var columns1 = $("#gridMls").data("kendoGrid").columns;
-for (var i = 0; i < columns.length; i++) {
-    var column = columns[i];
-    var columnName = column.field;
-    var columnHeader = jQuery('div#gridMls span.k-filtercell[data-field="oshugpz_start"]');
-    if (columnName == 'oshugpz_start') {
-        if (undefined != columnHeader[0]) {
-            var fieldValue = jQuery('<div>From: <input id="from"/> To: <input id="to"/>');
-            fieldValue.val(columnName);
-            fieldValue.click(function (evt) {
-                evt.stopPropagation();
-                jQuery(evt.target).focus().select();
-            });
-            columnHeader.append(fieldValue);
-        }
-    }
-}
-$("#from, #to").kendoDatePicker({
+
+var columnHeader = jQuery('div#gridMls span.k-filtercell[data-field="oshugpz_start"]');
+var fieldValue = jQuery('<table><tr><td style="width:30%;"><input id="from"/></td><td style="width:30%;"><input id="to"/></td><td style="width:40%;"><input id="dropdownlistGfz" /></td></tr></table>');
+columnHeader.empty();
+columnHeader.append(fieldValue);
+
+$("#from, #to").kendoDatePicker();
+
+$("#dropdownlistGfz").kendoDropDownList({
+    autoBind: false,
+    dataTextField: "text",
+    dataValueField: "value",
+    dataSource: new kendo.data.DataSource({
+        data: items
+    }),
+    index: 0,
+    optionLabel: {
+        text: "Без фильтра",
+        value: ""
+    },
+    valuePrimitive: true
 });
 
 function onClick(e) {

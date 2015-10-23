@@ -624,6 +624,7 @@
     <Content Include="Scripts\kendo\2015.3.930\kendo.webcomponents.min.js" />
     <Content Include="Scripts\kendo\2015.3.930\kendo.window.min.js" />
     <Content Include="Scripts\kendo\2015.3.930\pako_deflate.min.js" />
+    <Content Include="Scripts\kendo\culture\kendo.culture.ru-RU.min.js" />
     <Content Include="Scripts\QueryBuilder\configurator.js" />
     <Content Include="Scripts\QueryBuilder\jQuery.extendext.min.js" />
     <Content Include="Scripts\QueryBuilder\query-builder.ru.js" />
