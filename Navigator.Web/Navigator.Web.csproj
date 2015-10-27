@@ -137,10 +137,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\favicon.ico" />
     <Content Include="Content\kendo\2015.3.930\Black\editor.png" />
     <Content Include="Content\kendo\2015.3.930\Black\imagebrowser.png" />
@@ -486,14 +483,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Navigator.Web.ruleset" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
-    <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\gridMls.js" />
-    <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\kendo\2015.3.930\jszip.min.js" />
     <Content Include="Content\kendo\2015.3.930\fonts\DejaVu\DejaVuSans-Bold.ttf" />
@@ -515,7 +508,6 @@
     <Content Include="Content\kendo\2015.3.930\images\kendoui.ttf" />
     <Content Include="Content\kendo\2015.3.930\images\kendoui.woff" />
     <None Include="Properties\PublishProfiles\Nav.pubxml" />
-    <Content Include="Scripts\jquery-2.1.4.min.map" />
     <None Include="Scripts\kendo\2015.3.930\kendo.all-vsdoc.js" />
     <None Include="Scripts\kendo\2015.3.930\kendo.all.min.intellisense.js" />
     <Content Include="Scripts\kendo\2015.3.930\kendo.all.min.js" />

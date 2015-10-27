@@ -10,7 +10,7 @@
     click: onClick
 });
 var items = [{ text: "Выдано", value: "1" },
-    { text: "Не ыдано", value: "2" },
+    { text: "Не выдано", value: "2" },
     { text: "Выполнено", value: "3" }];
 
 var filterDep = {
@@ -38,17 +38,15 @@ var filterDep = {
 var filterGfz = {
     mode: "row",
     cell: {
-        showOperators: false,
-        //template:
-
-
+        showOperators: false
     }
 
 };
 
 var columns = [
-        { width: 30, headerTemplate: "<input  type='checkbox' id='chkSelectAll' onclick='checkAll(this)' />", template: "<input  type='checkbox' class='chkbx'/>" },
-        { field: "NumML", title: "№ МЛ", template: "<a href='' class='redlink'>#=NumML# </a><div class=\"valueDel\"></div> #= utverzh ? kendo.toString(utverzh, 'dd.MM.yyyy') : '' #", width: 150 },
+        { width: 30, headerTemplate: "<input  type='checkbox' id='chkSelectAll' onclick='checkAll(this)' />", template: "<input  type='checkbox' class='chkbx'/>", locked: true },
+        { command: ["edit"], title: "&nbsp;",text: "", width: 90, locked: true },
+        { field: "NumML", title: "№ МЛ", template: "<a href='' class='redlink'>#=NumML# </a><div class=\"valueDel\"></div> #= utverzh ? kendo.toString(utverzh, 'dd.MM.yyyy') : '' #", width: 150, locked: true, editable:false },
         { field: "USERs", title: "Пользователь", width: 160, filterable: { cell: { operator: "contains" } } },
         { field: "Otvetstv", title: "Ответственный", width: 160 },
         { field: "Zakazhcik", title: "Заказчик", width: 190 },
@@ -60,29 +58,18 @@ var columns = [
         { field: "UDA", title: "Узел доступа", template: "#=UDA ? UDA:'' # <div class=\"valueDel\"></div> #=UDB ? UDB:''#", width: 190 },
         { field: "SpecOb", title: "Канал привязки", width: 120 },
         { field: "ChNumA", title: "F стыка", template: "#=ChNumA ? ChNumA:'' # <div class=\"valueDel\"></div> #=ChNumB ? ChNumB:''#", width: 100 },
-        { field: "ESVTPIQQCNfe", title: "E,S,V,T,P,I,Q,QC,N,Ф", width: 100 },
-        { field: "L", width: 100 }, { field: "E", width: 100 }, { field: "S", width: 100 }, { field: "V", width: 100 }, { field: "T", width: 100 },
-        { field: "P", width: 100 }, { field: "I", width: 100 }, { field: "Q", width: 100 }, { field: "QC", width: 100 }, { field: "N", width: 100 },
-        { field: "Fe", width: 100, title: "Ф" },
-        {
-            field: "gplr_ReportExist", title: "ГПЛР", type: "number", filterable: filterDep
-        , template: "<table><tr><td >#=gplr_start ? kendo.toString(gplr_start,'dd.MM.yyyy'):'' #</td><td>#=gplr2_start ? kendo.toString(gplr2_start,'dd.MM.yyyy'):'' #</td></tr><tr><td>#=gplr_end ? kendo.toString(gplr_end,'dd.MM.yyyy'):'' # #=gplrIsCanceled ? gplrIsCanceled:'' #</td><td>#=gplr2_end ? kendo.toString(gplr2_end,'dd.MM.yyyy'):'' # #=gplr2IsCanceled ? gplr2IsCanceled:''#</td></tr></table>", width: 160
-        },
+        { field: "ESVTPIQQCNfe", title: "E,S,V,T,P,I,Q,QC,N,Ф", width: 100 },{ field: "L", width: 100 }, { field: "E", width: 100 }, { field: "S", width: 100 }, { field: "V", width: 100 }, { field: "T", width: 100 },{ field: "P", width: 100 }, { field: "I", width: 100 }, { field: "Q", width: 100 }, { field: "QC", width: 100 }, { field: "N", width: 100 }, { field: "Fe", width: 100, title: "Ф" },
+        { field: "gplr_ReportExist", title: "ГПЛР", type: "number", filterable: filterDep, template: "<table><tr><td >#=gplr_start ? kendo.toString(gplr_start,'dd.MM.yyyy'):'' #</td><td>#=gplr2_start ? kendo.toString(gplr2_start,'dd.MM.yyyy'):'' #</td></tr><tr><td>#=gplr_end ? kendo.toString(gplr_end,'dd.MM.yyyy'):'' # #=gplrIsCanceled ? gplrIsCanceled:'' #</td><td>#=gplr2_end ? kendo.toString(gplr2_end,'dd.MM.yyyy'):'' # #=gplr2IsCanceled ? gplr2IsCanceled:''#</td></tr></table>", width: 160 },
         { field: "dmv_ReportExist", type: "number", title: "ДМВ", filterable: filterDep, template: "<table><tr><td >#=dmv_start ? kendo.toString(dmv_start,'dd.MM.yyyy'):'' #</td><td>#=dmv2_start ? kendo.toString(dmv2_start,'dd.MM.yyyy'):'' #</td></tr><tr><td>#=dmv_end ? kendo.toString(dmv_end,'dd.MM.yyyy'):'' # #=dmvIsCanceled ? dmvIsCanceled:'' #</td><td>#=dmv2_end ? kendo.toString(dmv2_end,'dd.MM.yyyy'):'' #  #=dmv2IsCanceled ? dmv2IsCanceled:''#</td></tr></table>", width: 160 },
-
-       { field: "osp_start", title: "ОСП", filterable: filterDep, template: "#=osp_start ? kendo.toString(osp_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=osp_end ? kendo.toString(osp_end,'dd.MM.yyyy'):'' # #=ospIsCanceled ? ospIsCanceled:'' #", width: 160 },
-        { field: "uiias_h_start", title: "ОЦОДиТ", filterable: filterDep, template: "#=uiias_h_start ? kendo.toString(uiias_h_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=uiias_h_end ? kendo.toString(uiias_h_end,'dd.MM.yyyy'):'' # #=uiias_hIsCanceled ? uiias_hIsCanceled:'' #", width: 160 },
-        { field: "oshugpu_start", title: "ОШУГПУ", filterable: filterDep, template: "#=oshugpu_start ? kendo.toString(oshugpu_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=oshugpu_end ? kendo.toString(oshugpu_end,'dd.MM.yyyy'):'' # #=oshugpuIsCanceled ? oshugpuIsCanceled:'' #", width: 160 },
-        {
-            field: "oshugpz_start", title: "ГФЗ", filterable: filterGfz
-            , template: "#=oshugpz_start ? kendo.toString(oshugpz_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=oshugpz_end ? kendo.toString(oshugpz_end,'dd.MM.yyyy'):'' # #=oshugpzIsCanceled ? oshugpzIsCanceled:'' #", width: 160
-
-        },
+        { field: "osp_ReportExist", title: "ОСП", filterable: filterDep, template: "#=osp_start ? kendo.toString(osp_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=osp_end ? kendo.toString(osp_end,'dd.MM.yyyy'):'' # #=ospIsCanceled ? ospIsCanceled:'' #", width: 160 },
+        { field: "otsod_ReportExist", title: "ОЦОДиТ", filterable: filterDep, template: "#=uiias_h_start ? kendo.toString(uiias_h_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=uiias_h_end ? kendo.toString(uiias_h_end,'dd.MM.yyyy'):'' # #=uiias_hIsCanceled ? uiias_hIsCanceled:'' #", width: 160 },
+        { field: "ushugpu_ReportExist", title: "ОШУГПУ", filterable: filterDep, template: "#=oshugpu_start ? kendo.toString(oshugpu_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=oshugpu_end ? kendo.toString(oshugpu_end,'dd.MM.yyyy'):'' # #=oshugpuIsCanceled ? oshugpuIsCanceled:'' #", width: 160 },
+        { field: "oshugpz_start", title: "ГФЗ", filterable: filterGfz, template: "#=oshugpz_start ? kendo.toString(oshugpz_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=oshugpz_end ? kendo.toString(oshugpz_end,'dd.MM.yyyy'):'' # #=oshugpzIsCanceled ? oshugpzIsCanceled:'' #", width: 340 },
         { field: "to_start", title: "ТО", filterable: filterDep, template: "<table><tr><td >#=to_start ? kendo.toString(to_start,'dd.MM.yyyy'):''#</td><td>#=to2_start ? kendo.toString(to2_start,'dd.MM.yyyy'):''#</td></tr><tr><td>#=to_end ? kendo.toString(to_end,'dd.MM.yyyy'):''# #=toIsCanceled ? toIsCanceled:''#</td><td>#=to2_end ? kendo.toString(to2_end,'dd.MM.yyyy'):''# #=to2IsCanceled ? to2IsCanceled:''#</td></tr></table>", width: 160 },
-        { field: "otse_start", title: "ОТС(Е)", filterable: filterDep, template: "<table><tr><td >#=otse_start ? kendo.toString(otse_start,'dd.MM.yyyy'):''#</td><td>#=otse2_start ? kendo.toString(otse2_start,'dd.MM.yyyy'):''#</td></tr><tr><td>#=otse_end ? kendo.toString(otse_end,'dd.MM.yyyy'):''# #=otseIsCanceled ? otseIsCanceled:''#</td><td>#=otse2_end ? kendo.toString(otse2_end,'dd.MM.yyyy'):''# #=otse2IsCanceled ? otse2IsCanceled:''#</td></tr></table>", width: 190 },
-        { field: "otss_start", title: "ОТС(S)", filterable: filterDep, template: "<table><tr><td >#=otss_start ? kendo.toString(otss_start,'dd.MM.yyyy'):''#</td><td>#=otss2_start ? kendo.toString(otss2_start,'dd.MM.yyyy'):''#</td></tr><tr><td>#=otss_end ? kendo.toString(otss_end,'dd.MM.yyyy'):''# #=otssIsCanceled ? otssIsCanceled:''#</td><td>#=otss2_end ? kendo.toString(otss2_end,'dd.MM.yyyy'):''# #=otss2IsCanceled ? otss2IsCanceled:''#</td></tr></table>", width: 190 },
-        { field: "otu_start", title: "ОТУ", filterable: filterDep, template: "#=otu_start ? kendo.toString(otu_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=otu_end ? kendo.toString(otu_end,'dd.MM.yyyy'):'' # #=otuIsCanceled ? otuIsCanceled:'' #", width: 190 },
-        { field: "otvu_start", title: "ОТвУ", filterable: filterDep, template: "#=otvu_start ? kendo.toString(otvu_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=otvu_end ? kendo.toString(otvu_end,'dd.MM.yyyy'):'' # #=otvuIsCanceled ? otvuIsCanceled:'' #", width: 190 },
+        { field: "otse_ReportExist", title: "ОТС(Е)", filterable: filterDep, template: "<table><tr><td >#=otse_start ? kendo.toString(otse_start,'dd.MM.yyyy'):''#</td><td>#=otse2_start ? kendo.toString(otse2_start,'dd.MM.yyyy'):''#</td></tr><tr><td>#=otse_end ? kendo.toString(otse_end,'dd.MM.yyyy'):''# #=otseIsCanceled ? otseIsCanceled:''#</td><td>#=otse2_end ? kendo.toString(otse2_end,'dd.MM.yyyy'):''# #=otse2IsCanceled ? otse2IsCanceled:''#</td></tr></table>", width: 190 },
+        { field: "otss_ReportExist", title: "ОТС(S)", filterable: filterDep, template: "<table><tr><td >#=otss_start ? kendo.toString(otss_start,'dd.MM.yyyy'):''#</td><td>#=otss2_start ? kendo.toString(otss2_start,'dd.MM.yyyy'):''#</td></tr><tr><td>#=otss_end ? kendo.toString(otss_end,'dd.MM.yyyy'):''# #=otssIsCanceled ? otssIsCanceled:''#</td><td>#=otss2_end ? kendo.toString(otss2_end,'dd.MM.yyyy'):''# #=otss2IsCanceled ? otss2IsCanceled:''#</td></tr></table>", width: 190 },
+        { field: "otu_ReportExist", title: "ОТУ", filterable: filterDep, template: "#=otu_start ? kendo.toString(otu_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=otu_end ? kendo.toString(otu_end,'dd.MM.yyyy'):'' # #=otuIsCanceled ? otuIsCanceled:'' #", width: 190 },
+        { field: "otvu_ReportExist", title: "ОТвУ", filterable: filterDep, template: "#=otvu_start ? kendo.toString(otvu_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=otvu_end ? kendo.toString(otvu_end,'dd.MM.yyyy'):'' # #=otvuIsCanceled ? otvuIsCanceled:'' #", width: 190 },
         { field: "TaskReturns", title: "Возврат МЛ", width: 120 },
         { field: "TaskCancels", title: "Возврат заданий", width: 190 },
         { field: "StartDate", title: "Заморозка", template: "#=StartDate ? kendo.toString(StartDate,'dd.MM.yyyy'):'' # <div class=\"valueDel\"></div> #=StopDate ? kendo.toString(StopDate,'dd.MM.yyyy'):''#", width: 160 },
@@ -93,19 +80,12 @@ var columns = [
         { field: "SpecProject", title: "Спецпроект", width: 130 }
 ];
 var fields = {
-    utverzh: { type: "date" },
-    gplr_start: { type: "date" },
-    gplr2_start: { type: "date" },
-    gplr_end: { type: "date" },
-    gplr2_end: { type: "date" },
-    dmv_start: { type: "date" },
-    dmv2_start: { type: "date" },
-    dmv_end: { type: "date" },
-    dmv2_end: { type: "date" },
-    osp_start: { type: "date" },
-    osp_end: { type: "date" },
-    oshugpz_start: { type: "date" },
-    oshugpz_end: { type: "date" },
+    utverzh: { type: "date" }, gplr_start: { type: "date" }, gplr2_start: { type: "date" }, gplr_end: { type: "date" },  gplr2_end: { type: "date" },  dmv_start: { type: "date" }, dmv2_start: { type: "date" }, dmv_end: { type: "date" },
+    dmv2_end: { type: "date" }, osp_start: { type: "date" }, osp_end: { type: "date" }, oshugpz_start: { type: "date" }, oshugpu_start: { type: "date" }, oshugpu_end: { type: "date" }, oshugpz_end: { type: "date" },
+    otvu_start: { type: "date" },
+    otvu_end: { type: "date" },
+    otu_start: { type: "date" },
+    otu_end: { type: "date" },
     uiias_h_start: { type: "date" },
     uiias_h_end: { type: "date" },
     test_date_a: { type: "date" },
@@ -141,7 +121,7 @@ $("#gridMls").kendoGrid({
         }
     },
     height: 720,
-    editable: true,
+    editable: "inline",
     filterable: { mode: "row", extra: false },
     columnMenu: true,
     sortable: { mode: "multiple", allowUnsort: true },
@@ -169,14 +149,35 @@ $("#dropdownlistGfz").kendoDropDownList({
     dataTextField: "text",
     dataValueField: "value",
     dataSource: new kendo.data.DataSource({
-        data: items
+        data: [{ text: "Выдано", value: "1" },
+    { text: "Не выдано", value: "2" },
+    { text: "Выполнено", value: "3" },
+        { text: "Выдано впервые", value: "4" }]
     }),
     index: 0,
     optionLabel: {
         text: "Без фильтра",
         value: ""
     },
-    valuePrimitive: true
+
+    change: function () {
+        var value = this.value();
+        var ds = $("#gridMls").data("kendoGrid").dataSource;
+        var new_filter = { field: "oshugpz_ReportExist", operator: "eq", value: parseInt(value) };
+        if (value) {
+            var curr_filters = null;
+            if (ds.filter() != null) {
+                curr_filters = ds.filter().filters;
+                curr_filters.push(new_filter);
+            }
+            if (curr_filters == null) {
+                curr_filters = [new_filter];
+            }
+            ds.filter(curr_filters);
+        } else {
+            $("#gridMls").data("kendoGrid").dataSource.filter({});
+        }
+    }
 });
 
 function onClick(e) {

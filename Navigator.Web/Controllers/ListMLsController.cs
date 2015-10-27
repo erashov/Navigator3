@@ -73,8 +73,7 @@ namespace Navigator.Web.Controllers
                 return Json(null, JsonRequestBehavior.AllowGet);
             }
         }
-        public static string BuildWhereClause<T>(int index, string logic,
-        GridFilter filter, List<object> parameters)
+        public static string BuildWhereClause<T>(int index, string logic, GridFilter filter, List<object> parameters)
         {
             var entityType = (typeof(T));
             var property = entityType.GetProperty(filter.Field);
@@ -95,7 +94,9 @@ namespace Navigator.Web.Controllers
                             ToLinqOperator(filter.Operator),
                             index);
                     }
-                    if (typeof(int).IsAssignableFrom(property.PropertyType) || filter.Field== "dmv_ReportExist" || filter.Field== "gplr_ReportExist")
+                    if (typeof(int).IsAssignableFrom(property.PropertyType) || filter.Field== "dmv_ReportExist" || filter.Field== "gplr_ReportExist"|| filter.Field == "oshugpz_ReportExist" || 
+                        filter.Field== "otsod_ReportExist" || filter.Field== "osp_ReportExist" || filter.Field== "otse_ReportExist"|| filter.Field== "otss_ReportExist" || filter.Field== "ushugpu_ReportExist"
+                        || filter.Field== "otvu_ReportExist" || filter.Field== "otu_ReportExist")
                     {
                         parameters.Add(int.Parse(filter.Value));
                         return string.Format("{0}{1}@{2}",

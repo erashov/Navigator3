@@ -5,7 +5,7 @@
 }
 
 .k-grid {
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .k-grid td {
@@ -58,3 +58,5 @@
     color:#841D1D!important;
 }
 .redlink:focus, .redlink:hover{color:#7C233F!important;}
+.k-button{padding:1px 5px 1px;}
+
