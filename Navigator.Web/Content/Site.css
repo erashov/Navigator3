@@ -60,3 +60,23 @@
 .redlink:focus, .redlink:hover{color:#7C233F!important;}
 .k-button{padding:1px 5px 1px;}
 
+    #tabstrip {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 99%;
+    }
+    .k-tabstrip .k-content {
+    position: absolute;
+    top: 28px;
+    bottom: 0;
+        left: 0;
+    right: 0;
+        width: auto;
+}
+#gridMls {
+    /*height: 100% !important;*/
+}
