@@ -9,8 +9,8 @@
 }
 
 .k-grid td {
-    line-height: 1.6em;
-    padding: .2em .2em;
+    line-height: 1.7em;
+    padding: .3em .3em;
 }
 
 .k-toolbar .k-button, .k-toolbar .k-split-button, .k-toolbar .k-button-group, .k-toolbar .k-widget, .k-toolbar .k-textbox, .k-toolbar label, .k-toolbar .k-separator {
@@ -26,7 +26,7 @@
 }
 
 .k-grid-header th.k-header, .k-filter-row th {
-    padding: .1em .4em .1em .5em !important;
+    padding: .2em .4em .2em .5em !important;
 }
 
 .k-toolbar {

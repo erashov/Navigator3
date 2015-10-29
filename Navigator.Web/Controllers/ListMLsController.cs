@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Web.Mvc;
-
+using System.Data;
 namespace Navigator.Web.Controllers
 {
     public class ListMLsController : Controller
@@ -86,17 +86,22 @@ namespace Navigator.Web.Controllers
                 case "gt":
                 case "lte":
                 case "lt":
-                    if (typeof(DateTime).IsAssignableFrom(property.PropertyType))
+                    if ( filter.Field == "oshugpz_start")
                     {
                         parameters.Add(DateTime.Parse(filter.Value).Date);
-                        return string.Format("EntityFunctions.TruncateTime({0}){1}@{2}",
-                            filter.Field,
-                            ToLinqOperator(filter.Operator),
-                            index);
+
+                        return string.Format("{0}{1}@{2}",
+                filter.Field,
+                ToLinqOperator(filter.Operator),
+                index);
+                        //return string.Format("EntityFunctions.TruncateTime({0}){1}@{2}",
+                        //    filter.Field,
+                        //    ToLinqOperator(filter.Operator),
+                        //    index);
                     }
-                    if (typeof(int).IsAssignableFrom(property.PropertyType) || filter.Field== "dmv_ReportExist" || filter.Field== "gplr_ReportExist"|| filter.Field == "oshugpz_ReportExist" || 
+                    if ( filter.Field== "dmv_ReportExist" || filter.Field== "gplr_ReportExist"|| filter.Field == "oshugpz_ReportExist" || 
                         filter.Field== "otsod_ReportExist" || filter.Field== "osp_ReportExist" || filter.Field== "otse_ReportExist"|| filter.Field== "otss_ReportExist" || filter.Field== "ushugpu_ReportExist"
-                        || filter.Field== "otvu_ReportExist" || filter.Field== "otu_ReportExist"||filter.Field== "to_ReportExist")
+                        || filter.Field== "otvu_ReportExist" || filter.Field== "otu_ReportExist"||filter.Field== "to_ReportExist" )
                     {
                         parameters.Add(int.Parse(filter.Value));
                         return string.Format("{0}{1}@{2}",
