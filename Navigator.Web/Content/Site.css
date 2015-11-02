@@ -26,7 +26,7 @@
 }
 
 .k-grid-header th.k-header, .k-filter-row th {
-    padding: .2em .4em .2em .5em !important;
+    padding: .1em .3em .1em .3em !important;
 }
 
 .k-toolbar {
@@ -77,6 +77,4 @@
     right: 0;
         width: auto;
 }
-#gridMls {
-    /*height: 100% !important;*/
-}
+    .k-grid tbody .k-button, .k-ie8 .k-grid tbody button.k-button{min-width:30px;}
