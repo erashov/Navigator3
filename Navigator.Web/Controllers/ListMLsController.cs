@@ -8,6 +8,8 @@ using System.Linq;
 using System.Linq.Dynamic;
 using System.Web.Mvc;
 using System.Data;
+using System.Data.Entity;
+
 namespace Navigator.Web.Controllers
 {
     public class ListMLsController : Controller
@@ -83,9 +85,20 @@ namespace Navigator.Web.Controllers
                         parameters.Add(DateTime.Parse(filter.Value).Date);
                         return string.Format("{0}{1}@{2}", filter.Field, ToLinqOperator(filter.Operator), index);
                     }
-                    if (filter.Field == "NumML" || filter.Field == "dmv_ReportExist" || filter.Field == "gplr_ReportExist" || filter.Field == "oshugpz_ReportExist" ||
-                        filter.Field == "otsod_ReportExist" || filter.Field == "osp_ReportExist" || filter.Field == "otse_ReportExist" || filter.Field == "otss_ReportExist" || filter.Field == "ushugpu_ReportExist"
-                        || filter.Field == "otvu_ReportExist" || filter.Field == "otu_ReportExist" || filter.Field == "to_ReportExist")
+                    if (filter.Field == "Sdan_TS")
+                    {
+                        DateTime? sdan_TS = null;
+                        parameters.Add(sdan_TS);
+                        return string.Format("!{0}.HasValue", filter.Field, ToLinqOperator(filter.Operator), index);
+                    }
+                    if (filter.Field == "Sroch_USHTU")
+                    {
+                        parameters.Add(Boolean.Parse(filter.Value));
+                        return string.Format("{0}{1}@{2}", filter.Field, ToLinqOperator(filter.Operator), index);
+                    }
+                    if (filter.Field == "NumML" || filter.Field == "dmv_ReportExist" || filter.Field == "gplr_ReportExist" || filter.Field == "oshugpz_ReportExist"
+                        || filter.Field == "otsod_ReportExist" || filter.Field == "osp_ReportExist" || filter.Field == "otse_ReportExist" || filter.Field == "otss_ReportExist" 
+                        || filter.Field == "ushugpu_ReportExist" || filter.Field == "otvu_ReportExist" || filter.Field == "otu_ReportExist" || filter.Field == "to_ReportExist")
                     {
                         parameters.Add(int.Parse(filter.Value));
                         return string.Format("{0}{1}@{2}", filter.Field, ToLinqOperator(filter.Operator), index);

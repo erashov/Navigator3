@@ -37,7 +37,7 @@ var filterFreezen = {
 var filterGfz = { mode: "row", cell: { showOperators: false } };
 var columns = [
         { width: 30, headerTemplate: "<input  type='checkbox' id='chkSelectAll' onclick='checkAll(this)' />", template: "<input  type='checkbox' class='chkbx'/>", locked: false },
-        { command: [{ name: "edit", text: { edit: "", update: "", cancel: "" } }], title: "&nbsp;", text: "", width: 40, locked: false },
+        { command: [{ name: "edit", text: { edit: "", update: "", cancel: "" } }], title: "&nbsp;", text: "", width: 44, locked: false },
         { field: "NumML", title: "№ МЛ", template: "<a href='' class='redlink'>#=NumML# </a><div class=\"valueDel\"></div> #= utverzh ? kendo.toString(utverzh, 'dd.MM.yyyy') : '' #", width: 150, locked: false, editable: false },
         { field: "USERs", title: "Пользователь", width: 160, filterable: { cell: { operator: "contains" } } },
         { field: "Otvetstv", title: "Ответственный", width: 160, filterable: { cell: { operator: "contains" } } },
@@ -50,7 +50,7 @@ var columns = [
         { field: "UDA", title: "Узел доступа", template: "#=UDA ? UDA:'' # <div class=\"valueDel\"></div> #=UDB ? UDB:''#", width: 190, filterable: { cell: { operator: "contains" } } },
         { field: "SpecOb", title: "Канал привязки", width: 120, filterable: { cell: { operator: "contains" } } },
         { field: "ChNumA", title: "F стыка", template: "#=ChNumA ? ChNumA:'' # <div class=\"valueDel\"></div> #=ChNumB ? ChNumB:''#", width: 130, filterable: { cell: { operator: "contains" } } },
-        { field: "ESVTPIQQCNfe", title: "E,S,V,T,P,I,Q,QC,N,Ф", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "L", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "E", width: 130 }, { field: "S", width: 100, filterable: { cell: { operator: "contains" } } }, { field: "V", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "T", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "P", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "I", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "Q", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "QC", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "N", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "Fe", width: 130, title: "Ф", filterable: { cell: { operator: "contains" } } },
+        { field: "ESVTPIQQCNfe", title: "E,S,V,T,P,I,Q,QC,N,Ф", width: 150, filterable: { cell: { operator: "contains" } } }, { field: "L", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "E", width: 130 }, { field: "S", width: 100, filterable: { cell: { operator: "contains" } } }, { field: "V", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "T", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "P", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "I", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "Q", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "QC", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "N", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "Fe", width: 130, title: "Ф", filterable: { cell: { operator: "contains" } } },
         { field: "gplr_ReportExist", editable: false, title: "ГПЛР", type: "number", filterable: filterDep, template: "<table><tr><td >#=gplr_start ? kendo.toString(gplr_start,'dd.MM.yyyy'):'' #</td><td>#=gplr2_start ? kendo.toString(gplr2_start,'dd.MM.yyyy'):'' #</td></tr><tr><td>#=gplr_end ? kendo.toString(gplr_end,'dd.MM.yyyy'):'' # #=gplrIsCanceled ? gplrIsCanceled:'' #</td><td>#=gplr2_end ? kendo.toString(gplr2_end,'dd.MM.yyyy'):'' # #=gplr2IsCanceled ? gplr2IsCanceled:''#</td></tr></table>", width: 160 },
         { field: "dmv_ReportExist", editable: false, type: "number", title: "ДМВ", filterable: filterDep, template: "<table><tr><td >#=dmv_start ? kendo.toString(dmv_start,'dd.MM.yyyy'):'' #</td><td>#=dmv2_start ? kendo.toString(dmv2_start,'dd.MM.yyyy'):'' #</td></tr><tr><td>#=dmv_end ? kendo.toString(dmv_end,'dd.MM.yyyy'):'' # #=dmvIsCanceled ? dmvIsCanceled:'' #</td><td>#=dmv2_end ? kendo.toString(dmv2_end,'dd.MM.yyyy'):'' #  #=dmv2IsCanceled ? dmv2IsCanceled:''#</td></tr></table>", width: 160 },
         { field: "osp_ReportExist", editable: false, title: "ОСП", filterable: filterDep, template: "#=osp_start ? kendo.toString(osp_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=osp_end ? kendo.toString(osp_end,'dd.MM.yyyy'):'' # #=ospIsCanceled ? ospIsCanceled:'' #", width: 160 },
@@ -68,9 +68,9 @@ var columns = [
         { field: "Probl", title: "Проблема", width: 190, filterable: { cell: { operator: "contains" } } },
         { field: "Prim", title: "Примечание", width: 130, filterable: { cell: { operator: "contains" } } },
         { field: "Operator", title: "Наименование СО", width: 180, filterable: { cell: { operator: "contains" } } },
-        { field: "test_date_a", title: "Тест СО", width: 190, template: "<table><tr><td>#=test_date_a ? kendo.toString(test_date_a,'dd.MM.yyyy'):''#</td><td>#=test_res_a ? test_res_a:''#&nbsp;</td></tr><tr><td>#=test_date_b ? kendo.toString(test_date_b,'dd.MM.yyyy'):''#&nbsp;</td><td>#=test_res_b ? test_res_a:''#&nbsp;</td></tr></table>" },
+        { field: "test_date_a", title: "Тест СО", width: 190, filterable: false, template: "<table><tr><td>#=test_date_a ? kendo.toString(test_date_a,'dd.MM.yyyy'):''#</td><td>#=test_res_a ? test_res_a:''#&nbsp;</td></tr><tr><td>#=test_date_b ? kendo.toString(test_date_b,'dd.MM.yyyy'):''#&nbsp;</td><td>#=test_res_b ? test_res_a:''#&nbsp;</td></tr></table>" },
         { field: "SpecProject", title: "Спецпроект", width: 130, filterable: { cell: { operator: "contains" } } },
-        { field: "Urgent", title: "Срочность", template: " <input type='checkbox' #= Sroch_USHTU ? 'checked=checked' : '' # disabled='disabled' ></input> #=Sroch_SZ?Sroch_SZ:''#", width: 160 },
+        { field: "Urgent", title: "Срочность", template: " <input type='checkbox' #= Sroch_USHTU ? 'checked=checked' : '' # disabled='disabled' ></input> #=Sroch_SZ?Sroch_SZ:''#", width: 280 },
         { field: "Line", editable: false, title: "Линия", template: "<button onclick='myFunction(#=NumML#)' class='k-button k-toolbar-last-visible'>Линия</button>", width: 130 },
         { field: "UspState", title: "Статус УСП", editable: false, filterable: false, template: "<input type='checkbox' #= Ivanov_Gulka ? 'checked=checked' : '' # disabled='disabled' >   <input type='checkbox' #= NMR ? 'checked=checked' : '' # disabled='disabled' >", width: 130 },
         { field: "Sdan", editable: false, title: "Сдан", width: 100, type: "date", filterable: false, format: "{0:dd.MM.yyyy}" },
@@ -78,12 +78,14 @@ var columns = [
 ];
 var fields = {
     NumML: { editable: false }, USERs: { editable: false }, Otvetstv: { editable: false }, Zakazhcik: { editable: false }, AdresA: { editable: false }, AdressA: { editable: false }, UspState: { editable: false },
+    gplr_ReportExist: { editable: false }, dmv_ReportExist: { editable: false }, osp_ReportExist: { editable: false }, otsod_ReportExist: { editable: false }, ushugpu_ReportExist: { editable: false }, oshugpz_start: { editable: false }, to_ReportExist: { editable: false }, otse_ReportExist: { editable: false },
+    otss_ReportExist: { editable: false }, otu_ReportExist: { editable: false }, otvu_ReportExist: { editable: false },
     utverzh: { type: "date" }, gplr_start: { type: "date" }, gplr2_start: { type: "date" }, gplr_end: { type: "date" }, gplr2_end: { type: "date" }, dmv_start: { type: "date" }, dmv2_start: { type: "date" }, dmv_end: { type: "date" },
     dmv2_end: { type: "date" }, osp_start: { type: "date" }, osp_end: { type: "date" }, oshugpz_start: { type: "date", format: "dd.MM.yyyy" }, oshugpu_start: { type: "date" }, oshugpu_end: { type: "date" }, oshugpz_end: { type: "date" },
     otvu_start: { type: "date" }, otvu_end: { type: "date" }, otu_start: { type: "date" }, otu_end: { type: "date" }, uiias_h_start: { type: "date" }, uiias_h_end: { type: "date" }, test_date_a: { type: "date" },
     test_date_b: { type: "date" }, Sdan: { type: "date" }, Sdan_TS: { type: "date" }, to_start: { type: "date" }, to2_start: { type: "date" }, to_end: { type: "date" }, to2_end: { type: "date" }, to2IsCanceled: { type: "date" },
     otse_start: { type: "date" }, otse2_start: { type: "date" }, otse_end: { type: "date" }, otse2_end: { type: "date" }, otss_start: { type: "date" }, otss2_start: { type: "date" }, otss_end: { type: "date" }, otss2_end: { type: "date" }, otu_start: { type: "date" }, otu_end: { type: "date" },
-    StartDate: { type: "date" }, StopDate: { type: "date" }, test_date_a: { type: "date" }, test_date_b: { type: "date" }, dmv_ReportExist: { type: "number" }, gplr_ReportExist: { type: "number" }
+    StartDate: { type: "date" }, StopDate: { type: "date" }, test_date_a: { type: "date" }, test_date_b: { type: "date" }, dmv_ReportExist: { type: "number" }, gplr_ReportExist: { type: "number" }, Sroch_USHTU: { type: "boolean" }
 };
 
 $("#gridMls").kendoGrid({
@@ -96,7 +98,7 @@ $("#gridMls").kendoGrid({
 });
 
 AddCustomFilter('oshugpz_start', '<table><tr><td style="width:25%;"><input id="from"/></td><td style="width:25%;"><input id="to"/></td><td style="width:40%;"><input id="dropdownlistGfz" /></td><td style="width:10%;"><button type="button" onclick="ClearFilterFGZ()" class="k-button k-button-icon"  style="display: visible;"><span class="k-icon k-i-close"></span></button></td></tr></table>');
-AddCustomFilter('Urgent', '<table><tr><td style="width:30%;"><input type="text" id="Sroch_SZ" style="width:100%;" class="k-input k-textbox" role="textbox"/></td></td><td style="width:40%;"><input id="dropdownlistSroch" /></td></tr></table>');
+AddCustomFilter('Urgent', '<table><tr><td style="width:43%;"><input type="text" id="Sroch_SZ" style="width:100%;" class="k-input k-textbox" role="textbox"/></td></td><td style="width:43%;"><input id="dropdownlistUrgent" /></td><td style="width:14%;"><button type="button" onclick="ClearFilterUrgent()" class="k-button k-button-icon"  style="display: visible;"><span class="k-icon k-i-close"></span></button></td></tr></table>');
 
 function AddCustomFilter(field, content) {
     var columnHeader = jQuery('div#gridMls span.k-filtercell[data-field="' + field + '"]');
@@ -118,7 +120,19 @@ function ClearFilterFGZ() {
         $("#to").data("kendoDatePicker").value("");
     }
 }
-$("#dropdownlistSroch").kendoDropDownList({
+function ClearFilterUrgent() {
+    var gridDataUrgent = $("#gridMls").data("kendoGrid");
+    var dsUrgent = gridDataUrgent.dataSource;
+    if (dsUrgent.filter() != null) {
+        var filtersUrgent = dsUrgent.filter().filters;
+        filtersUrgent = removeFilter(filtersUrgent, 'Sroch_USHTU');
+        filtersUrgent = removeFilter(filtersUrgent, 'Sdan_TS');
+        gridDataUrgent.dataSource.filter(filtersUrgent);
+        $("#dropdownlistUrgent").data("kendoDropDownList").value(-1);
+
+    }
+}
+$("#dropdownlistUrgent").kendoDropDownList({
     autoBind: false, dataTextField: "text", dataValueField: "value",
     dataSource: new kendo.data.DataSource({ data: [{ text: "Содержит", value: "1" }, { text: "Срочные", value: "2" }, { text: "Не срочные", value: "3" }, { text: "Срочные не выполненые", value: "4" }] }),
     index: 0, optionLabel: { text: "Без фильтра", value: "" },
@@ -126,22 +140,42 @@ $("#dropdownlistSroch").kendoDropDownList({
         var value = this.value();
         var gridData = $("#gridMls").data("kendoGrid");
         var ds = gridData.dataSource;
-        var new_filter = { field: "oshugpz_ReportExist", operator: "eq", value: parseInt(value) };
+
         if (value) {
             var curr_filters = null;
+            var new_filter;
+            var notperform;
+            if (value == "2") {
+                new_filter = { field: "Sroch_USHTU", operator: "eq", value: true };
+            }
+            if (value == "3") {
+                new_filter = { field: "Sroch_USHTU", operator: "eq", value: false };
+            }
+            if (value == "4") {
+                new_filter = { field: "Sroch_USHTU", operator: "eq", value: true };
+                notperform = { field: "Sdan_TS", operator: "eq", value: null };
+            }
             if (ds.filter() != null) {
                 curr_filters = ds.filter().filters;
-                curr_filters = removeFilter(curr_filters, 'oshugpz_ReportExist');
+                curr_filters = removeFilter(curr_filters, 'Sroch_USHTU');
+                if (value == "4") {
+                    curr_filters = removeFilter(curr_filters, 'Sdan_TS');
+                    curr_filters.push(notperform);
+                }
                 curr_filters.push(new_filter);
             }
             if (curr_filters == null) {
                 curr_filters = [new_filter];
+                if (value == "4") { curr_filters.push(notperform); }
             }
             ds.filter(curr_filters);
         } else {
-            var filters = ds.filter().filters;
-            filters = removeFilter(filters, 'oshugpz_ReportExist');
-            gridData.dataSource.filter(filtersGFZ);
+            if (ds.filter() != null) {
+                var filters = ds.filter().filters;
+                filters = removeFilter(filters, 'Sroch_USHTU');
+                gridData.dataSource.filter(filters);
+            }
+
         }
     }
 });
@@ -190,12 +224,14 @@ $("#dropdownlistGfz").kendoDropDownList({
             }
             ds.filter(curr_filters);
         } else {
-            var filters = ds.filter().filters;
-            filters = removeFilter(filters, 'oshugpz_ReportExist');
-            filters = removeFilter(filters, 'oshugpz_ReportExist');
-            filters = removeFilter(filters, 'oshugpz_start');
-            filters = removeFilter(filters, 'oshugpz_end');
-            gridData.dataSource.filter(filters);
+            if (ds.filter() != null) {
+                var filters = ds.filter().filters;
+                filters = removeFilter(filters, 'oshugpz_ReportExist');
+                filters = removeFilter(filters, 'oshugpz_ReportExist');
+                filters = removeFilter(filters, 'oshugpz_start');
+                filters = removeFilter(filters, 'oshugpz_end');
+                gridData.dataSource.filter(filters);
+            }
         }
     }
 });
@@ -212,23 +248,4 @@ function checkAll(ele) {
     grid.refresh();
 }
 
-function removeFilter(filter, searchFor) {
-    if (filter == null)
-        return [];
-    for (var x = 0; x < filter.length; x++) {
-        if (filter[x].filters != null && filter[x].filters.length >= 0) {
-            if (filter[x].filters.length == 0) {
-                filter.splice(x, 1);
-                return removeFilter(filter, searchFor);
-            }
-            filter[x].filters = removeFilter(filter[x].filters, searchFor);
-        }
-        else {
-            if (filter[x].field == searchFor) {
-                filter.splice(x, 1);
-                return removeFilter(filter, searchFor);
-            }
-        }
-    }
-    return filter;
-}
+function removeFilter(filter, searchFor) { if (filter == null) return []; for (var x = 0; x < filter.length; x++) { if (filter[x].filters != null && filter[x].filters.length >= 0) { if (filter[x].filters.length == 0) { filter.splice(x, 1); return removeFilter(filter, searchFor); } filter[x].filters = removeFilter(filter[x].filters, searchFor); } else { if (filter[x].field == searchFor) { filter.splice(x, 1); return removeFilter(filter, searchFor); } } } return filter; }
