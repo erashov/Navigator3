@@ -283,6 +283,7 @@ namespace Navigator.Domain.Entities
         public int dmv_ReportExist { get; set; }
 
         public int? ushugpu_ReportExist { get; set; }
+        public int? Freeze_ReportExist { get; set; }
 
         [StringLength(50)]
         public string ChNumA { get; set; }

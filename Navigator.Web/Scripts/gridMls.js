@@ -13,12 +13,12 @@ var filterFreezen = {
                 change: function () {
                     var value = this.value();
                     var ds = $("#gridMls").data("kendoGrid").dataSource;
-                    var new_filter = { field: "oshugpz_ReportExist", operator: "eq", value: parseInt(value) };
+                    var new_filter = { field: "Freeze_ReportExist", operator: "eq", value: parseInt(value) };
                     if (value) {
                         var curr_filters = null;
                         if (ds.filter() != null) {
                             curr_filters = ds.filter().filters;
-                            curr_filters = removeFilter(curr_filters, 'oshugpz_ReportExist');
+                            curr_filters = removeFilter(curr_filters, 'Freeze_ReportExist');
                             curr_filters.push(new_filter);
                         }
                         if (curr_filters == null) {
@@ -27,14 +27,14 @@ var filterFreezen = {
                         ds.filter(curr_filters);
                     } else {
                         var filters = ds.filter().filters;
-                        filters = removeFilter(filters, 'oshugpz_ReportExist');
+                        filters = removeFilter(filters, 'Freeze_ReportExist');
                     }
                 }
             });
         }
     }
 };
-var filterGfz = { mode: "row", cell: { showOperators: false } };
+var filterEmpty = { mode: "row", cell: { showOperators: false } };
 var columns = [
         { width: 30, headerTemplate: "<input  type='checkbox' id='chkSelectAll' onclick='checkAll(this)' />", template: "<input  type='checkbox' class='chkbx'/>", locked: false },
         { command: [{ name: "edit", text: { edit: "", update: "", cancel: "" } }], title: "&nbsp;", text: "", width: 44, locked: false },
@@ -56,15 +56,15 @@ var columns = [
         { field: "osp_ReportExist", editable: false, title: "ОСП", filterable: filterDep, template: "#=osp_start ? kendo.toString(osp_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=osp_end ? kendo.toString(osp_end,'dd.MM.yyyy'):'' # #=ospIsCanceled ? ospIsCanceled:'' #", width: 160 },
         { field: "otsod_ReportExist", editable: false, title: "ОЦОДиТ", filterable: filterDep, template: "#=uiias_h_start ? kendo.toString(uiias_h_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=uiias_h_end ? kendo.toString(uiias_h_end,'dd.MM.yyyy'):'' # #=uiias_hIsCanceled ? uiias_hIsCanceled:'' #", width: 160 },
         { field: "ushugpu_ReportExist", editable: false, title: "ОШУГПУ", filterable: filterDep, template: "#=oshugpu_start ? kendo.toString(oshugpu_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=oshugpu_end ? kendo.toString(oshugpu_end,'dd.MM.yyyy'):'' # #=oshugpuIsCanceled ? oshugpuIsCanceled:'' #", width: 160 },
-        { field: "oshugpz_start", editable: false, title: "ГФЗ", filterable: filterGfz, template: "#=oshugpz_start ? kendo.toString(oshugpz_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=oshugpz_end ? kendo.toString(oshugpz_end,'dd.MM.yyyy'):'' # #=oshugpzIsCanceled ? oshugpzIsCanceled:'' #", width: 380 },
+        { field: "oshugpz_start", editable: false, title: "ГФЗ", filterable: filterEmpty, template: "#=oshugpz_start ? kendo.toString(oshugpz_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=oshugpz_end ? kendo.toString(oshugpz_end,'dd.MM.yyyy'):'' # #=oshugpzIsCanceled ? oshugpzIsCanceled:'' #", width: 380 },
         { field: "to_ReportExist", editable: false, title: "ТО", filterable: filterDep, template: "<table><tr><td >#=to_start ? kendo.toString(to_start,'dd.MM.yyyy'):''#</td><td>#=to2_start ? kendo.toString(to2_start,'dd.MM.yyyy'):''#</td></tr><tr><td>#=to_end ? kendo.toString(to_end,'dd.MM.yyyy'):''# #=toIsCanceled ? toIsCanceled:''#</td><td>#=to2_end ? kendo.toString(to2_end,'dd.MM.yyyy'):''# #=to2IsCanceled ? to2IsCanceled:''#</td></tr></table>", width: 190 },
         { field: "otse_ReportExist", editable: false, title: "ОТС(Е)", filterable: filterDep, template: "<table><tr><td >#=otse_start ? kendo.toString(otse_start,'dd.MM.yyyy'):''#</td><td>#=otse2_start ? kendo.toString(otse2_start,'dd.MM.yyyy'):''#</td></tr><tr><td>#=otse_end ? kendo.toString(otse_end,'dd.MM.yyyy'):''# #=otseIsCanceled ? otseIsCanceled:''#</td><td>#=otse2_end ? kendo.toString(otse2_end,'dd.MM.yyyy'):''# #=otse2IsCanceled ? otse2IsCanceled:''#</td></tr></table>", width: 190 },
         { field: "otss_ReportExist", editable: false, title: "ОТС(S)", filterable: filterDep, template: "<table><tr><td >#=otss_start ? kendo.toString(otss_start,'dd.MM.yyyy'):''#</td><td>#=otss2_start ? kendo.toString(otss2_start,'dd.MM.yyyy'):''#</td></tr><tr><td>#=otss_end ? kendo.toString(otss_end,'dd.MM.yyyy'):''# #=otssIsCanceled ? otssIsCanceled:''#</td><td>#=otss2_end ? kendo.toString(otss2_end,'dd.MM.yyyy'):''# #=otss2IsCanceled ? otss2IsCanceled:''#</td></tr></table>", width: 190 },
         { field: "otu_ReportExist", editable: false, title: "ОТУ", filterable: filterDep, template: "#=otu_start ? kendo.toString(otu_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=otu_end ? kendo.toString(otu_end,'dd.MM.yyyy'):'' # #=otuIsCanceled ? otuIsCanceled:'' #", width: 190 },
         { field: "otvu_ReportExist", editable: false, title: "ОТвУ", filterable: filterDep, template: "#=otvu_start ? kendo.toString(otvu_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=otvu_end ? kendo.toString(otvu_end,'dd.MM.yyyy'):'' # #=otvuIsCanceled ? otvuIsCanceled:'' #", width: 190 },
-        { field: "TaskReturns", title: "Возврат МЛ", width: 120 },
+        { field: "TaskReturns", title: "Возврат МЛ", filterable:filterEmpty,  width: 270 },
         { field: "TaskCancels", title: "Возврат заданий", width: 190, filterable: { cell: { operator: "contains" } } },
-        { field: "StartDate", title: "Заморозка", editable: false, filterable: filterFreezen, template: "#=StartDate ? kendo.toString(StartDate,'dd.MM.yyyy'):'' # <div class=\"valueDel\"></div> #=StopDate ? kendo.toString(StopDate,'dd.MM.yyyy'):''#", width: 160 },
+        { field: "Freeze_ReportExist", title: "Заморозка", editable: false, filterable: filterFreezen, template: "#=StartDate ? kendo.toString(StartDate,'dd.MM.yyyy'):'' # <div class=\"valueDel\"></div> #=StopDate ? kendo.toString(StopDate,'dd.MM.yyyy'):''#", width: 160 },
         { field: "Probl", title: "Проблема", width: 190, filterable: { cell: { operator: "contains" } } },
         { field: "Prim", title: "Примечание", width: 130, filterable: { cell: { operator: "contains" } } },
         { field: "Operator", title: "Наименование СО", width: 180, filterable: { cell: { operator: "contains" } } },
@@ -98,7 +98,8 @@ $("#gridMls").kendoGrid({
 });
 
 AddCustomFilter('oshugpz_start', '<table><tr><td style="width:25%;"><input id="from"/></td><td style="width:25%;"><input id="to"/></td><td style="width:40%;"><input id="dropdownlistGfz" /></td><td style="width:10%;"><button type="button" onclick="ClearFilterFGZ()" class="k-button k-button-icon"  style="display: visible;"><span class="k-icon k-i-close"></span></button></td></tr></table>');
-AddCustomFilter('Urgent', '<table><tr><td style="width:43%;"><input type="text" id="Sroch_SZ" style="width:100%;" class="k-input k-textbox" role="textbox"/></td></td><td style="width:43%;"><input id="dropdownlistUrgent" /></td><td style="width:14%;"><button type="button" onclick="ClearFilterUrgent()" class="k-button k-button-icon"  style="display: visible;"><span class="k-icon k-i-close"></span></button></td></tr></table>');
+AddCustomFilter('Urgent', '<table><tr><td style="width:43%;"><input type="text" id="SrochSZ" style="width:100%;" class="k-input k-textbox" role="textbox"/></td></td><td style="width:43%;"><input id="dropdownlistUrgent" /></td><td style="width:14%;"><button type="button" onclick="ClearFilterUrgent()" class="k-button k-button-icon"  style="display: visible;"><span class="k-icon k-i-close"></span></button></td></tr></table>');
+AddCustomFilter('TaskReturns', '<table><tr><td style="width:43%;"><input id="returnDate"/></td></td><td style="width:43%;"><input id="dropdownlistTaskReturns" /></td><td style="width:14%;"><button type="button" onclick="ClearFilterTaskReturns()" class="k-button k-button-icon"  style="display: visible;"><span class="k-icon k-i-close"></span></button></td></tr></table>');
 
 function AddCustomFilter(field, content) {
     var columnHeader = jQuery('div#gridMls span.k-filtercell[data-field="' + field + '"]');
@@ -127,11 +128,34 @@ function ClearFilterUrgent() {
         var filtersUrgent = dsUrgent.filter().filters;
         filtersUrgent = removeFilter(filtersUrgent, 'Sroch_USHTU');
         filtersUrgent = removeFilter(filtersUrgent, 'Sdan_TS');
+        filtersUrgent = removeFilter(filtersUrgent, 'Sroch_SZ');
         gridDataUrgent.dataSource.filter(filtersUrgent);
         $("#dropdownlistUrgent").data("kendoDropDownList").value(-1);
-
+        $("#SrochSZ").val("");
     }
 }
+$("#SrochSZ").keypress(function (e) {
+    if (e.which == 13) {
+        var gridData = $("#gridMls").data("kendoGrid");
+        var ds = gridData.dataSource;
+        var new_filter;
+        var curr_filters = null;
+        $("#dropdownlistUrgent").data("kendoDropDownList").value(1);
+        var ungentText = $("#SrochSZ").val();
+        if (ungentText != "")
+        { new_filter = { field: "Sroch_SZ", operator: "contains", value: ungentText }; }
+        if (ds.filter() != null) {
+            curr_filters = ds.filter().filters;
+            curr_filters = removeFilter(curr_filters, 'Sroch_USHTU'); curr_filters = removeFilter(curr_filters, 'Sdan_TS'); curr_filters = removeFilter(curr_filters, 'Sroch_SZ');
+            curr_filters.push(new_filter);
+        }
+        if (curr_filters == null) {
+            curr_filters = [new_filter];
+        }
+        ds.filter(curr_filters);
+        
+    }
+});
 $("#dropdownlistUrgent").kendoDropDownList({
     autoBind: false, dataTextField: "text", dataValueField: "value",
     dataSource: new kendo.data.DataSource({ data: [{ text: "Содержит", value: "1" }, { text: "Срочные", value: "2" }, { text: "Не срочные", value: "3" }, { text: "Срочные не выполненые", value: "4" }] }),
@@ -140,26 +164,30 @@ $("#dropdownlistUrgent").kendoDropDownList({
         var value = this.value();
         var gridData = $("#gridMls").data("kendoGrid");
         var ds = gridData.dataSource;
-
         if (value) {
             var curr_filters = null;
             var new_filter;
             var notperform;
-            if (value == "2") {
+            if (value == "1") {
+                var ungentText = $("#SrochSZ").val();
+                if (ungentText != "")
+                { new_filter = { field: "Sroch_SZ", operator: "contains", value: ungentText }; }
+            }
+            else if (value == "2") {
                 new_filter = { field: "Sroch_USHTU", operator: "eq", value: true };
             }
-            if (value == "3") {
+            else if (value == "3") {
                 new_filter = { field: "Sroch_USHTU", operator: "eq", value: false };
             }
-            if (value == "4") {
+            else if (value == "4") {
                 new_filter = { field: "Sroch_USHTU", operator: "eq", value: true };
                 notperform = { field: "Sdan_TS", operator: "eq", value: null };
             }
             if (ds.filter() != null) {
                 curr_filters = ds.filter().filters;
-                curr_filters = removeFilter(curr_filters, 'Sroch_USHTU');
+                curr_filters = removeFilter(curr_filters, 'Sroch_USHTU'); curr_filters = removeFilter(curr_filters, 'Sdan_TS'); curr_filters = removeFilter(curr_filters, 'Sroch_SZ');
                 if (value == "4") {
-                    curr_filters = removeFilter(curr_filters, 'Sdan_TS');
+
                     curr_filters.push(notperform);
                 }
                 curr_filters.push(new_filter);
@@ -169,17 +197,75 @@ $("#dropdownlistUrgent").kendoDropDownList({
                 if (value == "4") { curr_filters.push(notperform); }
             }
             ds.filter(curr_filters);
-        } else {
+        }
+        else {
             if (ds.filter() != null) {
                 var filters = ds.filter().filters;
                 filters = removeFilter(filters, 'Sroch_USHTU');
+                filters = removeFilter(filters, 'Sroch_SZ');
                 gridData.dataSource.filter(filters);
             }
 
         }
     }
 });
+$("#dropdownlistTaskReturns").kendoDropDownList({
+    autoBind: false, dataTextField: "text", dataValueField: "value",
+    dataSource: new kendo.data.DataSource({ data: [{ text: "Содержит", value: "1" }, { text: "Срочные", value: "2" }, { text: "Не срочные", value: "3" }, { text: "Срочные не выполненые", value: "4" }] }),
+    index: 0, optionLabel: { text: "Без фильтра", value: "" },
+    change: function () {
+        var value = this.value();
+        var gridData = $("#gridMls").data("kendoGrid");
+        var ds = gridData.dataSource;
+        if (value) {
+            var curr_filters = null;
+            var new_filter;
+            var notperform;
+            if (value == "1") {
+                var ungentText = $("#SrochSZ").val();
+                if (ungentText != "")
+                { new_filter = { field: "Sroch_SZ", operator: "contains", value: ungentText }; }
+            }
+            else if (value == "2") {
+                new_filter = { field: "Sroch_USHTU", operator: "eq", value: true };
+            }
+            else if (value == "3") {
+                new_filter = { field: "Sroch_USHTU", operator: "eq", value: false };
+            }
+            else if (value == "4") {
+                new_filter = { field: "Sroch_USHTU", operator: "eq", value: true };
+                notperform = { field: "Sdan_TS", operator: "eq", value: null };
+            }
+            if (ds.filter() != null) {
+                curr_filters = ds.filter().filters;
+                curr_filters = removeFilter(curr_filters, 'Sroch_USHTU'); curr_filters = removeFilter(curr_filters, 'Sdan_TS'); curr_filters = removeFilter(curr_filters, 'Sroch_SZ');
+                if (value == "4") {
+
+                    curr_filters.push(notperform);
+                }
+                curr_filters.push(new_filter);
+            }
+            if (curr_filters == null) {
+                curr_filters = [new_filter];
+                if (value == "4") { curr_filters.push(notperform); }
+            }
+            ds.filter(curr_filters);
+        }
+        else {
+            if (ds.filter() != null) {
+                var filters = ds.filter().filters;
+                filters = removeFilter(filters, 'Sroch_USHTU');
+                filters = removeFilter(filters, 'Sroch_SZ');
+                gridData.dataSource.filter(filters);
+            }
+
+        }
+    }
+});
+
+
 $("#to").kendoDatePicker();
+$("#returnDate").kendoDatePicker();
 $("#from").kendoDatePicker({ format: "dd.MM.yyyy", change: function (e) { var to = $("#to").data("kendoDatePicker"); if (to.value() == null) { to.value(new Date()); } } });
 
 $("#dropdownlistGfz").kendoDropDownList({
@@ -237,7 +323,7 @@ $("#dropdownlistGfz").kendoDropDownList({
 });
 
 function onClick(e) { }
-function buttonClickOpenConf() { $("#configurator").show(); $("#windowConf").kendoWindow({ title: "Конфигуратор", actions: ["Refresh", "Minimize", "Maximize", "Close"], width: 580 }).data("kendoWindow").center().open(); }
+function buttonClickOpenConf() { $("#configurator").show(); $("#windowConf").kendoWindow({ title: "Конфигуратор", actions: ["Refresh", "Minimize", "Maximize", "Close"], width: 680 }).data("kendoWindow").center().open(); }
 function buttonClickClearFilters() { var gridData = $("#gridMls").data("kendoGrid"); gridData.dataSource.filter({}); }
 function checkAll(ele) {
     var state = $(ele).is(':checked');

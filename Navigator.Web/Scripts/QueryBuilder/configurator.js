@@ -1,10 +1,13 @@
 ﻿$('#builder').queryBuilder({
     filters: [{
-        id: 'name',
-        label: 'Name',
-        type: 'string'
+        id: 'NumML',
+        field: 'NumML',
+        label: '№ МЛ',
+        type: 'integer'
+        , operators: ['equal']
     }, {
         id: 'category',
+        field: 'category',
         label: 'Category',
         type: 'integer',
         input: 'select',
@@ -19,6 +22,7 @@
         operators: ['equal', 'not_equal', 'in', 'not_in', 'is_null', 'is_not_null']
     }, {
         id: 'in_stock',
+        field: 'in_stock',
         label: 'In stock',
         type: 'integer',
         input: 'radio',
@@ -30,6 +34,7 @@
         operators: ['equal']
     }, {
         id: 'price',
+        field: 'price',
         label: 'Price',
         type: 'double',
         validation: {
@@ -38,6 +43,7 @@
         }
     }, {
         id: 'id',
+        field: 'id',
         label: 'Identifier',
         type: 'string',
         placeholder: '____-____-____',
@@ -47,3 +53,14 @@
         }
     }],
 });
+
+function Save() {
+    var grid = $("#gridMls").data("kendoGrid");
+    var filters = $('#builder').queryBuilder('getRules');
+    var ds = grid.dataSource;
+
+    //alert(filters);
+    ds.filter(filters);
+
+
+}
