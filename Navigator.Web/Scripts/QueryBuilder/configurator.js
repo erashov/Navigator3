@@ -29,13 +29,20 @@
          type: 'integer',
          input: 'select',
          values: { 1: 'Выдано', 2: 'Не выдано', 3: 'Выполнено' }, operators: ['equal']
-     }],
+     },
+     {
+        id: 'dmv_ReportExist',
+        label: 'ДМВ',
+        type: 'integer',
+        input: 'select',
+        values: { 1: 'Выдано', 2: 'Не выдано', 3: 'Выполнено' }, operators: ['equal']
+    }],
 });
 function Save() {
     var result = $('#builderConf').queryBuilder('getRules');
     if (!$.isEmptyObject(result)) {
         var result = renameProperties(result, { rules: 'filters', condition: 'logic' });
-        var query = JSON.stringify(result, null, 2);
+        //        var query = JSON.stringify(result, null, 2);
         $("#gridMls").data("kendoGrid").dataSource.filter(result);;
     }
 }
