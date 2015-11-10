@@ -20,9 +20,6 @@ namespace Navigator.Domain.Entities
         [StringLength(255)]
         public string Zakazhcik { get; set; }
 
-        [StringLength(510)]
-        public string Adres { get; set; }
-
         [StringLength(255)]
         public string AdresA { get; set; }
 

@@ -124,6 +124,7 @@ namespace Navigator.Web.Controllers
             switch (@operator.ToLower())
             {
                 case "eq": return " == ";
+                case "equal": return " == ";
                 case "neq": return " != ";
                 case "gte": return " >= ";
                 case "gt": return " > ";

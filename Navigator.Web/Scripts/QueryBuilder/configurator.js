@@ -1,66 +1,43 @@
-﻿$('#builder').queryBuilder({
+﻿$('#builderConf').queryBuilder({
     filters: [{
         id: 'NumML',
-        field: 'NumML',
         label: '№ МЛ',
         type: 'integer'
-        , operators: ['equal']
     }, {
-        id: 'category',
-        field: 'category',
-        label: 'Category',
-        type: 'integer',
-        input: 'select',
-        values: {
-            1: 'Books',
-            2: 'Movies',
-            3: 'Music',
-            4: 'Tools',
-            5: 'Goodies',
-            6: 'Clothes'
-        },
-        operators: ['equal', 'not_equal', 'in', 'not_in', 'is_null', 'is_not_null']
-    }, {
-        id: 'in_stock',
-        field: 'in_stock',
-        label: 'In stock',
-        type: 'integer',
-        input: 'radio',
-        values: {
-            1: 'Yes',
-            0: 'No',
-            2: 'Maybe'
-        },
-        operators: ['equal']
-    }, {
-        id: 'price',
-        field: 'price',
-        label: 'Price',
-        type: 'double',
-        validation: {
-            min: 0,
-            step: 0.01
-        }
-    }, {
-        id: 'id',
-        field: 'id',
-        label: 'Identifier',
-        type: 'string',
-        placeholder: '____-____-____',
-        operators: ['equal', 'not_equal'],
-        validation: {
-            format: /^.{4}-.{4}-.{4}$/
-        }
-    }],
+        id: 'Zakazhcik',
+        label: 'Заказчик',
+        type: 'string'
+    },
+     {
+         id: 'Otvetstv',
+         label: 'Ответственный',
+         type: 'string'
+     },
+     {
+         id: 'AdresA',
+         label: 'Адрес',
+         type: 'string'
+     },
+     {
+         id: 'AdressA',
+         label: 'Адрес СО',
+         type: 'string'
+     },
+     {
+         id: 'gplr_ReportExist',
+         label: 'ГПЛР',
+         type: 'integer',
+         input: 'select',
+         values: { 1: 'Выдано', 2: 'Не выдано', 3: 'Выполнено' }, operators: ['equal']
+     }],
 });
-
 function Save() {
-    var grid = $("#gridMls").data("kendoGrid");
-    var filters = $('#builder').queryBuilder('getRules');
-    var ds = grid.dataSource;
-
-    //alert(filters);
-    ds.filter(filters);
-
-
+    var result = $('#builderConf').queryBuilder('getRules');
+    if (!$.isEmptyObject(result)) {
+        var result = renameProperties(result, { rules: 'filters', condition: 'logic' });
+        var query = JSON.stringify(result, null, 2);
+        $("#gridMls").data("kendoGrid").dataSource.filter(result);;
+    }
 }
+
+function renameProperties(sourceObj, replaceList, destObj) { destObj = destObj || {}; $.each(sourceObj, function (key) { if (sourceObj.hasOwnProperty(key)) { if (sourceObj[key] instanceof Array) { if (replaceList[key]) { var newName = replaceList[key]; destObj[newName] = []; renameProperties(sourceObj[key], replaceList, destObj[newName]); } else if (!replaceList[key]) { destObj[key] = []; renameProperties(sourceObj[key], replaceList, destObj[key]); } } else if (typeof sourceObj[key] === 'object') { if (replaceList[key]) { var newName = replaceList[key]; destObj[newName] = {}; renameProperties(sourceObj[key], replaceList, destObj[newName]); } else if (!replaceList[key]) { destObj[key] = {}; renameProperties(sourceObj[key], replaceList, destObj[key]); } } else { if (replaceList[key]) { var newName = replaceList[key]; destObj[newName] = sourceObj[key]; } else if (!replaceList[key]) { destObj[key] = sourceObj[key]; } } } }); return destObj; }
