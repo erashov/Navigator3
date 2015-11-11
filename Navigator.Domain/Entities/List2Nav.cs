@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Navigator.Domain.Entities
 {
-    public class List2Navv
+    public class List2Nav
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]

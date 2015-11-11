@@ -80,13 +80,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IList2NavRepository.cs" />
     <Compile Include="Abstract\IListMLGridRepository.cs" />
     <Compile Include="Abstract\IOsnovaRepository.cs" />
     <Compile Include="Abstract\IRouteSheetsRepository.cs" />
+    <Compile Include="Abstract\IWfl_UserConfigurationRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
+    <Compile Include="Concrete\EFList2NavRepository.cs" />
     <Compile Include="Concrete\EFListMLGridRepository.cs" />
     <Compile Include="Concrete\EFOsnovaRepository.cs" />
     <Compile Include="Concrete\EFRouteSheetsRepository.cs" />
+    <Compile Include="Concrete\EFWfl_UserConfigurationRepository.cs" />
     <Compile Include="Entities\Area.cs" />
     <Compile Include="Entities\AttributeMLExtra.cs" />
     <Compile Include="Entities\AttributeMLExtraStor.cs" />
