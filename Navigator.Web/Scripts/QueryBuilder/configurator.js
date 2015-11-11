@@ -42,6 +42,7 @@ function Save() {
     var result = $('#builderConf').queryBuilder('getRules');
     if (!$.isEmptyObject(result)) {
         var result = renameProperties(result, { rules: 'filters', condition: 'logic' });
+        alert(kendo.stringify($("#gridMls").data("kendoGrid").getOptions()));
         //        var query = JSON.stringify(result, null, 2);
         $("#gridMls").data("kendoGrid").dataSource.filter(result);;
     }

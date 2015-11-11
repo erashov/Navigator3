@@ -87,9 +87,38 @@
     <Compile Include="Concrete\EFListMLGridRepository.cs" />
     <Compile Include="Concrete\EFOsnovaRepository.cs" />
     <Compile Include="Concrete\EFRouteSheetsRepository.cs" />
+    <Compile Include="Entities\Area.cs" />
+    <Compile Include="Entities\AttributeMLExtra.cs" />
+    <Compile Include="Entities\AttributeMLExtraStor.cs" />
+    <Compile Include="Entities\CompatibilityML.cs" />
+    <Compile Include="Entities\JointInfo.cs" />
+    <Compile Include="Entities\List2Nav.cs" />
     <Compile Include="Entities\ListMLGrid.cs" />
+    <Compile Include="Entities\Main_Table.cs" />
+    <Compile Include="Entities\ML_Editing.cs" />
+    <Compile Include="Entities\ML_Ends.cs" />
+    <Compile Include="Entities\ML_Equipment.cs" />
+    <Compile Include="Entities\ML_Equipment_Directory.cs" />
+    <Compile Include="Entities\ML_EquipResponsible.cs" />
+    <Compile Include="Entities\ML_EquipType.cs" />
+    <Compile Include="Entities\ML_EquipUnit.cs" />
+    <Compile Include="Entities\ML_History.cs" />
+    <Compile Include="Entities\ML_Knots.cs" />
+    <Compile Include="Entities\ML_Lines.cs" />
+    <Compile Include="Entities\ML_Main.cs" />
+    <Compile Include="Entities\ML_Notices.cs" />
     <Compile Include="Entities\Osnova.cs" />
     <Compile Include="Entities\RouteSheet.cs" />
+    <Compile Include="Entities\ServiceML.cs" />
+    <Compile Include="Entities\TL_Knots.cs" />
+    <Compile Include="Entities\TL_Main.cs" />
+    <Compile Include="Entities\Wfl_Depts.cs" />
+    <Compile Include="Entities\Wfl_Interfaces.cs" />
+    <Compile Include="Entities\Wfl_RouteSheetFreezings.cs" />
+    <Compile Include="Entities\Wfl_TaskInWork.cs" />
+    <Compile Include="Entities\Wfl_Tasks.cs" />
+    <Compile Include="Entities\Wfl_UserConfiguration.cs" />
+    <Compile Include="Entities\Wfl_Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -99,9 +128,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="temp\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
