@@ -35,8 +35,9 @@ var filterFreezen = {
     }
 };
 var filterEmpty = { mode: "row", cell: { showOperators: false } };
+
 var columns = [
-        { width: 30, headerTemplate: "<input  type='checkbox' id='chkSelectAll' onclick='checkAll(this)' />", template: "<input  type='checkbox' class='chkbx'/>", locked: false },
+        { width: 30, headerTemplate: "<input type='checkbox' id='checkAll' onClick='selectAll(this)'/>", template: "<input type='checkbox' name='selectItem' class='checkbox' />", locked: false },
         { command: [{ name: "edit", text: { edit: "", update: "", cancel: "" } }], title: "&nbsp;", text: "", width: 44, locked: false },
         { field: "NumML", title: "№ МЛ", template: "<a href='' class='redlink'>#=NumML# </a><div class=\"valueDel\"></div> #= utverzh ? kendo.toString(utverzh, 'dd.MM.yyyy') : '' #", width: 150, locked: false, editable: false },
         { field: "USERs", title: "Пользователь", width: 160, filterable: { cell: { operator: "contains" } } },
@@ -62,7 +63,7 @@ var columns = [
         { field: "otss_ReportExist", editable: false, title: "ОТС(S)", filterable: filterDep, template: "<table><tr><td >#=otss_start ? kendo.toString(otss_start,'dd.MM.yyyy'):''#</td><td>#=otss2_start ? kendo.toString(otss2_start,'dd.MM.yyyy'):''#</td></tr><tr><td>#=otss_end ? kendo.toString(otss_end,'dd.MM.yyyy'):''# #=otssIsCanceled ? otssIsCanceled:''#</td><td>#=otss2_end ? kendo.toString(otss2_end,'dd.MM.yyyy'):''# #=otss2IsCanceled ? otss2IsCanceled:''#</td></tr></table>", width: 190 },
         { field: "otu_ReportExist", editable: false, title: "ОТУ", filterable: filterDep, template: "#=otu_start ? kendo.toString(otu_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=otu_end ? kendo.toString(otu_end,'dd.MM.yyyy'):'' # #=otuIsCanceled ? otuIsCanceled:'' #", width: 190 },
         { field: "otvu_ReportExist", editable: false, title: "ОТвУ", filterable: filterDep, template: "#=otvu_start ? kendo.toString(otvu_start,'dd.MM.yyyy'):'' #<div class=\"valueDel\"></div>#=otvu_end ? kendo.toString(otvu_end,'dd.MM.yyyy'):'' # #=otvuIsCanceled ? otvuIsCanceled:'' #", width: 190 },
-        { field: "TaskReturns", title: "Возврат МЛ", filterable:filterEmpty,  width: 280 },
+        { field: "TaskReturns", title: "Возврат МЛ", filterable: filterEmpty, width: 280 },
         { field: "TaskCancels", title: "Возврат заданий", width: 190, filterable: { cell: { operator: "contains" } } },
         { field: "Freeze_ReportExist", title: "Заморозка", editable: false, filterable: filterFreezen, template: "#=StartDate ? kendo.toString(StartDate,'dd.MM.yyyy'):'' # <div class=\"valueDel\"></div> #=StopDate ? kendo.toString(StopDate,'dd.MM.yyyy'):''#", width: 160 },
         { field: "Probl", title: "Проблема", width: 190, filterable: { cell: { operator: "contains" } } },
@@ -87,15 +88,24 @@ var fields = {
     otse_start: { type: "date" }, otse2_start: { type: "date" }, otse_end: { type: "date" }, otse2_end: { type: "date" }, otss_start: { type: "date" }, otss2_start: { type: "date" }, otss_end: { type: "date" }, otss2_end: { type: "date" }, otu_start: { type: "date" }, otu_end: { type: "date" },
     StartDate: { type: "date" }, StopDate: { type: "date" }, test_date_a: { type: "date" }, test_date_b: { type: "date" }, dmv_ReportExist: { type: "number" }, gplr_ReportExist: { type: "number" }, Sroch_USHTU: { type: "boolean" }
 };
+var selectedIds = {};
 
-$("#gridMls").kendoGrid({
+var gridMls = $("#gridMls").kendoGrid({
     dataSource: {
         transport: { read: { url: "ListMLs/GetListMls", dataType: "json", type: "POST" } },
-        pageSize: 20, serverPaging: true, serverSorting: true, serverFiltering: true, schema: { data: "data", total: "total", model: { fields: fields } }
+        pageSize: 20, serverPaging: true, serverSorting: true, serverFiltering: true, schema: { data: "data", total: "total", id: "NumML", model: { fields: fields } }
     }, height: $(document).height() - 80,
-    editable: "inline", filterable: { mode: "row", extra: false }, columnMenu: true, sortable: { mode: "multiple", allowUnsort: true }, pageable: true, selectable: "multiple", resizable: true, reorderable: true,
-    pageable: { refresh: true, pageSizes: [10, 20, 50, 100], buttonCount: 5 }, columns: columns
+    editable: "inline", filterable: { mode: "row", extra: false }, columnMenu: true, sortable: { mode: "multiple", allowUnsort: true }, pageable: true,
+    //   selectable: "multiple",
+    resizable: true, reorderable: true,
+    pageable: { refresh: true, pageSizes: [10, 20, 50, 100], buttonCount: 5 }, columns: columns, dataBound: function () {
+        $(".checkbox").bind("change", function (e) {
+            $(e.target).closest("tr").toggleClass("k-state-selected");
+        });
+    }
+
 });
+
 
 AddCustomFilter('oshugpz_start', '<table><tr><td style="width:25%;"><input id="from"/></td><td style="width:25%;"><input id="to"/></td><td style="width:40%;"><input id="dropdownlistGfz" /></td><td style="width:10%;"><button type="button" onclick="ClearFilterFGZ()" class="k-button k-button-icon"  style="display: visible;"><span class="k-icon k-i-close"></span></button></td></tr></table>');
 AddCustomFilter('Urgent', '<table><tr><td style="width:43%;"><input type="text" id="SrochSZ" style="width:100%;" class="k-input k-textbox" role="textbox"/></td></td><td style="width:43%;"><input id="dropdownlistUrgent" /></td><td style="width:14%;"><button type="button" onclick="ClearFilterUrgent()" class="k-button k-button-icon"  style="display: visible;"><span class="k-icon k-i-close"></span></button></td></tr></table>');
@@ -153,7 +163,6 @@ $("#SrochSZ").keypress(function (e) {
             curr_filters = [new_filter];
         }
         ds.filter(curr_filters);
-        
     }
 });
 $("#dropdownlistUrgent").kendoDropDownList({
@@ -262,7 +271,19 @@ $("#dropdownlistTaskReturns").kendoDropDownList({
         }
     }
 });
-
+function selectAll(source) {
+    checkboxes = document.getElementsByName('selectItem');
+    for (var i = 0, n = checkboxes.length; i < n; i++) {
+        checkboxes[i].checked = source.checked;       
+    }
+    var datasourcedata = $("#gridMls").data("kendoGrid");
+    if (source.checked) {
+        datasourcedata.tbody.children('tr').addClass('k-state-selected');
+    }
+    else {
+        datasourcedata.tbody.children('tr').removeClass('k-state-selected');
+    }
+}
 
 $("#to").kendoDatePicker();
 $("#returnDate").kendoDatePicker();
@@ -322,18 +343,10 @@ $("#dropdownlistGfz").kendoDropDownList({
     }
 });
 
+
 function onClick(e) { }
 function buttonClickOpenConf() { $("#configurator").show(); $("#windowConf").kendoWindow({ title: "Конфигуратор", actions: ["Refresh", "Minimize", "Maximize", "Close"], width: 680 }).data("kendoWindow").center().open(); }
 function buttonClickClearFilters() { var gridData = $("#gridMls").data("kendoGrid"); gridData.dataSource.filter({}); }
-function checkAll(ele) {
-    var state = $(ele).is(':checked');
-    var grid = $('#grid').data('kendoGrid');
-    $.each(grid.dataSource.view(), function () {
-        this.dirty = true;
-    });
-    grid.refresh();
-}
-
 
 
 function removeFilter(filter, searchFor) { if (filter == null) return []; for (var x = 0; x < filter.length; x++) { if (filter[x].filters != null && filter[x].filters.length >= 0) { if (filter[x].filters.length == 0) { filter.splice(x, 1); return removeFilter(filter, searchFor); } filter[x].filters = removeFilter(filter[x].filters, searchFor); } else { if (filter[x].field == searchFor) { filter.splice(x, 1); return removeFilter(filter, searchFor); } } } return filter; }
