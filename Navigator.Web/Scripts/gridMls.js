@@ -1,4 +1,7 @@
-﻿$("#toolbarMls").kendoToolBar({ items: [{ type: "button", text: "Принять", id: "btnAccept" }, { type: "button", text: "Снять", id: "btnTakeOff" }, { type: "button", title: "Обновить", id: "btnRefresh", icon: "refresh" }, { type: "button", text: "Конфигуратор", id: "btnconf", click: buttonClickOpenConf }, { type: "button", text: "Очистить фильтпы", id: "btnclear", click: buttonClickClearFilters }], click: onClick });
+﻿$("#toolbarMls").kendoToolBar({
+    items: [{ type: "button", text: "Принять", id: "btnAccept" }, { type: "button", text: "Снять", id: "btnTakeOff" }, { type: "button", title: "Обновить", id: "btnRefresh", icon: "refresh" }, { type: "button", text: "Конфигуратор", id: "btnconf", click: buttonClickOpenConf }, { type: "button", text: "Очистить фильтпы", id: "btnclear", click: buttonClickClearFilters },
+        {type:"button", id:"getSelect",text:"Выделеные МЛ", click:getSelectionItems}], click: onClick
+});
 var items = [{ text: "Выдано", value: "1" }, { text: "Не выдано", value: "2" }, { text: "Выполнено", value: "3" }];
 var filterDep = { mode: "row", cell: { showOperators: false, template: function (args) { args.element.kendoDropDownList({ autoBind: false, dataTextField: "text", dataValueField: "value", dataSource: new kendo.data.DataSource({ data: items }), index: 0, optionLabel: { text: "Без фильтра", value: "" }, valuePrimitive: true }); } } };
 var filterFreezen = {
@@ -347,6 +350,17 @@ $("#dropdownlistGfz").kendoDropDownList({
 function onClick(e) { }
 function buttonClickOpenConf() { $("#configurator").show(); $("#windowConf").kendoWindow({ title: "Конфигуратор", actions: ["Refresh", "Minimize", "Maximize", "Close"], width: 680 }).data("kendoWindow").center().open(); }
 function buttonClickClearFilters() { var gridData = $("#gridMls").data("kendoGrid"); gridData.dataSource.filter({}); }
-
+function getSelectionItems() {
+    var grid = $("#gridMls").data("kendoGrid");
+    var selectedRows = $(".k-state-selected", "#gridMls");
+    var list = [];
+     if (selectedRows.length > 0) {
+        for (var i = 0, n = selectedRows.length-1; i < n; i++) {
+            var selectedItem = grid.dataItem(selectedRows[i]);
+            list.push(selectedItem.NumML);
+        }
+    }
+    return list;
+}
 
 function removeFilter(filter, searchFor) { if (filter == null) return []; for (var x = 0; x < filter.length; x++) { if (filter[x].filters != null && filter[x].filters.length >= 0) { if (filter[x].filters.length == 0) { filter.splice(x, 1); return removeFilter(filter, searchFor); } filter[x].filters = removeFilter(filter[x].filters, searchFor); } else { if (filter[x].field == searchFor) { filter.splice(x, 1); return removeFilter(filter, searchFor); } } } return filter; }
