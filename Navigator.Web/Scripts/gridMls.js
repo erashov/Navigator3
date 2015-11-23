@@ -1,40 +1,13 @@
 ﻿$("#toolbarMls").kendoToolBar({
     items: [{ type: "button", text: "Принять", id: "btnAccept" }, { type: "button", text: "Снять", id: "btnTakeOff" }, { type: "button", title: "Обновить", id: "btnRefresh", icon: "refresh" }, { type: "button", text: "Конфигуратор", id: "btnconf", click: buttonClickOpenConf }, { type: "button", text: "Очистить фильтпы", id: "btnclear", click: buttonClickClearFilters },
-        {type:"button", id:"getSelect",text:"Выделеные МЛ", click:getSelectionItems}], click: onClick
+        { type: "button", id: "getSelect", text: "Выделеные МЛ", click: getSelectionItems }], click: onClick
 });
 var items = [{ text: "Выдано", value: "1" }, { text: "Не выдано", value: "2" }, { text: "Выполнено", value: "3" }];
 var filterDep = { mode: "row", cell: { showOperators: false, template: function (args) { args.element.kendoDropDownList({ autoBind: false, dataTextField: "text", dataValueField: "value", dataSource: new kendo.data.DataSource({ data: items }), index: 0, optionLabel: { text: "Без фильтра", value: "" }, valuePrimitive: true }); } } };
 var filterFreezen = {
-    mode: "row",
-    cell: {
+    mode: "row", cell: {
         showOperators: false,
-        template: function (args) {
-            args.element.kendoDropDownList({
-                autoBind: false, dataTextField: "text", dataValueField: "value",
-                dataSource: new kendo.data.DataSource({ data: [{ text: "Замороженные", value: "1" }, { text: "Размороженные", value: "2" }, { text: "Без приостановоу", value: "3" }] }),
-                index: 0, optionLabel: { text: "Без фильтра", value: "" }, valuePrimitive: true,
-                change: function () {
-                    var value = this.value();
-                    var ds = $("#gridMls").data("kendoGrid").dataSource;
-                    var new_filter = { field: "Freeze_ReportExist", operator: "eq", value: parseInt(value) };
-                    if (value) {
-                        var curr_filters = null;
-                        if (ds.filter() != null) {
-                            curr_filters = ds.filter().filters;
-                            curr_filters = removeFilter(curr_filters, 'Freeze_ReportExist');
-                            curr_filters.push(new_filter);
-                        }
-                        if (curr_filters == null) {
-                            curr_filters = [new_filter];
-                        }
-                        ds.filter(curr_filters);
-                    } else {
-                        var filters = ds.filter().filters;
-                        filters = removeFilter(filters, 'Freeze_ReportExist');
-                    }
-                }
-            });
-        }
+        template: function (args) { args.element.kendoDropDownList({ autoBind: false, dataTextField: "text", dataValueField: "value", dataSource: new kendo.data.DataSource({ data: [{ text: "Замороженные", value: "1" }, { text: "Размороженные", value: "2" }, { text: "Без приостановоу", value: "3" }] }), index: 0, optionLabel: { text: "Без фильтра", value: "" }, valuePrimitive: true, change: function () { var value = this.value(); var ds = $("#gridMls").data("kendoGrid").dataSource; var new_filter = { field: "Freeze_ReportExist", operator: "eq", value: parseInt(value) }; if (value) { var curr_filters = null; if (ds.filter() != null) { curr_filters = ds.filter().filters; curr_filters = removeFilter(curr_filters, 'Freeze_ReportExist'); curr_filters.push(new_filter); } if (curr_filters == null) { curr_filters = [new_filter]; } ds.filter(curr_filters); } else { var filters = ds.filter().filters; filters = removeFilter(filters, 'Freeze_ReportExist'); } } }); }
     }
 };
 var filterEmpty = { mode: "row", cell: { showOperators: false } };
@@ -99,20 +72,25 @@ var gridMls = $("#gridMls").kendoGrid({
         pageSize: 20, serverPaging: true, serverSorting: true, serverFiltering: true, schema: { data: "data", total: "total", id: "NumML", model: { fields: fields } }
     }, height: $(document).height() - 80,
     editable: "inline", filterable: { mode: "row", extra: false }, columnMenu: true, sortable: { mode: "multiple", allowUnsort: true }, pageable: true,
-    //   selectable: "multiple",
     resizable: true, reorderable: true,
-    pageable: { refresh: true, pageSizes: [10, 20, 50, 100], buttonCount: 5 }, columns: columns, dataBound: function () {
+    pageable: { refresh: true, pageSizes: [10, 20, 50, 100], buttonCount: 5 }, columns: columns,  dataBound: function () {
         $(".checkbox").bind("change", function (e) {
             $(e.target).closest("tr").toggleClass("k-state-selected");
         });
+        var cells = $("input.checkbox").parent();
+        for (var i = 0; i < cells.length; i++) {
+            cells[i].style.backgroundColor = '#' + Math.random().toString(16).slice(-6);
+        };
     }
-
 });
 
 
 AddCustomFilter('oshugpz_start', '<table><tr><td style="width:25%;"><input id="from"/></td><td style="width:25%;"><input id="to"/></td><td style="width:40%;"><input id="dropdownlistGfz" /></td><td style="width:10%;"><button type="button" onclick="ClearFilterFGZ()" class="k-button k-button-icon"  style="display: visible;"><span class="k-icon k-i-close"></span></button></td></tr></table>');
 AddCustomFilter('Urgent', '<table><tr><td style="width:43%;"><input type="text" id="SrochSZ" style="width:100%;" class="k-input k-textbox" role="textbox"/></td></td><td style="width:43%;"><input id="dropdownlistUrgent" /></td><td style="width:14%;"><button type="button" onclick="ClearFilterUrgent()" class="k-button k-button-icon"  style="display: visible;"><span class="k-icon k-i-close"></span></button></td></tr></table>');
 AddCustomFilter('TaskReturns', '<table><tr><td style="width:43%;"><input id="returnDate"/></td></td><td style="width:43%;"><input id="dropdownlistTaskReturns" /></td><td style="width:14%;"><button type="button" onclick="ClearFilterTaskReturns()" class="k-button k-button-icon"  style="display: visible;"><span class="k-icon k-i-close"></span></button></td></tr></table>');
+
+
+
 
 function AddCustomFilter(field, content) {
     var columnHeader = jQuery('div#gridMls span.k-filtercell[data-field="' + field + '"]');
@@ -213,8 +191,7 @@ $("#dropdownlistUrgent").kendoDropDownList({
         else {
             if (ds.filter() != null) {
                 var filters = ds.filter().filters;
-                filters = removeFilter(filters, 'Sroch_USHTU');
-                filters = removeFilter(filters, 'Sroch_SZ');
+                filters = removeFilter(filters, 'Sroch_USHTU');filters = removeFilter(filters, 'Sroch_SZ');
                 gridData.dataSource.filter(filters);
             }
 
@@ -233,51 +210,27 @@ $("#dropdownlistTaskReturns").kendoDropDownList({
             var curr_filters = null;
             var new_filter;
             var notperform;
-            if (value == "1") {
-                var ungentText = $("#SrochSZ").val();
-                if (ungentText != "")
-                { new_filter = { field: "Sroch_SZ", operator: "contains", value: ungentText }; }
-            }
-            else if (value == "2") {
-                new_filter = { field: "Sroch_USHTU", operator: "eq", value: true };
-            }
-            else if (value == "3") {
-                new_filter = { field: "Sroch_USHTU", operator: "eq", value: false };
-            }
-            else if (value == "4") {
-                new_filter = { field: "Sroch_USHTU", operator: "eq", value: true };
-                notperform = { field: "Sdan_TS", operator: "eq", value: null };
-            }
+            if (value == "1") {var ungentText = $("#SrochSZ").val();if (ungentText != ""){ new_filter = { field: "Sroch_SZ", operator: "contains", value: ungentText }; }}
+            else if (value == "2") { new_filter = { field: "Sroch_USHTU", operator: "eq", value: true };}
+            else if (value == "3") {new_filter = { field: "Sroch_USHTU", operator: "eq", value: false };}
+            else if (value == "4") {new_filter = { field: "Sroch_USHTU", operator: "eq", value: true };notperform = { field: "Sdan_TS", operator: "eq", value: null };}
             if (ds.filter() != null) {
                 curr_filters = ds.filter().filters;
                 curr_filters = removeFilter(curr_filters, 'Sroch_USHTU'); curr_filters = removeFilter(curr_filters, 'Sdan_TS'); curr_filters = removeFilter(curr_filters, 'Sroch_SZ');
-                if (value == "4") {
-
-                    curr_filters.push(notperform);
-                }
+                if (value == "4") {curr_filters.push(notperform);}
                 curr_filters.push(new_filter);
             }
-            if (curr_filters == null) {
-                curr_filters = [new_filter];
-                if (value == "4") { curr_filters.push(notperform); }
-            }
+            if (curr_filters == null) {curr_filters = [new_filter];if (value == "4") { curr_filters.push(notperform); }}
             ds.filter(curr_filters);
         }
-        else {
-            if (ds.filter() != null) {
-                var filters = ds.filter().filters;
-                filters = removeFilter(filters, 'Sroch_USHTU');
-                filters = removeFilter(filters, 'Sroch_SZ');
-                gridData.dataSource.filter(filters);
-            }
-
+        else {if (ds.filter() != null) {var filters = ds.filter().filters;filters = removeFilter(filters, 'Sroch_USHTU');filters = removeFilter(filters, 'Sroch_SZ');gridData.dataSource.filter(filters);}
         }
     }
 });
 function selectAll(source) {
     checkboxes = document.getElementsByName('selectItem');
     for (var i = 0, n = checkboxes.length; i < n; i++) {
-        checkboxes[i].checked = source.checked;       
+        checkboxes[i].checked = source.checked;
     }
     var datasourcedata = $("#gridMls").data("kendoGrid");
     if (source.checked) {
@@ -346,6 +299,7 @@ $("#dropdownlistGfz").kendoDropDownList({
     }
 });
 
+$("input.checkbox").parent().css("background-color", "red");
 
 function onClick(e) { }
 function buttonClickOpenConf() { $("#configurator").show(); $("#windowConf").kendoWindow({ title: "Конфигуратор", actions: ["Refresh", "Minimize", "Maximize", "Close"], width: 680 }).data("kendoWindow").center().open(); }
@@ -354,8 +308,8 @@ function getSelectionItems() {
     var grid = $("#gridMls").data("kendoGrid");
     var selectedRows = $(".k-state-selected", "#gridMls");
     var list = [];
-     if (selectedRows.length > 0) {
-        for (var i = 0, n = selectedRows.length-1; i < n; i++) {
+    if (selectedRows.length > 0) {
+        for (var i = 0, n = selectedRows.length - 1; i < n; i++) {
             var selectedItem = grid.dataItem(selectedRows[i]);
             list.push(selectedItem.NumML);
         }
@@ -364,3 +318,5 @@ function getSelectionItems() {
 }
 
 function removeFilter(filter, searchFor) { if (filter == null) return []; for (var x = 0; x < filter.length; x++) { if (filter[x].filters != null && filter[x].filters.length >= 0) { if (filter[x].filters.length == 0) { filter.splice(x, 1); return removeFilter(filter, searchFor); } filter[x].filters = removeFilter(filter[x].filters, searchFor); } else { if (filter[x].field == searchFor) { filter.splice(x, 1); return removeFilter(filter, searchFor); } } } return filter; }
+
+$("input.checkbox").parent().css("background-color", "red");

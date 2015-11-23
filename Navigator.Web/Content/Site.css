@@ -8,10 +8,10 @@
     font-size: 14px;
 }
 
-.k-grid td {
-    line-height: 1.7em;
-    padding: .3em .3em;
-}
+    .k-grid td {
+        line-height: 1.6em;
+        padding: .2em .2em;
+    }
 
 .k-toolbar .k-button, .k-toolbar .k-split-button, .k-toolbar .k-button-group, .k-toolbar .k-widget, .k-toolbar .k-textbox, .k-toolbar label, .k-toolbar .k-separator {
     font-size: 14px;
@@ -32,35 +32,48 @@
 .k-toolbar {
     padding-top: 0px;
     padding-bottom: 0px;
-    line-height:2em!important;
+    line-height: 2.2em !important;
 }
-.k-toolbar-resizable{min-height:2.19em!important;}
 
-#toolbarMls{height:11px;}
+.k-toolbar-resizable {
+    min-height: 2.21em !important;
+}
+
+#toolbarMls {
+    height: 11px;
+}
+
 .k-tabstrip-items {
     font-size: 15px;
     line-height: .9em;
-    padding: 0.09em .3em 1px;
+    padding: .1em .3em 1px;
 }
 
     .k-tabstrip-items .k-link, .k-panelbar .k-tabstrip-items .k-link {
-        padding: .4em .92em;
+        padding: .4em .9em;
     }
 
 .k-loading {
     visibility: hidden;
 }
-.k-block > .k-header, .k-window-titlebar
-{
-    font-size:1em;
-}
-.redlink {
-    color:#841D1D!important;
-}
-.redlink:focus, .redlink:hover{color:#7C233F!important;}
-.k-button{padding:1px 5px 1px;}
 
-    #tabstrip {
+.k-block > .k-header, .k-window-titlebar {
+    font-size: 1em;
+}
+
+.redlink {
+    color: #841D1D !important;
+}
+
+    .redlink:focus, .redlink:hover {
+        color: #7C233F !important;
+    }
+
+.k-button {
+    padding: 1px 5px 1px;
+}
+
+#tabstrip {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -68,13 +81,21 @@
     right: 0;
     width: auto;
     height: 99%;
-    }
-    .k-tabstrip .k-content {
+}
+
+.k-tabstrip .k-content {
     position: absolute;
     top: 28px;
     bottom: 0;
-        left: 0;
+    left: 0;
     right: 0;
-        width: auto;
+    width: auto;
 }
-    .k-grid tbody .k-button, .k-ie8 .k-grid tbody button.k-button{min-width:30px;}
+
+.k-grid tbody .k-button, .k-ie8 .k-grid tbody button.k-button {
+    min-width: 30px;
+}
+.randomColor{
+border-style: none!important;
+     padding: 1px 0!important;
+}

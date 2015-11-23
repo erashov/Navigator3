@@ -1,7 +1,7 @@
 ﻿<div id="tabstrip">
     <ul>
         <li class="k-state-active">Список МЛ</li>
-        <li>Osnova</li>
+
         <li>Список F</li>
         <li>Список Y</li>
         <li>Список R</li>
@@ -15,10 +15,8 @@
     </ul>
 </div>
 <script>
-    $(document).ready(function () {
-        var ts = $("#tabstrip").kendoTabStrip({
-            animation: { open: { effects: "fadeIn" } },
-            contentUrls: ["ListMLs/Index", "Osnova/Index","","","","","","","","","",""]
-        }).data('kendoTabStrip');
-    });
+    var ts = $("#tabstrip").kendoTabStrip({
+        animation: { open: { effects: "fadeIn" } },
+        contentUrls: ["ListMLs/Index", "http://192.168.60.15/NavigatorRouteSheets/ChannelForms/ChannelFList.aspx", "", "", "", "", "", "", "", "", ""]
+    }).data('kendoTabStrip');
 </script>
