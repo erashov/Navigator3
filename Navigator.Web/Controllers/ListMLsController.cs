@@ -57,8 +57,7 @@ namespace Navigator.Web.Controllers
                 {
                     mls = mls.OrderBy("NumML desc");
                 }
-                var data = mls.Skip((page - 1) * pageSize).Take(pageSize).ToList();
-                var jsonData = new { total = totalCount, data = data };
+                var jsonData = new { total = totalCount, data = mls.Skip((page - 1) * pageSize).Take(pageSize).ToList() };
                 return Json(jsonData, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
