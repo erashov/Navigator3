@@ -3,18 +3,14 @@
     <div class="demo-section k-content wide">
         <div id="toolbarOsn"></div>
     </div>
-    <div id="gridOsnova"></div>
-  
-    <script>
-      
+    <div id="gridOsnova"></div>  
+    <script>      
             $("#toolbarOsn").kendoToolBar({
                 items: [
                     { type: "button", text: "Toggle Button", togglable: true }
                 ],
                 click: onClick
             });
-
-
             $("#gridOsnova").kendoGrid({
                 dataSource: {
                     transport: {
