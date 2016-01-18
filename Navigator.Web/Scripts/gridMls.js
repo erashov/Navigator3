@@ -4,16 +4,10 @@
 });
 var items = [{ text: "Выдано", value: "1" }, { text: "Не выдано", value: "2" }, { text: "Выполнено", value: "3" }];
 var filterDep = { mode: "row", cell: { showOperators: false, template: function (args) { args.element.kendoDropDownList({ autoBind: false, dataTextField: "text", dataValueField: "value", dataSource: new kendo.data.DataSource({ data: items }), index: 0, optionLabel: { text: "Без фильтра", value: "" }, valuePrimitive: true }); } } };
-var filterFreezen = {
-    mode: "row", cell: {
-        showOperators: false,
-        template: function (args) { args.element.kendoDropDownList({ autoBind: false, dataTextField: "text", dataValueField: "value", dataSource: new kendo.data.DataSource({ data: [{ text: "Замороженные", value: "1" }, { text: "Размороженные", value: "2" }, { text: "Без приостановоу", value: "3" }] }), index: 0, optionLabel: { text: "Без фильтра", value: "" }, valuePrimitive: true, change: function () { var value = this.value(); var ds = $("#gridMls").data("kendoGrid").dataSource; var new_filter = { field: "Freeze_ReportExist", operator: "eq", value: parseInt(value) }; if (value) { var curr_filters = null; if (ds.filter() != null) { curr_filters = ds.filter().filters; curr_filters = removeFilter(curr_filters, 'Freeze_ReportExist'); curr_filters.push(new_filter); } if (curr_filters == null) { curr_filters = [new_filter]; } ds.filter(curr_filters); } else { var filters = ds.filter().filters; filters = removeFilter(filters, 'Freeze_ReportExist'); } } }); }
-    }
-};
+var filterFreezen = { mode: "row", cell: { showOperators: false, template: function (args) { args.element.kendoDropDownList({ autoBind: false, dataTextField: "text", dataValueField: "value", dataSource: new kendo.data.DataSource({ data: [{ text: "Замороженные", value: "1" }, { text: "Размороженные", value: "2" }, { text: "Без приостановоу", value: "3" }] }), index: 0, optionLabel: { text: "Без фильтра", value: "" }, valuePrimitive: true, change: function () { var value = this.value(); var ds = $("#gridMls").data("kendoGrid").dataSource; var new_filter = { field: "Freeze_ReportExist", operator: "eq", value: parseInt(value) }; if (value) { var curr_filters = null; if (ds.filter() != null) { curr_filters = ds.filter().filters; curr_filters = removeFilter(curr_filters, 'Freeze_ReportExist'); curr_filters.push(new_filter); } if (curr_filters == null) { curr_filters = [new_filter]; } ds.filter(curr_filters); } else { var filters = ds.filter().filters; filters = removeFilter(filters, 'Freeze_ReportExist'); } } }); } } };
 var filterEmpty = { mode: "row", cell: { showOperators: false } };
-
 var columns = [
-        { width: 30, headerTemplate: "<input type='checkbox' id='checkAll' onClick='selectAll(this)'/>", template: "<input type='checkbox' name='selectItem' class='checkbox' />", locked: false },
+        { width: 30, headerTemplate: "<input type='checkbox' id='checkAll' onClick='selectAll(this)'/>", template: "<input type='checkbox' name='selectItem' #if(Freeze_ReportExist==1){# class='checkboxFreez'#}##if(Freeze_ReportExist!=1){#class='checkbox' #}#/>", locked: false },
         { command: [{ name: "edit", text: { edit: "", update: "", cancel: "" } }], title: "&nbsp;", text: "", width: 44, locked: false },
         { field: "NumML", title: "№ МЛ", template: "<a href='' class='redlink'>#=NumML# </a><div class=\"valueDel\"></div> #= utverzh ? kendo.toString(utverzh, 'dd.MM.yyyy') : '' #", width: 150, locked: false, editable: false },
         { field: "USERs", title: "Пользователь", width: 160, filterable: { cell: { operator: "contains" } } },
@@ -62,24 +56,19 @@ var fields = {
     otvu_start: { type: "date" }, otvu_end: { type: "date" }, otu_start: { type: "date" }, otu_end: { type: "date" }, uiias_h_start: { type: "date" }, uiias_h_end: { type: "date" }, test_date_a: { type: "date" },
     test_date_b: { type: "date" }, Sdan: { type: "date" }, Sdan_TS: { type: "date" }, to_start: { type: "date" }, to2_start: { type: "date" }, to_end: { type: "date" }, to2_end: { type: "date" }, to2IsCanceled: { type: "date" },
     otse_start: { type: "date" }, otse2_start: { type: "date" }, otse_end: { type: "date" }, otse2_end: { type: "date" }, otss_start: { type: "date" }, otss2_start: { type: "date" }, otss_end: { type: "date" }, otss2_end: { type: "date" }, otu_start: { type: "date" }, otu_end: { type: "date" },
-    StartDate: { type: "date" }, StopDate: { type: "date" }, test_date_a: { type: "date" }, test_date_b: { type: "date" }, dmv_ReportExist: { type: "number" }, gplr_ReportExist: { type: "number" }, Sroch_USHTU: { type: "boolean" }
+    StartDate: { type: "date" }, StopDate: { type: "date" }, test_date_a: { type: "date" }, test_date_b: { type: "date" }, dmv_ReportExist: { type: "number" }, gplr_ReportExist: { type: "number" }, Sroch_USHTU: { type: "boolean" }, Freeze_ReportExist: { type: "number" }
 };
 var selectedIds = {};
-
 var gridMls = $("#gridMls").kendoGrid({
-    dataSource: {
-        transport: { read: { url: "ListMLs/GetListMls", dataType: "json", type: "POST" } },
-        pageSize: 20, serverPaging: true, serverSorting: true, serverFiltering: true, schema: { data: "data", total: "total", id: "NumML", model: { fields: fields } }
-    }, height: $(document).height() - 80,
-    editable: "inline", filterable: { mode: "row", extra: false }, columnMenu: true, sortable: { mode: "multiple", allowUnsort: true }, pageable: true,
-    resizable: true, reorderable: true,
+    dataSource: {transport: { read: { url: "ListMLs/GetListMls", dataType: "json", type: "POST" }}, pageSize: 20, serverPaging: true, serverSorting: true, serverFiltering: true, schema: { data: "data", total: "total", id: "NumML", model: { fields: fields }}}, height: $(document).height() - 80,
+    editable: "inline", filterable: { mode: "row", extra: false }, columnMenu: true, sortable: { mode: "multiple", allowUnsort: true }, pageable: true, resizable: true, reorderable: true,
     pageable: { refresh: true, pageSizes: [10, 20, 50, 100], buttonCount: 5 }, columns: columns, dataBound: function () {
-        $(".checkbox").bind("change", function (e) {
-            $(e.target).closest("tr").toggleClass("k-state-selected");
-        });
-        var cells = $("input.checkbox").parent();
+        $(".checkbox").bind("change", function (e) { $(e.target).closest("tr").toggleClass("k-state-selected"); });
+        $(".checkboxFreez").bind("change", function (e) { $(e.target).closest("tr").toggleClass("k-state-selected"); });
+        var cells = $("input.checkboxFreez").parent();
         for (var i = 0; i < cells.length; i++) {
-            cells[i].style.backgroundColor = '#' + Math.random().toString(16).slice(-6);
+  
+            cells[i].style.backgroundColor = '#0000FF';// + Math.random().toString(16).slice(-6);
         };
     }
 });
@@ -125,20 +114,16 @@ $("#SrochSZ").keypress(function (e) {
     if (e.which == 13) {
         var gridData = $("#gridMls").data("kendoGrid");
         var ds = gridData.dataSource;
-        var new_filter;
-        var curr_filters = null;
+        var new_filter;var curr_filters = null;
         $("#dropdownlistUrgent").data("kendoDropDownList").value(1);
         var ungentText = $("#SrochSZ").val();
-        if (ungentText != "")
-        { new_filter = { field: "Sroch_SZ", operator: "contains", value: ungentText }; }
+        if (ungentText != ""){ new_filter = { field: "Sroch_SZ", operator: "contains", value: ungentText }; }
         if (ds.filter() != null) {
             curr_filters = ds.filter().filters;
             curr_filters = removeFilter(curr_filters, 'Sroch_USHTU'); curr_filters = removeFilter(curr_filters, 'Sdan_TS'); curr_filters = removeFilter(curr_filters, 'Sroch_SZ');
             curr_filters.push(new_filter);
         }
-        if (curr_filters == null) {
-            curr_filters = [new_filter];
-        }
+        if (curr_filters == null) { curr_filters = [new_filter]; }
         ds.filter(curr_filters);
     }
 });
@@ -151,47 +136,21 @@ $("#dropdownlistUrgent").kendoDropDownList({
         var gridData = $("#gridMls").data("kendoGrid");
         var ds = gridData.dataSource;
         if (value) {
-            var curr_filters = null;
-            var new_filter;
-            var notperform;
-            if (value == "1") {
-                var ungentText = $("#SrochSZ").val();
-                if (ungentText != "")
-                { new_filter = { field: "Sroch_SZ", operator: "contains", value: ungentText }; }
-            }
-            else if (value == "2") {
-                new_filter = { field: "Sroch_USHTU", operator: "eq", value: true };
-            }
-            else if (value == "3") {
-                new_filter = { field: "Sroch_USHTU", operator: "eq", value: false };
-            }
-            else if (value == "4") {
-                new_filter = { field: "Sroch_USHTU", operator: "eq", value: true };
-                notperform = { field: "Sdan_TS", operator: "eq", value: null };
-            }
+            var curr_filters = null;var new_filter;var notperform;
+            if (value == "1") {var ungentText = $("#SrochSZ").val();if (ungentText != ""){ new_filter = { field: "Sroch_SZ", operator: "contains", value: ungentText }; }}
+            else if (value == "2") { new_filter = { field: "Sroch_USHTU", operator: "eq", value: true };}
+            else if (value == "3") { new_filter = { field: "Sroch_USHTU", operator: "eq", value: false };}
+            else if (value == "4") { new_filter = { field: "Sroch_USHTU", operator: "eq", value: true }; notperform = { field: "Sdan_TS", operator: "eq", value: null };}
             if (ds.filter() != null) {
                 curr_filters = ds.filter().filters;
                 curr_filters = removeFilter(curr_filters, 'Sroch_USHTU'); curr_filters = removeFilter(curr_filters, 'Sdan_TS'); curr_filters = removeFilter(curr_filters, 'Sroch_SZ');
-                if (value == "4") {
-
-                    curr_filters.push(notperform);
-                }
+                if (value == "4") { curr_filters.push(notperform);}
                 curr_filters.push(new_filter);
             }
-            if (curr_filters == null) {
-                curr_filters = [new_filter];
-                if (value == "4") { curr_filters.push(notperform); }
-            }
+            if (curr_filters == null) { curr_filters = [new_filter];if (value == "4") { curr_filters.push(notperform); }}
             ds.filter(curr_filters);
         }
-        else {
-            if (ds.filter() != null) {
-                var filters = ds.filter().filters;
-                filters = removeFilter(filters, 'Sroch_USHTU'); filters = removeFilter(filters, 'Sroch_SZ');
-                gridData.dataSource.filter(filters);
-            }
-
-        }
+        else {if (ds.filter() != null) {var filters = ds.filter().filters;filters = removeFilter(filters, 'Sroch_USHTU'); filters = removeFilter(filters, 'Sroch_SZ');gridData.dataSource.filter(filters);}}
     }
 });
 $("#dropdownlistTaskReturns").kendoDropDownList({
@@ -203,9 +162,7 @@ $("#dropdownlistTaskReturns").kendoDropDownList({
         var gridData = $("#gridMls").data("kendoGrid");
         var ds = gridData.dataSource;
         if (value) {
-            var curr_filters = null;
-            var new_filter;
-            var notperform;
+            var curr_filters = null;var new_filter;var notperform;
             if (value == "1") { var ungentText = $("#SrochSZ").val(); if (ungentText != "") { new_filter = { field: "Sroch_SZ", operator: "contains", value: ungentText }; } }
             else if (value == "2") { new_filter = { field: "Sroch_USHTU", operator: "eq", value: true }; }
             else if (value == "3") { new_filter = { field: "Sroch_USHTU", operator: "eq", value: false }; }
@@ -226,16 +183,10 @@ $("#dropdownlistTaskReturns").kendoDropDownList({
 });
 function selectAll(source) {
     checkboxes = document.getElementsByName('selectItem');
-    for (var i = 0, n = checkboxes.length; i < n; i++) {
-        checkboxes[i].checked = source.checked;
-    }
+    for (var i = 0, n = checkboxes.length; i < n; i++) {checkboxes[i].checked = source.checked;}
     var datasourcedata = $("#gridMls").data("kendoGrid");
-    if (source.checked) {
-        datasourcedata.tbody.children('tr').addClass('k-state-selected');
-    }
-    else {
-        datasourcedata.tbody.children('tr').removeClass('k-state-selected');
-    }
+    if (source.checked) {datasourcedata.tbody.children('tr').addClass('k-state-selected');}
+    else {datasourcedata.tbody.children('tr').removeClass('k-state-selected');}
 }
 
 $("#to").kendoDatePicker();
@@ -277,10 +228,7 @@ $("#dropdownlistGfz").kendoDropDownList({
             }
             else {
                 curr_filters = [new_filter];
-                if (from.value() != null) {
-                    curr_filters.push(filterFrom);
-                    curr_filters.push(filterTo);
-                }
+                if (from.value() != null) {curr_filters.push(filterFrom);curr_filters.push(filterTo);}
             }
             ds.filter(curr_filters);
         } else {
@@ -296,24 +244,9 @@ $("#dropdownlistGfz").kendoDropDownList({
     }
 });
 
-$("input.checkbox").parent().css("background-color", "red");
-
 function onClick(e) { }
 function buttonClickOpenConf() { $("#configurator").show(); $("#windowConf").kendoWindow({ title: "Конфигуратор", actions: ["Refresh", "Minimize", "Maximize", "Close"], width: 680 }).data("kendoWindow").center().open(); }
 function buttonClickClearFilters() { var gridData = $("#gridMls").data("kendoGrid"); gridData.dataSource.filter({}); }
-function getSelectionItems() {
-    var grid = $("#gridMls").data("kendoGrid");
-    var selectedRows = $(".k-state-selected", "#gridMls");
-    var list = [];
-    if (selectedRows.length > 0) {
-        for (var i = 0, n = selectedRows.length - 1; i < n; i++) {
-            var selectedItem = grid.dataItem(selectedRows[i]);
-            list.push(selectedItem.NumML);
-        }
-    }
-    return list;
-}
-
+function getSelectionItems() { var grid = $("#gridMls").data("kendoGrid"); var selectedRows = $(".k-state-selected", "#gridMls"); var list = []; if (selectedRows.length > 0) { for (var i = 0, n = selectedRows.length - 1; i < n; i++) { var selectedItem = grid.dataItem(selectedRows[i]); list.push(selectedItem.NumML); } } return list; }
 function removeFilter(filter, searchFor) { if (filter == null) return []; for (var x = 0; x < filter.length; x++) { if (filter[x].filters != null && filter[x].filters.length >= 0) { if (filter[x].filters.length == 0) { filter.splice(x, 1); return removeFilter(filter, searchFor); } filter[x].filters = removeFilter(filter[x].filters, searchFor); } else { if (filter[x].field == searchFor) { filter.splice(x, 1); return removeFilter(filter, searchFor); } } } return filter; }
-
 $("input.checkbox").parent().css("background-color", "red");
