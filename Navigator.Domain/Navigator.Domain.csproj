@@ -84,8 +84,10 @@
     <Compile Include="Abstract\IListMLGridRepository.cs" />
     <Compile Include="Abstract\IOsnovaRepository.cs" />
     <Compile Include="Abstract\IRouteSheetsRepository.cs" />
+    <Compile Include="Abstract\IAccessNodeRepository.cs" />
     <Compile Include="Abstract\IWfl_UserConfigurationRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
+    <Compile Include="Concrete\EFDbAccessNodeRepository.cs" />
     <Compile Include="Concrete\EFList2NavRepository.cs" />
     <Compile Include="Concrete\EFListMLGridRepository.cs" />
     <Compile Include="Concrete\EFOsnovaRepository.cs" />
@@ -116,6 +118,7 @@
     <Compile Include="Entities\ServiceML.cs" />
     <Compile Include="Entities\TL_Knots.cs" />
     <Compile Include="Entities\TL_Main.cs" />
+    <Compile Include="Entities\AccessNode.cs" />
     <Compile Include="Entities\Wfl_Depts.cs" />
     <Compile Include="Entities\Wfl_Interfaces.cs" />
     <Compile Include="Entities\Wfl_RouteSheetFreezings.cs" />
@@ -132,7 +135,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

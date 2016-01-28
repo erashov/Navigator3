@@ -3,7 +3,48 @@
         { type: "button", id: "getSelect", text: "Выделеные МЛ", click: getSelectionItems }], click: onClick
 });
 var items = [{ text: "Выдано", value: "1" }, { text: "Не выдано", value: "2" }, { text: "Выполнено", value: "3" }];
-var filterDep = { mode: "row", cell: { showOperators: false, template: function (args) { args.element.kendoDropDownList({ autoBind: false, dataTextField: "text", dataValueField: "value", dataSource: new kendo.data.DataSource({ data: items }), index: 0, optionLabel: { text: "Без фильтра", value: "" }, valuePrimitive: true }); } } };
+var filterDep = {
+    mode: "row", cell: {
+        showOperators: false, template: function (args) {
+            args.element.kendoDropDownList({
+                autoBind: false, dataTextField: "text", dataValueField: "value",
+                dataSource: new kendo.data.DataSource({ data: items }), index: 0, optionLabel: { text: "Без фильтра", value: "" }, valuePrimitive: true
+            });
+        }
+    }
+};
+var filnterUDA = {
+    mode: "row",
+    cell: {
+        showOperators: false,
+        template: function (args) {
+            args.element.kendoComboBox({
+                autoBind: false,
+                enabled: true,          
+                width:400,
+                height: 600,
+                dataTextField: "text",
+                dataValueField: "adres",
+                headerTemplate:'<div class="dropdown-header k-widget k-header">' +'<span> sokr</span>' +'<span> organ</span>' + '<span> adres</span>' + '</div>',// "<table class=\"templateTable\"><thead><tr><td style=\"width: 20%\">sokr</td><td style=\"width: 20%\">organ</td><td style=\"width: 60%\">adres</td></tr></thead><tr><td></td><td></td><td></td></tr></table>"
+                 template: "<table class=\"templateTable\"><tr><td style=\"width: 20%\">#:sokr#</td><td style=\"width: 20%\">#:organ#</td><td style=\"width: 60%\">#:adres#</td></tr></table>"
+                , filter: "contains",
+                 autoBind: false, dataSource: {
+                    transport: {
+                        read: {
+                            url: "AccessNode/GetAccessNode",
+                            contentType: "application/json; charset=utf-8",
+                            type: "POST"
+                        }
+                    },
+                    schema: {
+                        data: "dataAN"
+                    }
+                 }, index: 0, valuePrimitive: true
+            }
+        );
+        }
+    }
+};
 var filterFreezen = { mode: "row", cell: { showOperators: false, template: function (args) { args.element.kendoDropDownList({ autoBind: false, dataTextField: "text", dataValueField: "value", dataSource: new kendo.data.DataSource({ data: [{ text: "Замороженные", value: "1" }, { text: "Размороженные", value: "2" }, { text: "Без приостановоу", value: "3" }] }), index: 0, optionLabel: { text: "Без фильтра", value: "" }, valuePrimitive: true, change: function () { var value = this.value(); var ds = $("#gridMls").data("kendoGrid").dataSource; var new_filter = { field: "Freeze_ReportExist", operator: "eq", value: parseInt(value) }; if (value) { var curr_filters = null; if (ds.filter() != null) { curr_filters = ds.filter().filters; curr_filters = removeFilter(curr_filters, 'Freeze_ReportExist'); curr_filters.push(new_filter); } if (curr_filters == null) { curr_filters = [new_filter]; } ds.filter(curr_filters); } else { var filters = ds.filter().filters; filters = removeFilter(filters, 'Freeze_ReportExist'); } } }); } } };
 var filterEmpty = { mode: "row", cell: { showOperators: false } };
 var columns = [
@@ -18,7 +59,7 @@ var columns = [
         { title: "Услуга", field: "Usluga", template: "<table><tr><td>#=Usluga ? Usluga:'' #  &nbsp;</td></tr><tr><td>#=Skorost ? Skorost:'' #  &nbsp; </td></tr><tr><td></td></tr></table>", width: 100, filterable: { cell: { operator: "contains" } } },
         { field: "Styk_A", title: "Стык", template: "#=Styk_A ? Styk_A:'' # <div class=\"valueDel\"></div> #=Styk_B ? Styk_B:''#", width: 150, filterable: { cell: { operator: "contains" } } },
         { field: "PrivA", title: "Узел привязки", template: "#=PrivA ? PrivA:'' # <div class=\"valueDel\"></div> #=PrivB ? PrivB:''#", width: 190, filterable: { cell: { operator: "contains" } } },
-        { field: "UDA", title: "Узел доступа", template: "#=UDA ? UDA:'' # <div class=\"valueDel\"></div> #=UDB ? UDB:''#", width: 190, filterable: { cell: { operator: "contains" } } },
+        { field: "UDA", title: "Узел доступа", template: "#=UDA ? UDA:'' # <div class=\"valueDel\"></div> #=UDB ? UDB:''#", width: 190, filterable: filnterUDA },// cell: { operator: "contains" } } },
         { field: "SpecOb", title: "Канал привязки", width: 120, filterable: { cell: { operator: "contains" } } },
         { field: "ChNumA", title: "F стыка", template: "#=ChNumA ? ChNumA:'' # <div class=\"valueDel\"></div> #=ChNumB ? ChNumB:''#", width: 130, filterable: { cell: { operator: "contains" } } },
         { field: "ESVTPIQQCNfe", title: "E,S,V,T,P,I,Q,QC,N,Ф", width: 150, filterable: { cell: { operator: "contains" } } }, { field: "L", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "E", width: 130 }, { field: "S", width: 100, filterable: { cell: { operator: "contains" } } }, { field: "V", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "T", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "P", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "I", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "Q", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "QC", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "N", width: 130, filterable: { cell: { operator: "contains" } } }, { field: "Fe", width: 130, title: "Ф", filterable: { cell: { operator: "contains" } } },
@@ -66,8 +107,7 @@ var gridMls = $("#gridMls").kendoGrid({
         $(".checkbox").bind("change", function (e) { $(e.target).closest("tr").toggleClass("k-state-selected"); });
         $(".checkboxFreez").bind("change", function (e) { $(e.target).closest("tr").toggleClass("k-state-selected"); });
         var cells = $("input.checkboxFreez").parent();
-        for (var i = 0; i < cells.length; i++) {
-  
+        for (var i = 0; i < cells.length; i++) {  
             cells[i].style.backgroundColor = '#0000FF';// + Math.random().toString(16).slice(-6);
         };
     }
@@ -243,7 +283,14 @@ $("#dropdownlistGfz").kendoDropDownList({
         }
     }
 });
-
+function cityFilter(element) {
+    element.kendoDropDownList({
+        dataSource: {
+            data: ["One", "Two"]
+        },
+        optionLabel: "--Select Value--"
+    });
+}
 function onClick(e) { }
 function buttonClickOpenConf() { $("#configurator").show(); $("#windowConf").kendoWindow({ title: "Конфигуратор", actions: ["Refresh", "Minimize", "Maximize", "Close"], width: 680 }).data("kendoWindow").center().open(); }
 function buttonClickClearFilters() { var gridData = $("#gridMls").data("kendoGrid"); gridData.dataSource.filter({}); }

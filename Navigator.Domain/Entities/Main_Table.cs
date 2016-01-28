@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Navigator.Domain.Entities
 {
-    class Main_Table
+   public class Main_Table
     {
         [Key]
         [StringLength(50)]

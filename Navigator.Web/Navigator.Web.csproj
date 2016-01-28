@@ -793,6 +793,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccessNodeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListMLsController.cs" />
     <Compile Include="Controllers\OsnovaController.cs" />
@@ -943,6 +944,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\Grids\" />
+    <Folder Include="Views\AccessNode\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Navigator.Domain\Navigator.Domain.csproj">
