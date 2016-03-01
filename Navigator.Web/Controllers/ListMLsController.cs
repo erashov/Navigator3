@@ -97,7 +97,7 @@ namespace Navigator.Web.Controllers
                     }
                     if (filter.Field == "NumML" || filter.Field == "dmv_ReportExist" || filter.Field == "gplr_ReportExist" || filter.Field == "oshugpz_ReportExist"
                         || filter.Field == "otsod_ReportExist" || filter.Field == "osp_ReportExist" || filter.Field == "otse_ReportExist" || filter.Field == "otss_ReportExist" 
-                        || filter.Field == "ushugpu_ReportExist" || filter.Field == "otvu_ReportExist" || filter.Field == "otu_ReportExist" || filter.Field == "to_ReportExist"|| filter.Field== "Freeze_ReportExist")
+                        || filter.Field == "ushugpu_ReportExist" || filter.Field == "otvu_ReportExist" || filter.Field == "otu_ReportExist" || filter.Field == "to_ReportExist"|| filter.Field== "Freeze_ReportExist" || filter.Field== "returnML_ReportExist"|| filter.Field== "TaskCancels_ReportExist")
                     {
                         parameters.Add(int.Parse(filter.Value));
                         return string.Format("{0}{1}@{2}", filter.Field, ToLinqOperator(filter.Operator), index);

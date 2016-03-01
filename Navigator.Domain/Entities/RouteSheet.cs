@@ -282,6 +282,8 @@ namespace Navigator.Domain.Entities
         public int? ushugpu_ReportExist { get; set; }
         public int? Freeze_ReportExist { get; set; }
 
+        public int? returnML_ReportExist { get; set; }
+        public int? TaskCancels_ReportExist { get; set; }
         [StringLength(50)]
         public string ChNumA { get; set; }
 
