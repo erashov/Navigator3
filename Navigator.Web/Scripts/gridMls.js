@@ -52,9 +52,10 @@ var columns = [
         { command: [{ name: "edit", text: { edit: "", update: "", cancel: "" } }], title: "&nbsp;", text: "", width: 44, locked: false },
         { field: "NumML", title: "№ МЛ", template: "<a href='' class='redlink'>#=NumML# </a><div class=\"valueDel\"></div> #= utverzh ? kendo.toString(utverzh, 'dd.MM.yyyy') : '' #", width: 150, locked: false, editable: false },
         { field: "FullUserName", title: "Пользователь", width: 160, filterable: { cell: { operator: "contains" } } },
+        { field: "Compatibility", title:"Совместность",width:160, filterable:false },
         { field: "Otvetstv", title: "Ответственный", width: 160, filterable: { cell: { operator: "contains" } } },
         { field: "Zakazhcik", title: "Заказчик", width: 190, filterable: { cell: { operator: "contains" } } },
-        { field: "AdresA", title: "Адрес", template: "#=AdresA ? AdresA:'' # <div class=\"valueDel\"></div> #=AdresB ? AdresB:''#", width: 400, filterable: { cell: { operator: "contains" } } },
+        { field: "AdresA", title: "Адрес", template: "#=AdresA ? AdresA:'' # <div class=\"valueDel\"></div> #=AdresB ? AdresB:''#", width: 400, editor: categoryDropDownEditor, filterable: { cell: { operator: "contains" } } },
         { field: "AdressA", title: "Адрес СО", template: "#=AdressA ? AdressA:'' # <div class=\"valueDel\"></div> #=AdressB ? AdressB:''#", width: 400, filterable: { cell: { operator: "contains" } } },
         { title: "Услуга", field: "Usluga", template: "<table><tr><td>#=Usluga ? Usluga:'' #  &nbsp;</td></tr><tr><td>#=Skorost ? Skorost:'' #  &nbsp; </td></tr><tr><td></td></tr></table>", width: 100, filterable: { cell: { operator: "contains" } } },
         { field: "Styk_A", title: "Стык", template: "#=Styk_A ? Styk_A:'' # <div class=\"valueDel\"></div> #=Styk_B ? Styk_B:''#", width: 150, filterable: { cell: { operator: "contains" } } },
@@ -89,7 +90,7 @@ var columns = [
         { field: "Sdan_TS", editable: false, title: "Сдан ТС", width: 100, type: "date", filterable: false, format: "{0:dd.MM.yyyy}" }
 ];
 var fields = {
-    NumML: { editable: false }, USERs: { editable: false }, Otvetstv: { editable: false }, Zakazhcik: { editable: false }, AdresA: { editable: false }, AdressA: { editable: false }, UspState: { editable: false },
+    NumML: { editable: false }, FullUserName: { editable: false },Compatibility:{editable:false }, Otvetstv: { editable: false }, Zakazhcik: { editable: false }, AdresA: { editable: true }, AdressA: { editable: false }, UspState: { editable: false },
     gplr_ReportExist: { editable: false }, dmv_ReportExist: { editable: false }, osp_ReportExist: { editable: false }, otsod_ReportExist: { editable: false }, ushugpu_ReportExist: { editable: false }, oshugpz_ReportExist: { editable: false }, to_ReportExist: { editable: false }, otse_ReportExist: { editable: false },
     otss_ReportExist: { editable: false }, otu_ReportExist: { editable: false }, otvu_ReportExist: { editable: false },
     utverzh: { type: "date" }, gplr_start: { type: "date" }, gplr2_start: { type: "date" }, gplr_end: { type: "date" }, gplr2_end: { type: "date" }, dmv_start: { type: "date" }, dmv2_start: { type: "date" }, dmv_end: { type: "date" },
@@ -362,7 +363,33 @@ $("#dropdownlistGfz").kendoDropDownList({
         }
     }
 });
+function categoryDropDownEditor(container, options) {
+    $('<input required data-text-field="CategoryName" data-value-field="CategoryID" data-bind="value:' + options.field + '"/>')
+        .appendTo(container)
+        .kendoDropDownList({
+            autoBind: false,
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                }
+            }
+        }); $('<input required data-text-field="CategoryName" data-value-field="CategoryID" data-bind="value:' + options.field + '"/>')
+        .appendTo(container)
+        .kendoDropDownList({
+            autoBind: false,
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                }
+            }
+        });
+}
 
+function showCompatibility(arg) {
+
+}
 function onClick(e) { }
 function buttonClickOpenConf() { $("#configurator").show(); $("#windowConf").kendoWindow({ title: "Конфигуратор", actions: ["Refresh", "Minimize", "Maximize", "Close"], width: 680 }).data("kendoWindow").center().open(); }
 function buttonClickClearFilters() { var gridData = $("#gridMls").data("kendoGrid"); gridData.dataSource.filter({}); }

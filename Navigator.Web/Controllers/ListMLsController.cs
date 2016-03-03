@@ -14,11 +14,11 @@ namespace Navigator.Web.Controllers
 {
     public class ListMLsController : Controller
     {
-        private IRouteSheetsRepository _repositoryRs;
+        private IRouteSheetsRepository _repositoryRouteSheet;
         private IRouteProcedureRepository _repositoryProcedure;
         public ListMLsController(IRouteSheetsRepository routesheetrepository, IRouteProcedureRepository routeproceduretRepository)
         {
-            this._repositoryRs = routesheetrepository;
+            this._repositoryRouteSheet = routesheetrepository;
             this._repositoryProcedure = routeproceduretRepository;
         }
         // GET: ListMLs
@@ -31,8 +31,8 @@ namespace Navigator.Web.Controllers
             try
             {
                 var userName = HttpContext.User.Identity.Name.Split('\\').Last(); ;
-                var mls = _repositoryRs.RouteSheets.AsQueryable();
-                var totalCount = _repositoryRs.RouteSheets.Count();
+                var mls = _repositoryRouteSheet.RouteSheets.AsQueryable();
+                var totalCount = _repositoryRouteSheet.RouteSheets.Count();
                 string filterValueUser = string.Empty;
                 if (filter != null && (filter.Filters != null && filter.Filters.Count > 0))
                 {
