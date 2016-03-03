@@ -337,7 +337,7 @@ namespace Navigator.Domain.Entities
         public string oshugpu { get; set; }
 
         [StringLength(152)]
-        public string USERs { get; set; }
+        public string FullUserName { get; set; }
 
         [StringLength(50)]
         public string Login { get; set; }

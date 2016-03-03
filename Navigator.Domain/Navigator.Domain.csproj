@@ -83,6 +83,7 @@
     <Compile Include="Abstract\IList2NavRepository.cs" />
     <Compile Include="Abstract\IListMLGridRepository.cs" />
     <Compile Include="Abstract\IOsnovaRepository.cs" />
+    <Compile Include="Abstract\IRouteProcedureRepository.cs" />
     <Compile Include="Abstract\IRouteSheetsRepository.cs" />
     <Compile Include="Abstract\IAccessNodeRepository.cs" />
     <Compile Include="Abstract\IWfl_UserConfigurationRepository.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Concrete\EFList2NavRepository.cs" />
     <Compile Include="Concrete\EFListMLGridRepository.cs" />
     <Compile Include="Concrete\EFOsnovaRepository.cs" />
+    <Compile Include="Concrete\EFRouteProcedureRepository.cs" />
     <Compile Include="Concrete\EFRouteSheetsRepository.cs" />
     <Compile Include="Concrete\EFWfl_UserConfigurationRepository.cs" />
     <Compile Include="Entities\Area.cs" />
@@ -114,6 +116,7 @@
     <Compile Include="Entities\ML_Main.cs" />
     <Compile Include="Entities\ML_Notices.cs" />
     <Compile Include="Entities\Osnova.cs" />
+    <Compile Include="Entities\RouteProcedure.cs" />
     <Compile Include="Entities\RouteSheet.cs" />
     <Compile Include="Entities\ServiceML.cs" />
     <Compile Include="Entities\TL_Knots.cs" />

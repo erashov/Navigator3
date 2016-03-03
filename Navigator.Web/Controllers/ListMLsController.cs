@@ -14,10 +14,12 @@ namespace Navigator.Web.Controllers
 {
     public class ListMLsController : Controller
     {
-        private IRouteSheetsRepository _repository;
-        public ListMLsController(IRouteSheetsRepository routesheetRepository)
+        private IRouteSheetsRepository _repositoryRs;
+        private IRouteProcedureRepository _repositoryProcedure;
+        public ListMLsController(IRouteSheetsRepository routesheetrepository, IRouteProcedureRepository routeproceduretRepository)
         {
-            this._repository = routesheetRepository;
+            this._repositoryRs = routesheetrepository;
+            this._repositoryProcedure = routeproceduretRepository;
         }
         // GET: ListMLs
         public ActionResult Index()
@@ -28,8 +30,10 @@ namespace Navigator.Web.Controllers
         {
             try
             {
-                var mls = _repository.RouteSheets.AsQueryable();
-                var totalCount = _repository.RouteSheets.Count();
+                var userName = HttpContext.User.Identity.Name.Split('\\').Last(); ;
+                var mls = _repositoryRs.RouteSheets.AsQueryable();
+                var totalCount = _repositoryRs.RouteSheets.Count();
+                string filterValueUser = string.Empty;
                 if (filter != null && (filter.Filters != null && filter.Filters.Count > 0))
                 {
                     string whereClause = null;
@@ -37,10 +41,15 @@ namespace Navigator.Web.Controllers
                     var filters = filter.Filters;
                     for (var i = 0; i < filters.Count; i++)
                     {
+                        if (filters[i].Field == "FullUserName")
+                        {
+                            filterValueUser = filters[i].Value;
+                            filters[i].Value = string.Empty;
+                        }
                         if (i == 0)
-                            whereClause += string.Format(" {0}", BuildWhereClause<ListMLGrid>(i, filter.Logic, filters[i], parameters));
+                        { whereClause += string.Format(" {0}", BuildWhereClause<ListMLGrid>(i, filter.Logic, filters[i], parameters)); }
                         else
-                            whereClause += string.Format(" {0} {1}", ToLinqOperator(filter.Logic), BuildWhereClause<ListMLGrid>(i, filter.Logic, filters[i], parameters));
+                        { whereClause += string.Format(" {0} {1}", ToLinqOperator(filter.Logic), BuildWhereClause<ListMLGrid>(i, filter.Logic, filters[i], parameters)); }
                     }
                     mls = mls.Where(whereClause, parameters.ToArray());
                     totalCount = mls.Where(whereClause, parameters.ToArray()).Count();
@@ -57,12 +66,39 @@ namespace Navigator.Web.Controllers
                 {
                     mls = mls.OrderBy("NumML desc");
                 }
-                var jsonData = new { total = totalCount, data = mls.Skip((page - 1) * pageSize).Take(pageSize).ToList() };
+                var data = mls.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                if (filterValueUser != string.Empty)
+                {
+                    var getUsers = _repositoryProcedure.GetUsers(userName, filterValueUser);
+                    totalCount = getUsers.Count();
+                    List<RouteSheet> filtersData = new List<RouteSheet>();
+     
+                    foreach (var d in data)
+                    {
+                        var user = getUsers.FirstOrDefault(u => u.NumML == d.NumML);
+                        if (user != null)
+                        {
+                            d.FullUserName = user.FullUserName;
+                            filtersData.Add(d);
+                        }
+                    }
+                    data = filtersData;
+                }
+                else
+                {
+                    var getUsers = _repositoryProcedure.GetUsers(userName, "");
+                    foreach (var d in data)
+                    {
+                        var user = getUsers.FirstOrDefault(u => u.NumML == d.NumML);
+                        if (user != null)
+                        { d.FullUserName = user.FullUserName; }
+                    }
+                }
+                var jsonData = new { total = totalCount, data = data };
                 return Json(jsonData, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
-                //string s = e.InnerException.Message;
                 return Json(null, JsonRequestBehavior.AllowGet);
             }
         }
@@ -96,8 +132,8 @@ namespace Navigator.Web.Controllers
                         return string.Format("{0}{1}@{2}", filter.Field, ToLinqOperator(filter.Operator), index);
                     }
                     if (filter.Field == "NumML" || filter.Field == "dmv_ReportExist" || filter.Field == "gplr_ReportExist" || filter.Field == "oshugpz_ReportExist"
-                        || filter.Field == "otsod_ReportExist" || filter.Field == "osp_ReportExist" || filter.Field == "otse_ReportExist" || filter.Field == "otss_ReportExist" 
-                        || filter.Field == "ushugpu_ReportExist" || filter.Field == "otvu_ReportExist" || filter.Field == "otu_ReportExist" || filter.Field == "to_ReportExist"|| filter.Field== "Freeze_ReportExist" || filter.Field== "returnML_ReportExist"|| filter.Field== "TaskCancels_ReportExist")
+                        || filter.Field == "otsod_ReportExist" || filter.Field == "osp_ReportExist" || filter.Field == "otse_ReportExist" || filter.Field == "otss_ReportExist"
+                        || filter.Field == "ushugpu_ReportExist" || filter.Field == "otvu_ReportExist" || filter.Field == "otu_ReportExist" || filter.Field == "to_ReportExist" || filter.Field == "Freeze_ReportExist" || filter.Field == "returnML_ReportExist" || filter.Field == "TaskCancels_ReportExist")
                     {
                         parameters.Add(int.Parse(filter.Value));
                         return string.Format("{0}{1}@{2}", filter.Field, ToLinqOperator(filter.Operator), index);
@@ -112,7 +148,10 @@ namespace Navigator.Web.Controllers
                     return string.Format("{0}.EndsWith(" + "@{1})", filter.Field, index);
                 case "contains":
                     parameters.Add(filter.Value);
-                    return string.Format("{0}.Contains(" + "@{1})", filter.Field, index);
+                    if (filter.Field == "AdresA") { return string.Format("{0}.Contains(" + "@{1}) || AdresB.Contains(" + "@{1})", filter.Field, index); }
+                    else if (filter.Field == "AdressA") { return string.Format("{0}.Contains(" + "@{1}) || AdressB.Contains(" + "@{1})", filter.Field, index); }
+
+                    else { return string.Format("{0}.Contains(" + "@{1})", filter.Field, index); }
                 default:
                     throw new ArgumentException("This operator is not yet supported for this Grid", filter.Operator);
             }

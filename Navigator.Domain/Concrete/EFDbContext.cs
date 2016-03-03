@@ -11,5 +11,10 @@ namespace Navigator.Domain.Concrete
         public DbSet<List2Nav> List2Navs { get; set; }
         public DbSet<Wfl_UserConfiguration> Wfl_UserConfigurations { get; set; }
         public DbSet<AccessNode> AccessNodes { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<RouteSheet>().MapToStoredProcedures();
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

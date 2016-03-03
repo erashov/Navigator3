@@ -29,6 +29,7 @@ namespace Navigator.Web.Infrastructure
             kernel.Bind<IOsnovaRepository>().To<EFOsnovaRepository>();
             kernel.Bind<IRouteSheetsRepository>().To<EFRouteSheetsRepository>();
             kernel.Bind<IAccessNodeRepository>().To<EFDbAccessNodeRepository>();
+            kernel.Bind<IRouteProcedureRepository>().To<EFRouteProcedureRepository>();
 
         }
     }

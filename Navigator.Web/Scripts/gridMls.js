@@ -51,7 +51,7 @@ var columns = [
         { width: 30, headerTemplate: "<input type='checkbox' id='checkAll' onClick='selectAll(this)'/>", template: "<input type='checkbox' name='selectItem' #if(Freeze_ReportExist==1){# class='checkboxFreez'#}##if(Freeze_ReportExist!=1){#class='checkbox' #}#/>", locked: false },
         { command: [{ name: "edit", text: { edit: "", update: "", cancel: "" } }], title: "&nbsp;", text: "", width: 44, locked: false },
         { field: "NumML", title: "№ МЛ", template: "<a href='' class='redlink'>#=NumML# </a><div class=\"valueDel\"></div> #= utverzh ? kendo.toString(utverzh, 'dd.MM.yyyy') : '' #", width: 150, locked: false, editable: false },
-        { field: "USERs", title: "Пользователь", width: 160, filterable: { cell: { operator: "contains" } } },
+        { field: "FullUserName", title: "Пользователь", width: 160, filterable: { cell: { operator: "contains" } } },
         { field: "Otvetstv", title: "Ответственный", width: 160, filterable: { cell: { operator: "contains" } } },
         { field: "Zakazhcik", title: "Заказчик", width: 190, filterable: { cell: { operator: "contains" } } },
         { field: "AdresA", title: "Адрес", template: "#=AdresA ? AdresA:'' # <div class=\"valueDel\"></div> #=AdresB ? AdresB:''#", width: 400, filterable: { cell: { operator: "contains" } } },
@@ -237,10 +237,8 @@ $("#dropdownlistTaskReturns").kendoDropDownList({
             if (value == 3) {
                 filterReturn = { field: "returnDate", operator: "gte", value: kendo.toString(returnDate.value(), "dd.MM.yyyy") };
             }
-
-
             if (ds.filter() != null) {
-                curr_filters = ds.filter().filters;
+                curr_filters = ds.filter().filters
                 curr_filters = removeFilter(curr_filters, 'returnML_ReportExist');
                 curr_filters.push(new_filter);
                 if (returnDate.value() != null) {
@@ -364,14 +362,7 @@ $("#dropdownlistGfz").kendoDropDownList({
         }
     }
 });
-function cityFilter(element) {
-    element.kendoDropDownList({
-        dataSource: {
-            data: ["One", "Two"]
-        },
-        optionLabel: "--Select Value--"
-    });
-}
+
 function onClick(e) { }
 function buttonClickOpenConf() { $("#configurator").show(); $("#windowConf").kendoWindow({ title: "Конфигуратор", actions: ["Refresh", "Minimize", "Maximize", "Close"], width: 680 }).data("kendoWindow").center().open(); }
 function buttonClickClearFilters() { var gridData = $("#gridMls").data("kendoGrid"); gridData.dataSource.filter({}); }
